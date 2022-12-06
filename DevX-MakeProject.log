@@ -1,0 +1,812 @@
+LocalDateTime: 2022.12.05 09:10:08 (+08:00)
+ServerDateTime: 2022.12.05
+Version: 10.06
+FullVersion: 10.06_x64_F07E9A51
+LicenseNumber: Cracked
+LicenseType: UnpackerEditorStudioLIC
+ID: 61DB-5783-EBFA-F207
+User: 10554@DESKTOP-GPICDCE
+OSVersion: Microsoft Windows NT 6.2.9200.0
+Is64BitProcess: True
+RuntimeVersion: 4.0.30319.42000
+Culture: zh - 中文(中国)
+MainModule: C:\Users\10554\Desktop\Windows.old\Users\10554\Desktop\张绍轩\DevX-Unity-GameRecovery\DevXUnityUnpackerRun.exe
+--
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_SubMeshUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_SubMeshUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_SubMeshUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_SubMeshUI
+Resolve4: Assembly-CSharp-firstpass
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Resolve4: Unity.TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Resolve4: Rewired_Core
+img read old[0]: {fileID: 0 (resources.assets), pathID: 50, m_Name: godoMaum SDF Atlas, type: Texture2D}
+img read old[-1]: {fileID: 0 (resources.assets), pathID: 50, m_Name: godoMaum SDF Atlas, type: Texture2D}
+img read old[8]: {fileID: 0 (resources.assets), pathID: 50, m_Name: godoMaum SDF Atlas, type: Texture2D}
+img read old[0]: {fileID: 0 (resources.assets), pathID: 51, m_Name: sameMistake Atlas, type: Texture2D}
+img read old[-1]: {fileID: 0 (resources.assets), pathID: 51, m_Name: sameMistake Atlas, type: Texture2D}
+img read old[8]: {fileID: 0 (resources.assets), pathID: 51, m_Name: sameMistake Atlas, type: Texture2D}
+img read old[0]: {fileID: 0 (resources.assets), pathID: 52, m_Name: zhankuhappy Atlas, type: Texture2D}
+img read old[-1]: {fileID: 0 (resources.assets), pathID: 52, m_Name: zhankuhappy Atlas, type: Texture2D}
+img read old[8]: {fileID: 0 (resources.assets), pathID: 52, m_Name: zhankuhappy Atlas, type: Texture2D}
+img read old[0]: {fileID: 0 (resources.assets), pathID: 651, m_Name: MPLUSRounded1c-Bold Atlas, type: Texture2D}
+img read old[-1]: {fileID: 0 (resources.assets), pathID: 651, m_Name: MPLUSRounded1c-Bold Atlas, type: Texture2D}
+img read old[8]: {fileID: 0 (resources.assets), pathID: 651, m_Name: MPLUSRounded1c-Bold Atlas, type: Texture2D}
+img read old[0]: {fileID: 0 (resources.assets), pathID: 652, m_Name: cjkFonts-regular-normalized SDF Atlas, type: Texture2D}
+img read old[-1]: {fileID: 0 (resources.assets), pathID: 652, m_Name: cjkFonts-regular-normalized SDF Atlas, type: Texture2D}
+img read old[8]: {fileID: 0 (resources.assets), pathID: 652, m_Name: cjkFonts-regular-normalized SDF Atlas, type: Texture2D}
+img read old[0]: {fileID: 0 (resources.assets), pathID: 653, m_Name: cjkFonts-regular-normalized SDF Atlas, type: Texture2D}
+img read old[-1]: {fileID: 0 (resources.assets), pathID: 653, m_Name: cjkFonts-regular-normalized SDF Atlas, type: Texture2D}
+img read old[8]: {fileID: 0 (resources.assets), pathID: 653, m_Name: cjkFonts-regular-normalized SDF Atlas, type: Texture2D}
+System.IO.EndOfStreamException: 无法在流的结尾之外进行读取。 在 System.IO.__Error.EndOfFile() 在 System.IO.BinaryReader.FillBuffer(Int32 numBytes) 在 System.IO.BinaryReader.ReadUInt16() 在 as. 
+ . 
+ ( 
+ 
+ , Boolean 
+)
+System.IO.EndOfStreamException: 无法在流的结尾之外进行读取。 在 System.IO.__Error.EndOfFile() 在 System.IO.BinaryReader.FillBuffer(Int32 numBytes) 在 System.IO.BinaryReader.ReadUInt16() 在 as. 
+ . 
+ ( 
+ 
+ , Boolean 
+)
+System.IO.EndOfStreamException: 无法在流的结尾之外进行读取。 在 System.IO.__Error.EndOfFile() 在 System.IO.BinaryReader.FillBuffer(Int32 numBytes) 在 System.IO.BinaryReader.ReadUInt16() 在 as. 
+ . 
+ ( 
+ 
+ , Boolean 
+)
+[241: AudioMixerController] is_break_read3 size=1281936055  \m_MixerConstant\groupGUIDs\Array
+241: AudioMixerController pathID: 1719
+
+Ba.Warning: pos: 788 != len: 2768 for: {fileID: 0 (resources.assets), pathID: 1719, m_Name: MasterMixer, type: AudioMixerController}
+PPt: {fileID: 0 (resources.assets), pathID: 1719, m_Name: MasterMixer, type: AudioMixerController}EX: System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。 参数名: index 在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource) 在 as. 
+. 
+ ()
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Resolve4: UnityEngine.TextCoreFontEngineModule
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_SpriteAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_SpriteAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_SpriteAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_SpriteAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_StyleSheet
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_StyleSheet
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_Settings
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_Settings
+Ba.Warning: pos: 88 != len: 92 for: {fileID: 0 (sharedassets4.assets), pathID: 81, m_Name: thumbnail_rt, type: RenderTexture}
+Missed: for UnityEngine.IMGUIModule.dll/UnityEngine/GUISkin
+Warning: pos: 100 != len: 8488 for: {fileID: 0 (unity default resources), pathID: 11000, m_Name: GameSkin, type: MonoBehaviour}
+Missed: for UnityEngine.IMGUIModule.dll/UnityEngine/GUISkin
+Missed: for UnityEngine.IMGUIModule.dll/UnityEngine/GUISkin
+114: MonoBehaviour pathID: 8189
+
+114: MonoBehaviour pathID: 8188
+
+114: MonoBehaviour pathID: 9516
+
+114: MonoBehaviour pathID: 9429
+
+114: MonoBehaviour pathID: 9351
+
+114: MonoBehaviour pathID: 9327
+
+114: MonoBehaviour pathID: 9520
+
+114: MonoBehaviour pathID: 9361
+
+114: MonoBehaviour pathID: 9434
+
+114: MonoBehaviour pathID: 9329
+
+114: MonoBehaviour pathID: 9517
+
+114: MonoBehaviour pathID: 9378
+
+114: MonoBehaviour pathID: 9396
+
+114: MonoBehaviour pathID: 9331
+
+114: MonoBehaviour pathID: 9518
+
+114: MonoBehaviour pathID: 9381
+
+114: MonoBehaviour pathID: 9387
+
+114: MonoBehaviour pathID: 9332
+
+114: MonoBehaviour pathID: 9519
+
+114: MonoBehaviour pathID: 9359
+
+114: MonoBehaviour pathID: 9424
+
+114: MonoBehaviour pathID: 9328
+
+114: MonoBehaviour pathID: 9521
+
+114: MonoBehaviour pathID: 9366
+
+114: MonoBehaviour pathID: 9413
+
+114: MonoBehaviour pathID: 9330
+
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+114: MonoBehaviour pathID: 8189
+
+114: MonoBehaviour pathID: 8188
+
+114: MonoBehaviour pathID: 9516
+
+114: MonoBehaviour pathID: 9429
+
+114: MonoBehaviour pathID: 9351
+
+114: MonoBehaviour pathID: 9327
+
+114: MonoBehaviour pathID: 9520
+
+114: MonoBehaviour pathID: 9361
+
+114: MonoBehaviour pathID: 9434
+
+114: MonoBehaviour pathID: 9329
+
+114: MonoBehaviour pathID: 9517
+
+114: MonoBehaviour pathID: 9378
+
+114: MonoBehaviour pathID: 9396
+
+114: MonoBehaviour pathID: 9331
+
+114: MonoBehaviour pathID: 9518
+
+114: MonoBehaviour pathID: 9381
+
+114: MonoBehaviour pathID: 9387
+
+114: MonoBehaviour pathID: 9332
+
+114: MonoBehaviour pathID: 9519
+
+114: MonoBehaviour pathID: 9359
+
+114: MonoBehaviour pathID: 9424
+
+114: MonoBehaviour pathID: 9328
+
+114: MonoBehaviour pathID: 9521
+
+114: MonoBehaviour pathID: 9366
+
+114: MonoBehaviour pathID: 9413
+
+114: MonoBehaviour pathID: 9330
+
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+114: MonoBehaviour pathID: 7319
+
+114: MonoBehaviour pathID: 7737
+
+114: MonoBehaviour pathID: 7736
+
+114: MonoBehaviour pathID: 9178
+
+114: MonoBehaviour pathID: 8985
+
+114: MonoBehaviour pathID: 8907
+
+114: MonoBehaviour pathID: 8852
+
+114: MonoBehaviour pathID: 9182
+
+114: MonoBehaviour pathID: 8917
+
+114: MonoBehaviour pathID: 8990
+
+114: MonoBehaviour pathID: 8854
+
+114: MonoBehaviour pathID: 9179
+
+114: MonoBehaviour pathID: 8934
+
+114: MonoBehaviour pathID: 8952
+
+114: MonoBehaviour pathID: 8856
+
+114: MonoBehaviour pathID: 9180
+
+114: MonoBehaviour pathID: 8937
+
+114: MonoBehaviour pathID: 8943
+
+114: MonoBehaviour pathID: 8857
+
+114: MonoBehaviour pathID: 9181
+
+114: MonoBehaviour pathID: 8915
+
+114: MonoBehaviour pathID: 8980
+
+114: MonoBehaviour pathID: 8853
+
+114: MonoBehaviour pathID: 9183
+
+114: MonoBehaviour pathID: 8922
+
+114: MonoBehaviour pathID: 8969
+
+114: MonoBehaviour pathID: 8855
+
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+114: MonoBehaviour pathID: 7319
+
+114: MonoBehaviour pathID: 7737
+
+114: MonoBehaviour pathID: 7736
+
+114: MonoBehaviour pathID: 9178
+
+114: MonoBehaviour pathID: 8985
+
+114: MonoBehaviour pathID: 8907
+
+114: MonoBehaviour pathID: 8852
+
+114: MonoBehaviour pathID: 9182
+
+114: MonoBehaviour pathID: 8917
+
+114: MonoBehaviour pathID: 8990
+
+114: MonoBehaviour pathID: 8854
+
+114: MonoBehaviour pathID: 9179
+
+114: MonoBehaviour pathID: 8934
+
+114: MonoBehaviour pathID: 8952
+
+114: MonoBehaviour pathID: 8856
+
+114: MonoBehaviour pathID: 9180
+
+114: MonoBehaviour pathID: 8937
+
+114: MonoBehaviour pathID: 8943
+
+114: MonoBehaviour pathID: 8857
+
+114: MonoBehaviour pathID: 9181
+
+114: MonoBehaviour pathID: 8915
+
+114: MonoBehaviour pathID: 8980
+
+114: MonoBehaviour pathID: 8853
+
+114: MonoBehaviour pathID: 9183
+
+114: MonoBehaviour pathID: 8922
+
+114: MonoBehaviour pathID: 8969
+
+114: MonoBehaviour pathID: 8855
+
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Scene analize:CAB-3199f8a9caf1c71a078bf6a5faadb269.unity
+GameObject: 1790979772176946265 !!!!  link to missed asset: {FileID: 1790979774072790166} tag: 1790979774072790166}
+Bad links count: 1
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Scene analize:CAB-3289f31e4a75075e7f7503082cadda13.unity
+GameObject: 1790979772176946189 !!!!  link to missed asset: {FileID: 1790979774072772289} tag: 1790979774072772289}
+Bad links count: 1
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+114: MonoBehaviour pathID: 11754
+
+114: MonoBehaviour pathID: 11313
+
+114: MonoBehaviour pathID: 11934
+
+114: MonoBehaviour pathID: 11950
+
+114: MonoBehaviour pathID: 9653
+
+114: MonoBehaviour pathID: 9652
+
+114: MonoBehaviour pathID: 9651
+
+114: MonoBehaviour pathID: 10312
+
+114: MonoBehaviour pathID: 10314
+
+114: MonoBehaviour pathID: 10313
+
+114: MonoBehaviour pathID: 10694
+
+114: MonoBehaviour pathID: 11090
+
+114: MonoBehaviour pathID: 9852
+
+114: MonoBehaviour pathID: 10335
+
+114: MonoBehaviour pathID: 10715
+
+114: MonoBehaviour pathID: 11118
+
+114: MonoBehaviour pathID: 11117
+
+114: MonoBehaviour pathID: 12922
+
+114: MonoBehaviour pathID: 12619
+
+114: MonoBehaviour pathID: 12541
+
+114: MonoBehaviour pathID: 12473
+
+114: MonoBehaviour pathID: 12926
+
+114: MonoBehaviour pathID: 12551
+
+114: MonoBehaviour pathID: 12624
+
+114: MonoBehaviour pathID: 12475
+
+114: MonoBehaviour pathID: 12923
+
+114: MonoBehaviour pathID: 12568
+
+114: MonoBehaviour pathID: 12586
+
+114: MonoBehaviour pathID: 12477
+
+114: MonoBehaviour pathID: 12924
+
+114: MonoBehaviour pathID: 12571
+
+114: MonoBehaviour pathID: 12577
+
+114: MonoBehaviour pathID: 12478
+
+114: MonoBehaviour pathID: 12925
+
+114: MonoBehaviour pathID: 12549
+
+114: MonoBehaviour pathID: 12614
+
+114: MonoBehaviour pathID: 12474
+
+114: MonoBehaviour pathID: 12927
+
+114: MonoBehaviour pathID: 12556
+
+114: MonoBehaviour pathID: 12603
+
+114: MonoBehaviour pathID: 12476
+
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+114: MonoBehaviour pathID: 11754
+
+114: MonoBehaviour pathID: 11313
+
+114: MonoBehaviour pathID: 11934
+
+114: MonoBehaviour pathID: 11950
+
+114: MonoBehaviour pathID: 9653
+
+114: MonoBehaviour pathID: 9652
+
+114: MonoBehaviour pathID: 9651
+
+114: MonoBehaviour pathID: 10312
+
+114: MonoBehaviour pathID: 10314
+
+114: MonoBehaviour pathID: 10313
+
+114: MonoBehaviour pathID: 10694
+
+114: MonoBehaviour pathID: 11090
+
+114: MonoBehaviour pathID: 9852
+
+114: MonoBehaviour pathID: 10335
+
+114: MonoBehaviour pathID: 10715
+
+114: MonoBehaviour pathID: 11118
+
+114: MonoBehaviour pathID: 11117
+
+114: MonoBehaviour pathID: 12922
+
+114: MonoBehaviour pathID: 12619
+
+114: MonoBehaviour pathID: 12541
+
+114: MonoBehaviour pathID: 12473
+
+114: MonoBehaviour pathID: 12926
+
+114: MonoBehaviour pathID: 12551
+
+114: MonoBehaviour pathID: 12624
+
+114: MonoBehaviour pathID: 12475
+
+114: MonoBehaviour pathID: 12923
+
+114: MonoBehaviour pathID: 12568
+
+114: MonoBehaviour pathID: 12586
+
+114: MonoBehaviour pathID: 12477
+
+114: MonoBehaviour pathID: 12924
+
+114: MonoBehaviour pathID: 12571
+
+114: MonoBehaviour pathID: 12577
+
+114: MonoBehaviour pathID: 12478
+
+114: MonoBehaviour pathID: 12925
+
+114: MonoBehaviour pathID: 12549
+
+114: MonoBehaviour pathID: 12614
+
+114: MonoBehaviour pathID: 12474
+
+114: MonoBehaviour pathID: 12927
+
+114: MonoBehaviour pathID: 12556
+
+114: MonoBehaviour pathID: 12603
+
+114: MonoBehaviour pathID: 12476
+
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+Missed: for Unity.TextMeshPro.dll/TMPro/TMP_FontAsset
+img read old[0]: {fileID: 0 (cab-3cad824010d89e8f99e7ce9e4b12bde8.sharedassets), pathID: 351, m_Name: MPLUSRounded1c-Bold Atlas, type: Texture2D}
+img read old[-1]: {fileID: 0 (cab-3cad824010d89e8f99e7ce9e4b12bde8.sharedassets), pathID: 351, m_Name: MPLUSRounded1c-Bold Atlas, type: Texture2D}
+img read old[8]: {fileID: 0 (cab-3cad824010d89e8f99e7ce9e4b12bde8.sharedassets), pathID: 351, m_Name: MPLUSRounded1c-Bold Atlas, type: Texture2D}
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+114: MonoBehaviour pathID: 8467
+
+114: MonoBehaviour pathID: 8466
+
+114: MonoBehaviour pathID: 9698
+
+114: MonoBehaviour pathID: 9594
+
+114: MonoBehaviour pathID: 9516
+
+114: MonoBehaviour pathID: 9489
+
+114: MonoBehaviour pathID: 9702
+
+114: MonoBehaviour pathID: 9526
+
+114: MonoBehaviour pathID: 9599
+
+114: MonoBehaviour pathID: 9491
+
+114: MonoBehaviour pathID: 9699
+
+114: MonoBehaviour pathID: 9543
+
+114: MonoBehaviour pathID: 9561
+
+114: MonoBehaviour pathID: 9493
+
+114: MonoBehaviour pathID: 9700
+
+114: MonoBehaviour pathID: 9546
+
+114: MonoBehaviour pathID: 9552
+
+114: MonoBehaviour pathID: 9494
+
+114: MonoBehaviour pathID: 9701
+
+114: MonoBehaviour pathID: 9524
+
+114: MonoBehaviour pathID: 9589
+
+114: MonoBehaviour pathID: 9490
+
+114: MonoBehaviour pathID: 9703
+
+114: MonoBehaviour pathID: 9531
+
+114: MonoBehaviour pathID: 9578
+
+114: MonoBehaviour pathID: 9492
+
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+114: MonoBehaviour pathID: 8467
+
+114: MonoBehaviour pathID: 8466
+
+114: MonoBehaviour pathID: 9698
+
+114: MonoBehaviour pathID: 9594
+
+114: MonoBehaviour pathID: 9516
+
+114: MonoBehaviour pathID: 9489
+
+114: MonoBehaviour pathID: 9702
+
+114: MonoBehaviour pathID: 9526
+
+114: MonoBehaviour pathID: 9599
+
+114: MonoBehaviour pathID: 9491
+
+114: MonoBehaviour pathID: 9699
+
+114: MonoBehaviour pathID: 9543
+
+114: MonoBehaviour pathID: 9561
+
+114: MonoBehaviour pathID: 9493
+
+114: MonoBehaviour pathID: 9700
+
+114: MonoBehaviour pathID: 9546
+
+114: MonoBehaviour pathID: 9552
+
+114: MonoBehaviour pathID: 9494
+
+114: MonoBehaviour pathID: 9701
+
+114: MonoBehaviour pathID: 9524
+
+114: MonoBehaviour pathID: 9589
+
+114: MonoBehaviour pathID: 9490
+
+114: MonoBehaviour pathID: 9703
+
+114: MonoBehaviour pathID: 9531
+
+114: MonoBehaviour pathID: 9578
+
+114: MonoBehaviour pathID: 9492
+
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Scene analize:CAB-aaa1254d5508ebe60e450de008f562f7.unity
+GameObject: 1790979772176946198 !!!!  link to missed asset: {FileID: 1790979774072772214} tag: 1790979774072772214}
+Bad links count: 1
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Scene analize:CAB-c7656f17bc4d686f4ef3e252151d739a.unity
+GameObject: 1790979772176946248 !!!!  link to missed asset: {FileID: 1790979774072786887} tag: 1790979774072786887}
+Bad links count: 1
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshPro
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Missed: for Unity.TextMeshPro.dll/TMPro/TextMeshProUGUI
+Make Script DB
+Make Scripts
+Code decompile: Assembly-CSharp-firstpass.dll, class_name=*, type=DecompilerFi
+Check for DeObfuscate: Assembly-CSharp-firstpass.dll
+DecompilerFi.exe begin decomplile
+Code decompile: Assembly-CSharp.dll, class_name=*, type=DecompilerFi
+Check for DeObfuscate: Assembly-CSharp.dll
+Find requried fix functions with empty param names, count: 13 (activate with 'Allow to de-obfuscate assembly' options)
+Assembly 'Assembly-CSharp.dll' - obfuscated (for deobfuscate - activate 'Allow to de-obfuscate assembly' options)
+DecompilerFi.exe begin decomplile
+DecompilerFi.exe end process
+Assembly-CSharp.dll- prepare classes, count: 790
+Assembly-CSharp.dll - decompiled
+Make plugins
+Check for DeObfuscate: com.rlabrecque.steamworks.net.dll
+Check for DeObfuscate: DemiLib.dll
+Check for DeObfuscate: DotNetZip.dll
+Check for DeObfuscate: DOTween.dll
+Check for DeObfuscate: DOTweenPro.dll
+Check for DeObfuscate: I18N.CJK.dll
+Check for DeObfuscate: I18N.dll
+Check for DeObfuscate: I18N.MidEast.dll
+Check for DeObfuscate: I18N.Other.dll
+Check for DeObfuscate: I18N.Rare.dll
+Check for DeObfuscate: I18N.West.dll
+Check for DeObfuscate: Mono.Data.Sqlite.dll
+Check for DeObfuscate: Ookii.Dialogs.dll
+Check for DeObfuscate: RDTools.dll
+Check for DeObfuscate: Rewired_Core.dll
+Find requried fix functions with empty param names, count: 2861 (activate with 'Allow to de-obfuscate assembly' options)
+Assembly 'Rewired_Core.dll' - obfuscated (for deobfuscate - activate 'Allow to de-obfuscate assembly' options)
+Check for DeObfuscate: Rewired_Windows.dll
+Find requried fix functions with empty param names, count: 2657 (activate with 'Allow to de-obfuscate assembly' options)
+Assembly 'Rewired_Windows.dll' - obfuscated (for deobfuscate - activate 'Allow to de-obfuscate assembly' options)
+Check for DeObfuscate: Rewired_Windows_Functions.dll
+Check for DeObfuscate: SharpHook.dll
+Find requried fix functions with empty param names, count: 2 (activate with 'Allow to de-obfuscate assembly' options)
+Assembly 'SharpHook.dll' - obfuscated (for deobfuscate - activate 'Allow to de-obfuscate assembly' options)
+Check for DeObfuscate: Unity.Addressables.dll
+Check for DeObfuscate: Unity.MemoryProfiler.dll
+Check for DeObfuscate: Unity.ResourceManager.dll
+Check for DeObfuscate: Unity.ScriptableBuildPipeline.dll
+Check for DeObfuscate: UnityEngine.NVIDIAModule.dll
+Check for DeObfuscate: UnityEngine.TextCoreFontEngineModule.dll
+Check for DeObfuscate: UnityEngine.TextCoreTextEngineModule.dll
+Check for DeObfuscate: XTUtilities.dll
+Make binStreamingAssets
+Write scrip db
+IsContains_TextMeshPro
+MakeUnityProject - end, dir: C:\Users\10554\Desktop\Windows.old\Users\10554\Desktop\张绍轩\新建文件夹 (3)\nosteamworks\2.1.0-DLC r97\Unity
