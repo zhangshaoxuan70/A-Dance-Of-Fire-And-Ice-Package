@@ -16,4 +16,8 @@ You can find us on Bilibili or Discord:
 
 [Bilibili 钢铁小草](https://space.bilibili.com/37078741)  [Bilibili Ther_CMD](https://space.bilibili.com/425111197)
 
-Discord:zhangshaoxuan70#5790
+Discord:
+
+zhangshaoxuan70#5790
+
+Minecraft #0139
