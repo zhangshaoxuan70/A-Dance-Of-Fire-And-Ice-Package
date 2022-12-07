@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c31568bc7e3043cf9954b08e5a4d1954
+timeCreated: 1670232930
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: "RiiTegakiN"
+  fontNames:
+  - RiiTegakiN
+  fallbackFontReferences: []
+  customCharacters:
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData:
+  assetBundleName: 
+  assetBundleVariant: 

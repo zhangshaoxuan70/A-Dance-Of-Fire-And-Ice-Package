@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 4f350e8dee624dcc94478284826b5975
+timeCreated: 1670233845
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: "zhankuhappy"
+  fontNames:
+  - HappyZcool-2016
+  fallbackFontReferences: []
+  customCharacters:
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData:
+  assetBundleName: b2433a48f30e3e7073f143e5438251f3.bundle
+  assetBundleVariant: 

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 695681b8109943918dfa05a91501f62b
+timeCreated: 1670233839
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: "RiiTegakiN-normalized"
+  fontNames:
+  - RiiTegakiN_normalized
+  fallbackFontReferences: []
+  customCharacters:
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData:
+  assetBundleName: b2433a48f30e3e7073f143e5438251f3.bundle
+  assetBundleVariant: 

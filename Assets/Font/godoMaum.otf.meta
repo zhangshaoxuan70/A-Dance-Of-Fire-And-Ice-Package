@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a237301c1685499586c372a38d54c39e
+timeCreated: 1670232677
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: "godoMaum"
+  fontNames:
+  - godoMaum
+  - Ch2.0-1
+  - RiiTegakiN_normalized
+  fallbackFontReferences: []
+  customCharacters:
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData:
+  assetBundleName: 
+  assetBundleVariant: 
