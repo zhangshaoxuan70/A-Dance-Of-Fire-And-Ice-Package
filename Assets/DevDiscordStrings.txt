@@ -1,0 +1,32 @@
+﻿{
+  "CrackThrough": {
+    "details": "Clearing space cooki 🍪",
+    "largeImageText": "Experimental cookie going wild 🧪"
+  },
+  "PizzaLovers007": {
+    "state": "🍕 Enjoying $700 premium pizza"
+  },
+  "fizzd": {
+    "largeImageText": "actually im clearing pupple yam... yum..."
+  },
+  "Satellite": {
+    "details": "Clearing space noises 🔊",
+    "largeImageText": "how is there music in space 🤔"
+  },
+  "giacomo": {
+    "details": "bark bark bark",
+    "largeImageText": "a dance of charmander and smoochum"
+  },
+  "HeySora": {
+    "details": "Currently vibing 🦊",
+    "largeImageText": "Hey you! Have a nice day :)"
+  },
+  "TaroNuke": {
+	"details": "Pipis room 😸",
+    "largeImageText": "Hey hey hey! Stay outta my shed!"
+  },
+  "megaminerzero": {
+	"details": "Making everything pettable 🤚",
+    "largeImageText": "Just one bug. How bad could it be?"
+  }
+}
