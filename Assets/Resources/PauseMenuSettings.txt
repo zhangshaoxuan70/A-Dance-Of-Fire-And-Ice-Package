@@ -1,0 +1,189 @@
+{
+    "general": [
+		{
+			"name": "vibration",
+			"type": "Bool",
+			"available": [
+				"mobile"
+			]
+		},
+		{
+			"name": "language",
+			"type": "Enum:Language"
+		},
+		{
+			"name": "perfectsOnlyMode",
+			"type": "Bool"
+		},
+		{
+			"name": "skipIntroAfterFirstTry",
+			"type": "Bool"
+		},
+		{
+			"name": "hideCursorWhilePlaying",
+			"type": "Bool"
+		},
+		{
+			"name": "useAsynchronousInput",
+			"type": "Bool",
+			"available": [
+				"desktop"
+			]
+		}
+    ],
+    "audio": [
+        {
+            "name": "volume",
+            "type": "Int",
+            "min": 0,
+            "max": 10
+        },
+        {
+            "name": "inputOffset",
+            "type": "Int",
+            "min": -1000,
+            "max": 1000,
+            "changeBy": 10,
+            "changeBySmall": 1,
+            "unit": "ms"
+        }
+    ],
+    "graphics": [
+        {
+            "name": "fullscreen",
+            "type": "Bool",
+            "available": [
+                "desktop"
+            ]
+        },
+        {
+            "name": "resolution",
+            "type": "Resolution",
+            "available": [
+                "desktop",
+				"steamDeck"
+            ]
+        },
+        {
+            "name": "mobileResolution",
+            "type": "Int",
+            "min": 20,
+            "max": 100,
+            "changeBy": 5,
+            "unit": "%",
+            "available": [
+                "mobile"
+            ]
+        },
+        {
+            "name": "vsync",
+            "type": "Bool"
+        },
+        {
+            "name": "targetFramerate",
+            "type": "Int",
+            "min": 60,
+            "max": 300,
+            "changeBy": 60,
+            "unit": "fps"
+        },
+        {
+            "name": "visualEffects",
+            "type": "Enum:VisualEffects",
+            "restartOnChange": true
+        },
+        {
+            "name": "visualQuality",
+            "type": "Enum:VisualQuality",
+            "restartOnChange": true
+        },
+        {
+            "name": "animateSpeedChanges",
+            "type": "Bool"
+        },
+        {
+            "name": "antiAliasing",
+            "type": "Samples"
+        }
+    ],
+    "editor": [
+        {
+            "name": "markFloorWithComment",
+            "type": "Bool",
+            "available": [
+                "desktop"
+            ]
+        },
+        {
+            "name": "disableRewindButton",
+            "type": "Bool",
+            "available": [
+                "desktop"
+            ]
+        },
+        {
+            "name": "shortcutPitchedPlaySpeed",
+            "type": "Int",
+            "changeBy": 10,
+            "changeBySmall": 1,
+            "min": 1,
+            "max": 1000,
+            "available": [
+                "desktop"
+            ],
+            "exclude": true
+        },
+        {
+            "name": "quickScrubbedPlay",
+            "type": "Int",
+            "available": [
+                "desktop"
+            ],
+            "exclude": true
+        }
+    ],
+	"advanced": [
+		{
+			"name": "showXAccuracy",
+			"type": "Bool"
+		},
+		{
+			"name": "hitErrorMeterSize",
+			"type": "Enum:ErrorMeterSize"
+		},
+		{
+			"name": "hitErrorMeterShape",
+			"type": "Enum:ErrorMeterShape"
+		},
+		{
+			"name": "showDetailedResults",
+			"type": "Bool"
+		},
+		{
+			"name": "multitapTileBehavior",
+			"type": "Enum:MultitapTileBehavior"
+		},
+		{
+			"name": "holdBehavior",
+			"type": "Enum:HoldBehavior"
+		},
+		{
+			"name": "freeroamInvuln",
+			"type": "Bool"
+		},
+		{
+			"name": "recoverDataSteam",
+			"type": "Action",
+			"steamOnly": true
+		},
+		{
+			"name": "clearData",
+			"type": "Action"
+		},
+		{
+			"name": "clearDlc",
+			"type": "Action"
+		}
+	],
+    "empty, this will not be included": []
+}

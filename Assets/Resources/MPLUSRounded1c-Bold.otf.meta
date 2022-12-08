@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 6fdcc7d725ce4225b973ea6ec00f9059
+timeCreated: 1670232609
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: "MPLUSRounded1c-Bold"
+  fontNames:
+  - Rounded Mplus 1c Bold
+  - godoMaum
+  fallbackFontReferences: []
+  customCharacters:
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData:
+  assetBundleName: 
+  assetBundleVariant: 

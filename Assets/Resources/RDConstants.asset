@@ -1,0 +1,406 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98691715da0de2885c8b4af158815d58, type: 3}
+  m_Name: "RDConstants"
+  m_EditorClassIdentifier: 
+  debug: 0
+  auto: 1
+  practice: 0
+  noHud: 0
+  forceMobile: 0
+  useOldAuto: 0
+  skipCutscenes: 0
+  customCheckpoint: 0
+  customCheckpointPos: 455
+  forceNoSteamworks: 0
+  runningOnSteamDeck: 0
+  hideTaroGimmicks: 0
+  deleteSavedProgress: 0
+  version: 
+  macRetinaSupport: 0
+  forceLanguage: 0
+  forcedLanguage: 7
+  latinFont: {fileID: 12800000, guid: a237301c1685499586c372a38d54c39e, type: 3}
+  chineseFont: {fileID: 12800000, guid: 8890cde7e85a4bc7b8e3013596e61b9f, type: 3}
+  koreanFont: {fileID: 12800000, guid: a237301c1685499586c372a38d54c39e, type: 3}
+  japaneseFont: {fileID: 12800000, guid: 6fdcc7d725ce4225b973ea6ec00f9059, type: 3}
+  legacyFont: {fileID: 0}
+  latinFontTMPro: {fileID: 11400000, guid: 6a965d392bd84d51b57610ba178a331d, type: 2}
+  chineseFontTMPro: {fileID: 11400000, guid: 07d9f6ce4a6e4cd6b7fb1da5aed64080, type: 2}
+  chineseFontTMProDuplicate: {fileID: 11400000, guid: d7d0b4e283a94f0d9bbcb9c2d79fa491, type: 2}
+  koreanFontTMPro: {fileID: 11400000, guid: 6a965d392bd84d51b57610ba178a331d, type: 2}
+  japaneseFontTMPro: {fileID: 11400000, guid: 06bbafcf940243af9b827bf84b195ed8, type: 2}
+  legacyFontTMPro: {fileID: 11400000, guid: 3863f305637d4cc5844b8a4895b8dd8b, type: 2}
+  editorFont: {fileID: 0}
+  arialFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  comicSansMSFont: {fileID: 12800000, guid: 1a1f170b06734c27bad49acf89f2e744, type: 3}
+  courierNewFont: {fileID: 12800000, guid: 4c0a1107855e4d9cae4ff9caa4e943ac, type: 3}
+  georgiaFont: {fileID: 12800000, guid: d31ede48aa1a462eba82b66c8888f5e7, type: 3}
+  impactFont: {fileID: 12800000, guid: 46ab8c71fc1f4a7086bff7eda0b8be24, type: 3}
+  timesNewRomanFont: {fileID: 12800000, guid: 537c0e169340445ca34cd2e0a132ad09, type: 3}
+  prefab_rewiredManager: {fileID: 1790979774072776582, guid: ca85d9d5fbcf4d2da2feb192d0564282, type: 2}
+  prefab_errorCanvas: {fileID: 1790979772176947992, guid: 54f7bdd5ce434456be5a5eba7414d4a2, type: 2}
+  prefab_sfxHandler: {fileID: 1790979772176948754, guid: 064bdc1a53cb426d99fffb49b393086b, type: 2}
+  prefab_butterfly: {fileID: 1790979772176948575, guid: 2dc17f7fa1604b61aa27bb288ba5a8b2, type: 2}
+  prefab_notification: {fileID: 1790979772176948176, guid: 3677d7e9eeac452a9091e4d4fd6b7638, type: 2}
+  prefab_PA_diamond: {fileID: 1790979772176947996, guid: 306ff25e4eed4110b142c743587c4af2, type: 2}
+  prefab_PA_circle: {fileID: 1790979772176947969, guid: 972588e436504779b7c7c5f693c88fab, type: 2}
+  prefab_PA_heart: {fileID: 1790979772176948582, guid: a3fddd15d3ea458c9a7faed5ed2bc30d, type: 2}
+  prefab_MD_ghostRing: {fileID: 1790979772176948057, guid: ea30fec7f0d148d188f01a83d861b94b, type: 2}
+  prefab_MD_ghostPopup: {fileID: 1790979772176948514, guid: 40138088107e41fc82fcaa23318844c8, type: 2}
+  prefab_MD_ghostPopupL: {fileID: 1790979772176948579, guid: dace9af5b9584d92b868d3acb47cdeca, type: 2}
+  prefab_options_shape: {fileID: 1790979772176948191, guid: 09dbe990744449a9b3228086a1dda8dd, type: 2}
+  prefab_ML_window: {fileID: 1790979772176948683, guid: 70498d427c5049089d548ae4c901fa0f, type: 2}
+  prefab_ML_torch: {fileID: 1790979772176948500, guid: 099cffb9e5434d95aa698c3c028b15fe, type: 2}
+  prefab_lanternWithChain: {fileID: 1790979772176948174, guid: f6385ac7c728412b9a76b39d575bd3b8, type: 2}
+  prefab_petals: {fileID: 1790979772176948619, guid: dafa3434701b46f6bf9cf1e572805d8c, type: 2}
+  prefab_petalsInstant: {fileID: 1790979772176948620, guid: 85f375c027c84c1e8dfb9eb3c6ead4e5, type: 2}
+  prefab_topGlow: {fileID: 1790979772176947947, guid: b7b1be64c3cb4761b84eb6d3ab034057, type: 2}
+  prefab_bottomGlow: {fileID: 1790979772176948015, guid: c8b7427bb0194baaa638f7e830fbc0e2, type: 2}
+  prefab_floorIcon: {fileID: 1790979772176948135, guid: 4d8117686236436887341eb7bdab22b7, type: 2}
+  prefab_propertiesPanel: {fileID: 1790979772176947930, guid: 6e4961b44bfa4e12937d9292e183efc7, type: 2}
+  prefab_property: {fileID: 1790979772176948725, guid: 27579433b0ae492a883459e340991c76, type: 2}
+  prefab_controlText: {fileID: 1790979772176948005, guid: 8574a3798db647f4b0777a8704dc9d5d, type: 2}
+  prefab_controlLongText: {fileID: 1790979772176948009, guid: 6dd09303835f4fc3a3590ecc81879430, type: 2}
+  prefab_controlEnum: {fileID: 0}
+  prefab_controlDropdown: {fileID: 0}
+  prefab_controlColor: {fileID: 1790979772176948006, guid: a2a1f2a415074320a727f77a49d1b0a7, type: 2}
+  prefab_controlToggle: {fileID: 1790979772176948008, guid: 2044f5d5c5404f63b9f101ac3ae82b36, type: 2}
+  prefab_controlBrowse: {fileID: 1790979772176948007, guid: ee3c4b60cf874d188153e7654e50f76d, type: 2}
+  prefab_controlVector2: {fileID: 1790979772176948010, guid: 22983e81532a4090a6e4fef68a0b0380, type: 2}
+  prefab_controlTile: {fileID: 1790979772176948012, guid: 2098110c1572436cb02017fa249a45f6, type: 2}
+  prefab_controlExport: {fileID: 1790979772176948011, guid: 4802a19ccd3e4e159e04d0e65b6bf593, type: 2}
+  prefab_controlRating: {fileID: 1790979772176948608, guid: 26a88570bcc647b882cf36e0e4ff72f3, type: 2}
+  prefab_controlList: {fileID: 1790979772176948609, guid: 269cfae3bd4a4102bdc3fc5b7a635db2, type: 2}
+  prefab_controlListItem: {fileID: 1790979772176948607, guid: 27b1543521204408a50d8f5a5d85b790, type: 2}
+  prefab_tab: {fileID: 1790979772176948148, guid: d7811ad893d44f3786ef92f9e691b4e3, type: 2}
+  prefab_cycleButtons: {fileID: 1790979772176948201, guid: 7ee9bd60601c43c3a670e1cbff2ae62c, type: 2}
+  prefab_eventIndicator: {fileID: 1790979772176948748, guid: dea66697ce164951999dc6e787c1c6ec, type: 2}
+  sprite_star_empty: {fileID: 21300000, guid: 3495321dee4747b0ab129b69669413cb, type: 3}
+  sprite_star_half: {fileID: 21300000, guid: 25a7b72c4ce043f1b580fb06d21ff2a9, type: 3}
+  sprite_star_full: {fileID: 21300000, guid: 8324496206d543ad939538a68940d34c, type: 3}
+  sprite_defaultPortal: {fileID: 21300000, guid: 8a6844c427c949808e964456f074470b, type: 3}
+  tex_defaultIcon: {fileID: 2800000, guid: c5cf41a1ab4448f9b661b0e69bdc6ede, type: 3}
+  sprite_options_circle: {fileID: 21300000, guid: fa750751d9aa40c3ac28265af1f74ece, type: 3}
+  sprite_options_square: {fileID: 21300000, guid: b7bee86159214b15a3a4d2d535cf0d9c, type: 3}
+  sprite_options_cross: {fileID: 21300000, guid: c386f63685624a8cb2dabaa71cf8cdcd, type: 3}
+  sprite_options_plus: {fileID: 21300000, guid: 1c40bfb8be5f486485d690bf73f15a4c, type: 3}
+  sprite_halloween_lantern_small: {fileID: 21300000, guid: 4b0ab2b7062b48f88797b736e992de0c, type: 3}
+  sprite_halloween_lantern_big: {fileID: 21300000, guid: 6924a37f79e64661852ef26e304ec9e9, type: 3}
+  sprite_cny_lantern: {fileID: 21300000, guid: ade8b39a193341fe8a782f95b4d52c21, type: 3}
+  halloweenLanternSprites:
+  - {fileID: 21300000, guid: e91a9d469e384657afe8102bb6a10886, type: 3}
+  - {fileID: 21300000, guid: 642e87ba440f412e81c35f9ad9f7b552, type: 3}
+  - {fileID: 21300000, guid: 5882f7f27c8a4f06b935c3173e7e6c4f, type: 3}
+  CNYLanternSprites:
+  - {fileID: 21300000, guid: b6fd7c4305a84dd39967becaee999833, type: 3}
+  - {fileID: 21300000, guid: fe3f4f66160b4edc901962a5e83f06e1, type: 3}
+  - {fileID: 21300000, guid: caba11d4c0444bf18c26f095fdd00347, type: 3}
+  bullseyeSprites:
+  - {fileID: 21300000, guid: ed34e0233c1c4515bbb794f80850fe96, type: 3}
+  - {fileID: 21300000, guid: 5bd7fc58955245a684baff53ba74650f, type: 3}
+  - {fileID: 21300000, guid: 48e69e6e3b7f4863ae173647cf5f9380, type: 3}
+  faceBaseSprites:
+  - {fileID: 21300000, guid: 5a8b461639aa4609ab8b03861994afeb, type: 3}
+  - {fileID: 21300000, guid: bd074a3b20c84d3a85f9c66f09648c6a, type: 3}
+  - {fileID: 21300000, guid: c189563e8ee04fddbddc6733cb24dd02, type: 3}
+  - {fileID: 21300000, guid: 7a96421d88234215b55dea2d53ea9fb6, type: 3}
+  - {fileID: 21300000, guid: 6fac05e532904a3fabc5d8384adaefeb, type: 3}
+  - {fileID: 21300000, guid: 2c803396f6f54556a8de336fbeefc2f5, type: 3}
+  - {fileID: 21300000, guid: e37560e6225b4fa88dd4d92c6c5c44f2, type: 3}
+  - {fileID: 21300000, guid: 7f10ffd98ba8457d8d99d756db18df33, type: 3}
+  - {fileID: 21300000, guid: 4720a4964b304bdfaf1a5875a79fac80, type: 3}
+  - {fileID: 21300000, guid: eb3035a52fdf40aa9032a8478b5bcd3b, type: 3}
+  - {fileID: 21300000, guid: 2a152f461c3c410aa46a665ae210e3ad, type: 3}
+  faceBaseDetailSprites:
+  - {fileID: 21300000, guid: ca11e36d94524895b5061e53304a75ea, type: 3}
+  - {fileID: 21300000, guid: 4032a654c7a643ca812242ae8b47066e, type: 3}
+  - {fileID: 21300000, guid: cbf380229e8747c0878d0b7a9b68cca5, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 2f25247d54d54c0cb130c89bd9d45300, type: 3}
+  - {fileID: 21300000, guid: 983813890b1e4c338bc1aa7637ff04a2, type: 3}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: f77e86753f07483782211e986166ad65, type: 3}
+  - {fileID: 21300000, guid: 5803cf97c6684ce590da7c83f7943fa6, type: 3}
+  - {fileID: 21300000, guid: d63eceea5808448f8c8ec8b29c2145b5, type: 3}
+  autoplayOn: {r: 0.4225829, g: 0.8113208, b: 0.3712175, a: 1}
+  autoplayOff: {r: 0.8867924, g: 0.3973834, b: 0.3973834, a: 1}
+  difficultyEasy: {r: 0.5424528, g: 1, b: 0.6702563, a: 1}
+  difficultyMedium: {r: 1, g: 0.9340695, b: 0.4198113, a: 1}
+  difficultyHard: {r: 1, g: 0.259434, b: 0.3426567, a: 1}
+  difficultyHardest: {r: 0.9927374, g: 0.5424528, b: 1, a: 1}
+  allowedColor: {r: 0.1686275, g: 0.6941177, b: 0.1529412, a: 1}
+  particallyDeclinedColor: {r: 0.8627452, g: 0.6117647, b: 0.254902, a: 1}
+  declinedColor: {r: 0.6941177, g: 0.2, b: 0.1529412, a: 1}
+  goldTextColor: {r: 1, g: 0.854902, b: 0, a: 1}
+  portalColor: {r: 0.5843138, g: 0.2117647, b: 0.8784314, a: 1}
+  speedPortalColor: {r: 1, g: 0.2039216, b: 0.282353, a: 1}
+  goldExplosionColor1: {r: 1, g: 0.7215686, b: 0, a: 1}
+  goldExplosionColor2: {r: 0, g: 0.5803922, b: 1, a: 1}
+  overseerExplosionColor1: {r: 0.1058824, g: 0.6470588, b: 0.7843137, a: 1}
+  overseerExplosionColor2: {r: 0.6352941, g: 0.9137255, b: 0.8901961, a: 1}
+  planetColors:
+  - name: 0
+    color: {r: 1, g: 0, b: 0, a: 1}
+  - name: 1
+    color: {r: 0, g: 0, b: 1, a: 1}
+  - name: 2
+    color: {r: 0.9960784, g: 0.5019608, b: 0.1803922, a: 1}
+  - name: 3
+    color: {r: 0.1647059, g: 0.5333334, b: 0.9960784, a: 1}
+  - name: 4
+    color: {r: 0, g: 1, b: 0, a: 1}
+  - name: 5
+    color: {r: 1, g: 0, b: 1, a: 1}
+  - name: 6
+    color: {r: 0.5333334, g: 0, b: 0.5333334, a: 1}
+  - name: 7
+    color: {r: 0, g: 0.6235294, b: 0.1568628, a: 1}
+  - name: 8
+    color: {r: 0.9607843, g: 0.6627451, b: 0.7215686, a: 1}
+  - name: 9
+    color: {r: 0.3568628, g: 0.8078431, b: 0.9803922, a: 1}
+  - name: 10
+    color: {r: 0.6313726, g: 0.3568628, b: 0.9803922, a: 1}
+  - name: 11
+    color: {r: 0, g: 1, b: 0.7490196, a: 1}
+  - name: 14
+    color: {r: 1, g: 0.8078431, b: 0.1607843, a: 1}
+  - name: 12
+    color: {r: 0.1960784, g: 0.1960784, b: 0.1960784, a: 1}
+  - name: 13
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - name: 16
+    color: {r: 0.7215686, g: 0, b: 0, a: 1}
+  - name: 17
+    color: {r: 0.3843137, g: 0, b: 0, a: 1}
+  - name: 18
+    color: {r: 0, g: 0.2509804, b: 0.1568628, a: 1}
+  - name: 19
+    color: {r: 0.3294118, g: 0.4431373, b: 0.254902, a: 1}
+  - name: 20
+    color: {r: 0, g: 1, b: 1, a: 1}
+  - name: 21
+    color: {r: 0.1372549, g: 0.5019608, b: 0.4941176, a: 1}
+  - name: 22
+    color: {r: 0.5696792, g: 0.383369, b: 0.67, a: 1}
+  - name: 23
+    color: {r: 0.5686275, g: 0.5647059, b: 0.6705883, a: 1}
+  - name: 24
+    color: {r: 0.5764706, g: 0.227451, b: 0.08627451, a: 1}
+  - name: 25
+    color: {r: 0.7333333, g: 0.6864, b: 0.6864, a: 1}
+  - name: 26
+    color: {r: 0.1058824, g: 0.6470588, b: 0.7843137, a: 1}
+  hitMarginColours:
+    colourTooEarly: {r: 1, g: 0, b: 0, a: 1}
+    colourVeryEarly: {r: 1, g: 0.4361459, b: 0.3058824, a: 1}
+    colourLittleEarly: {r: 0.627451, g: 1, b: 0.3058824, a: 1}
+    colourPerfect: {r: 0.3764706, g: 1, b: 0.3066038, a: 1}
+    colourLittleLate: {r: 0.627451, g: 1, b: 0.3058824, a: 1}
+    colourVeryLate: {r: 1, g: 0.4352941, b: 0.3058824, a: 1}
+    colourTooLate: {r: 1, g: 0, b: 0, a: 1}
+    colourMultipress: {r: 0, g: 1, b: 0.9301295, a: 1}
+    colourFail: {r: 0.851175, g: 0.3459119, b: 1, a: 1}
+  hitMarginColoursUI:
+    colourTooEarly: {r: 1, g: 0, b: 0, a: 1}
+    colourVeryEarly: {r: 1, g: 0.4352941, b: 0.3019608, a: 1}
+    colourLittleEarly: {r: 0.9882353, g: 1, b: 0.3019608, a: 1}
+    colourPerfect: {r: 0.372549, g: 1, b: 0.3058824, a: 1}
+    colourLittleLate: {r: 0.9882353, g: 1, b: 0.3019608, a: 1}
+    colourVeryLate: {r: 1, g: 0.4352941, b: 0.3019608, a: 1}
+    colourTooLate: {r: 1, g: 0, b: 0, a: 1}
+    colourMultipress: {r: 0, g: 1, b: 0.9294118, a: 1}
+    colourFail: {r: 0.854902, g: 0.3490196, b: 1, a: 1}
+  overlayShader: {fileID: 4800000, guid: d9450ea4ef774d99985e55c3eba96a65, type: 3}
+  tileBlurShader: {fileID: 4800000, guid: 0bc643037eb44f27b98cf409787c7fcf, type: 3}
+  tex_perlinDefault: {fileID: 2800000, guid: 67d5dbd432e24c99ad47b6fa6c0c0c9b, type: 3}
+  tex_perlinNone: {fileID: 2800000, guid: 583ff8fa6de14b31b6d0648de481b2cf, type: 3}
+  tex_floorTileNone: {fileID: 2800000, guid: a14dd19475274ba8a0d93333af323e52, type: 3}
+  tex_floorShadowDefault: {fileID: 2800000, guid: f40f0709565641b6a1fb3327a322ef0e, type: 3}
+  tex_floorShadowGlow: {fileID: 2800000, guid: c002052f38cf4d249deef870e6913936, type: 3}
+  tex_floorShadowNone: {fileID: 2800000, guid: c99980454896461f9b0b1fdc348ae1c4, type: 3}
+  tex_floorEdgeDefault: {fileID: 2800000, guid: e74f2cc3f546468a84b7721f6786aef4, type: 3}
+  tex_floorTileDefault: {fileID: 2800000, guid: acb4842d1b2c420b951a9acbb6c00c0f, type: 3}
+  tex_floorEdgeBasic: {fileID: 2800000, guid: 8b3d949d86844c07bd51b10b261c9b04, type: 3}
+  tex_floorEdgeNeon: {fileID: 2800000, guid: 3ac1d2db99664bdabccb17ad5c267f95, type: 3}
+  tex_floorEdgeNeon2: {fileID: 2800000, guid: dcce2a77798d46988010366eaced4ffc, type: 3}
+  tex_floorEdgeNeonLight: {fileID: 2800000, guid: 7c43bf6a87e8488891f57a3929789db4, type: 3}
+  tex_floorEdgeMinimal: {fileID: 2800000, guid: 4e7a0cde38274583972117cc36d24ed3, type: 3}
+  tex_gem: {fileID: 2800000, guid: 9341961eb6e94db7b9f78f1f6c44a525, type: 3}
+  tex_clear: {fileID: 2800000, guid: b8b9fcf645ec478d803152fc6f01bf93, type: 3}
+  halloweenMusic: {fileID: 8300000, guid: 9c782d980ae04b9f998129383d36d87e, type: 3}
+  soundEffects:
+  - {fileID: 8300000, guid: 3ff2f4a20acd42fc85b990ade3d07624, type: 3}
+  - {fileID: 8300000, guid: 76d23969fe1244e78563728342faf862, type: 3}
+  - {fileID: 8300000, guid: c06f9f1a6b7342d6bbfa68abdc01f405, type: 3}
+  - {fileID: 8300000, guid: d718b7f89d124e9cad4a1b951a6dbfc2, type: 3}
+  - {fileID: 8300000, guid: 60b57e6587c34e0e89e57fea51845ede, type: 3}
+  - {fileID: 8300000, guid: dc96d00ffcd042ba8265c979afe6a114, type: 3}
+  - {fileID: 8300000, guid: d607382d28334c82ac633519571e3da7, type: 3}
+  - {fileID: 8300000, guid: cd438168f9ee48cb94dfbc3643c2e014, type: 3}
+  - {fileID: 8300000, guid: d3be126e0c98400780c759b9c3c85e15, type: 3}
+  - {fileID: 8300000, guid: 20314d8680784722b58638ded2bd21bc, type: 3}
+  - {fileID: 8300000, guid: 39f1d02b23c147a59906555ddd4fe58f, type: 3}
+  - {fileID: 8300000, guid: 5bdd012e227f429790ee50284b8033e0, type: 3}
+  - {fileID: 8300000, guid: 9cdd1b23f2b14869be1dd1c6ce203def, type: 3}
+  - {fileID: 8300000, guid: 7efa3c405c6f45fa9d7f764b0c37ce2d, type: 3}
+  - {fileID: 8300000, guid: 2658f53d2c8947c39d384f8abfd641df, type: 3}
+  - {fileID: 8300000, guid: e6df172cce0c401fba631268345972d7, type: 3}
+  - {fileID: 8300000, guid: 7509133e964a4560aadbbb2d79a058ba, type: 3}
+  - {fileID: 8300000, guid: e0d8646ec14746c2bd6945722fd93df6, type: 3}
+  - {fileID: 8300000, guid: 790957fb6ae840ddb9ff9f39df678f4f, type: 3}
+  - {fileID: 8300000, guid: efb3ae4ccdd8419ab8ba2c06015e42dc, type: 3}
+  - {fileID: 8300000, guid: 2c3932f9a396415d9d507e7939b99783, type: 3}
+  - {fileID: 8300000, guid: f37824576a0d484899ce8184b951f971, type: 3}
+  - {fileID: 8300000, guid: abfb785138fa457cb264397f13f8c310, type: 3}
+  - {fileID: 8300000, guid: 67b6f4bebddd42cf846c2eea22d48bc5, type: 3}
+  - {fileID: 8300000, guid: abd42518b09c413cb76b725e39eff058, type: 3}
+  - {fileID: 8300000, guid: db07c806a77c4e21bb1fd427f9b765f3, type: 3}
+  - {fileID: 8300000, guid: 44da950a7811412e9c44c9e756023473, type: 3}
+  - {fileID: 8300000, guid: 1b1cd682aa0d4a8f890429ab2a8e3319, type: 3}
+  - {fileID: 8300000, guid: 4cbb1e3fc2b946f69d5033f9a3d2018b, type: 3}
+  - {fileID: 8300000, guid: 8accf047fe3e4032b024d4c7e70bfa2f, type: 3}
+  - {fileID: 8300000, guid: e4057985712040d5ba1f06d309535e92, type: 3}
+  - {fileID: 8300000, guid: 87773d845cda43599d4c0e9fa10b4f1b, type: 3}
+  - {fileID: 8300000, guid: 8bd43d002ae74b779253e74841fba52f, type: 3}
+  - {fileID: 8300000, guid: 70c8f1b52de04e78a9695b8b6161a7a3, type: 3}
+  - {fileID: 8300000, guid: f62259ad9eeb43f5be9bf7967db16374, type: 3}
+  - {fileID: 8300000, guid: 103a3c542a8143a0990a2730b26b2db9, type: 3}
+  - {fileID: 8300000, guid: a73a11488f1e4060a24e54494c866756, type: 3}
+  - {fileID: 8300000, guid: ba64b12aab6b42ee887d6fe01d19d02b, type: 3}
+  - {fileID: 8300000, guid: 3ac48b1b11284d669e7c54ce56766567, type: 3}
+  - {fileID: 8300000, guid: 3159e3d54bca4c1d969b107b697ab758, type: 3}
+  - {fileID: 8300000, guid: 6a42f395fbcd4193808713750042ce57, type: 3}
+  - {fileID: 8300000, guid: 53f32d837ba34eaeb91baa8a644c23d1, type: 3}
+  - {fileID: 8300000, guid: daefab92d6a340c49c9acf9a20bee8b2, type: 3}
+  - {fileID: 8300000, guid: f54368e9b8824632804a562915b8bfc4, type: 3}
+  - {fileID: 8300000, guid: c9b183ce07c342098357d257fa2a8cb7, type: 3}
+  - {fileID: 8300000, guid: e73902920d6d4652853eda814647117b, type: 3}
+  - {fileID: 8300000, guid: d4b0782dba244d95bbaaf0f9af9a5df7, type: 3}
+  - {fileID: 8300000, guid: ed216964cea4473b92c9235765eb2719, type: 3}
+  rabbitSpritesArr:
+  - {fileID: 21300000, guid: 46d2ba7926c84ec49490dcda004ad6e5, type: 3}
+  - {fileID: 21300000, guid: 8a49de54de2e4c8d93c965105082d5d1, type: 3}
+  - {fileID: 21300000, guid: fa9d35c85a194561b568b32e6261ca7d, type: 3}
+  - {fileID: 21300000, guid: 07613e4f4c1d4b3e9eea380f818bee47, type: 3}
+  - {fileID: 21300000, guid: df8994df90e74db1b6b7f6914cd88c90, type: 3}
+  - {fileID: 21300000, guid: 30e6acd8dd9d44c29dfd106efe838482, type: 3}
+  - {fileID: 21300000, guid: b6b64c7217784b1c9412e17a7fee730c, type: 3}
+  - {fileID: 21300000, guid: f61bf5c0c00f47c0a2304a7f652e43fc, type: 3}
+  - {fileID: 21300000, guid: 1f78f1a8a9db4b0c989a88f867609415, type: 3}
+  - {fileID: 21300000, guid: 648a62a7d4124f988c8652c3aefe5d11, type: 3}
+  snailSpritesArr:
+  - {fileID: 21300000, guid: 14633a2d9957462d9b7e9ffb5f9f3d06, type: 3}
+  - {fileID: 21300000, guid: 77dcfc1198a840ed8b4ecc895354a3e6, type: 3}
+  - {fileID: 21300000, guid: 312196b7d08747faaff97bfcc5dc2566, type: 3}
+  - {fileID: 21300000, guid: e3f405de9cd64e248a12c6711edfd125, type: 3}
+  - {fileID: 21300000, guid: 949361fdcc5447c98d203571349b4b34, type: 3}
+  - {fileID: 21300000, guid: 14eed1b298a948e1a2b629c3881b6a03, type: 3}
+  - {fileID: 21300000, guid: 469b5cfe40f3403d8a7c84e6e51cd279, type: 3}
+  - {fileID: 21300000, guid: a113222365954f3f9966d22e1e6113dd, type: 3}
+  - {fileID: 21300000, guid: 9ba71a338155460d9ca5da4ead878709, type: 3}
+  - {fileID: 21300000, guid: 7153445ccbf449eabaf7d9dabe0c6b39, type: 3}
+  sprPortal: {fileID: 21300000, guid: 0e1f80177f764b3ab776f23a410be472, type: 3}
+  sprIconRabbit: {fileID: 21300000, guid: 8a49de54de2e4c8d93c965105082d5d1, type: 3}
+  sprIconRabbitGray: {fileID: 21300000, guid: 46d2ba7926c84ec49490dcda004ad6e5, type: 3}
+  sprIconDoubleRabbit: {fileID: 21300000, guid: 5bcd6e4488914414a1d9e1488e62a38d, type: 3}
+  sprIconSnail: {fileID: 21300000, guid: 0bc4be3f142645b9ae09888deace44fc, type: 3}
+  sprIconSnailGray: {fileID: 21300000, guid: 14633a2d9957462d9b7e9ffb5f9f3d06, type: 3}
+  sprIconDoubleSnail: {fileID: 21300000, guid: c3576b7a77344d0abb22c46d76b07917, type: 3}
+  sprIconSwirlBlue: {fileID: 21300000, guid: 532d19553c324844bb714326bca8ae04, type: 3}
+  sprIconSwirlRed: {fileID: 21300000, guid: 756257b5bfc0441699ac361d23b0bd67, type: 3}
+  sprIconSameSpeed: {fileID: 21300000, guid: 769facf1f3c240a7aca2617d5fa98eaf, type: 3}
+  sprIconVfx: {fileID: 21300000, guid: 01150f74524c42bc98dfe23b54e08cb6, type: 3}
+  sprIconCheckpoint: {fileID: 21300000, guid: cf841271ca5a40e887b9388a5da2c16a, type: 3}
+  sprIconCheckpointLit: {fileID: 21300000, guid: 6641f54b4a154aa8a9e38afedc54cac5, type: 3}
+  prefabLetterPress: {fileID: 1790979772176948706, guid: 6bc7cf0354b647e896b787ed757d43b1, type: 2}
+  sprOutlineRabbit: {fileID: 21300000, guid: f41a4880a3864c3daa06b2845a0b56ea, type: 3}
+  sprOutlineDoubleRabbit: {fileID: 21300000, guid: e33e1ce9ec8443b896d78d788584052a, type: 3}
+  sprOutlineSnail: {fileID: 21300000, guid: bc80fdfabbd84bddb72f94a274706cfc, type: 3}
+  sprOutlineDoubleSnail: {fileID: 21300000, guid: 8ee83cd39ae34c1a96f83664c96754d9, type: 3}
+  sprOutlineSwirl: {fileID: 21300000, guid: 0e8e2d22653d42a690e8d6e9d1e9782b, type: 3}
+  sprOutlineSameSpeed: {fileID: 21300000, guid: 852c2a94f124433fbdc4455e7d5060e8, type: 3}
+  sprOutlineVfx: {fileID: 21300000, guid: d66ccee37ff74be78ca0f666d21daa54, type: 3}
+  sprOutlineCheckpoint: {fileID: 21300000, guid: 5d64259aed4943c3a4399fbb145d309f, type: 3}
+  canvasPrefab: {fileID: 1790979772176947898, guid: 2bab67f3a73d4aa18bbb236050c079ba, type: 2}
+  hitTextPrefab: {fileID: 1790979772176947908, guid: cf824f85a9d14931b56a8e35eb5d9dcd, type: 2}
+  animatedPortalPrefab: {fileID: 1790979772176948214, guid: a4a6469cedf643eb93c3e981ef7e92c0, type: 2}
+  errorMeterPrefab: {fileID: 1790979772176948601, guid: 36cfa50ac9c54913a0fc69c68b6538ca, type: 2}
+  missIndicator: {fileID: 1790979772176948150, guid: 23bba72572f54689946de51d47d6afeb, type: 2}
+  failIndicator: {fileID: 1790979772176948149, guid: 11039b698a0c4b1dbd36ff31a5891d82, type: 2}
+  floorMeshDefault: {fileID: 2100000, guid: 9848307ebdbe4a08ad543d7a13465e8a, type: 2}
+  floorSpriteDefault: {fileID: 2100000, guid: 5408d926683c44359db9fd47b07df793, type: 2}
+  hitSoundOffsetsArray:
+  - sound: 2
+    offset: 0.015
+  - sound: 5
+    offset: 0.015
+  - sound: 7
+    offset: 0.03
+  - sound: 11
+    offset: 0.021
+  - sound: 13
+    offset: 0.05
+  - sound: 21
+    offset: 0.036
+  - sound: 22
+    offset: 0.116
+  - sound: 23
+    offset: 0.026
+  worldColourScheme:
+  - colourBg: {r: 0, g: 0, b: 0, a: 1}
+    colourBarsHit: {r: 0.1618399, g: 0.3207547, b: 0.1134745, a: 1}
+    colourBarsIdle: {r: 0.3098039, g: 0.3098039, b: 0.3098039, a: 1}
+    colourText: {r: 1, g: 1, b: 1, a: 1}
+    colourBarsMiss: {r: 0.7450981, g: 0, b: 0, a: 1}
+  - colourBg: {r: 1, g: 1, b: 1, a: 1}
+    colourBarsHit: {r: 0.7450981, g: 0.7450981, b: 0.7450981, a: 1}
+    colourBarsIdle: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
+    colourText: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
+    colourBarsMiss: {r: 0.8584906, g: 0.7086597, b: 0.7086597, a: 1}
+  - colourBg: {r: 0.2901961, g: 0.1764706, b: 0.1843137, a: 1}
+    colourBarsHit: {r: 0.3294118, g: 0.290278, b: 0.2431373, a: 1}
+    colourBarsIdle: {r: 0.3294118, g: 0.2431373, b: 0.2431373, a: 1}
+    colourText: {r: 1, g: 0.8726415, b: 0.8726415, a: 1}
+    colourBarsMiss: {r: 0.9245283, g: 0.1003026, b: 0.1003026, a: 1}
+  - colourBg: {r: 0.1882353, g: 0.172549, b: 0.3058824, a: 1}
+    colourBarsHit: {r: 0.2509804, g: 0.3807051, b: 0.4862745, a: 1}
+    colourBarsIdle: {r: 0.2509804, g: 0.2509804, b: 0.4862745, a: 1}
+    colourText: {r: 1, g: 1, b: 1, a: 1}
+    colourBarsMiss: {r: 0.6603774, g: 0.02803488, b: 0.02803488, a: 1}
+  blurEffectConeTap: {fileID: 4800000, guid: 9887180defd04bad934a3e41c70197b6, type: 3}
+  featuredWorkshopLevels: []
+  prefab_worldPortal: {fileID: 1790979772176947910, guid: a2d1360171b6486abb053754f9b0aade, type: 2}
+  prefab_titleScreen: {fileID: 1790979772176948598, guid: 72c260af0e154708ad676269a21b12af, type: 2}
+  prefab_colorsScreen: {fileID: 1790979772176948638, guid: a9d415be2c114df3965136b20bb425bf, type: 2}
+  prefab_creditsScreen: {fileID: 1790979772176948645, guid: ba5ef8dcb25c4582b7f22d2a3c063012, type: 2}
+  sprSpeedTrialButtonOn: {fileID: 21300000, guid: 56e4ebcb344e443ab12893f877ed7960, type: 3}
+  sprSpeedTrialButtonOff: {fileID: 21300000, guid: 2842877eeaea44e2abdd2d02692d5379, type: 3}
+  collider180: {fileID: 1790979772176948188, guid: c4163ff9e6ca4dab9b5f81e9f7363846, type: 2}
+  sprIconHoldArrowLong: {fileID: 21300000, guid: d66816520bd54d3e8dd2f6c23c346035, type: 3}
+  sprIconHoldArrowShort: {fileID: 21300000, guid: a09356bcd92e49a98b05cbbb34dfda75, type: 3}
+  sprIconHoldReleaseLong: {fileID: 21300000, guid: 436bf421045042f3a7e3fa2c30529e2d, type: 3}
+  sprIconHoldReleaseShort: {fileID: 21300000, guid: 16a7c2c945fe440785e648450ce0f295, type: 3}
+  sprIconMultiPlanetTwo: {fileID: 21300000, guid: 6aa0af94d2fc4be8902ed9950589acb4, type: 3}
+  sprIconMultiPlanetThreeMore: {fileID: 21300000, guid: 352d04e0549c436981b362c74b68a619, type: 3}
+  sprIconMultiPlanetThreeLess: {fileID: 21300000, guid: 22a319148293467186b331769a83fc9a, type: 3}
+  sprOutlineHoldArrowLong: {fileID: 21300000, guid: 083890207c644ad896e3a30e53ce4158, type: 3}
+  sprOutlineHoldArrowShort: {fileID: 21300000, guid: 20b4c6c8b9c4402aaec95a9b97bec9fc, type: 3}
+  sprOutlineHoldReleaseLong: {fileID: 21300000, guid: 5372377e3ff74ee1882a8949bae10a7a, type: 3}
+  sprOutlineHoldReleaseShort: {fileID: 21300000, guid: 5372377e3ff74ee1882a8949bae10a7a, type: 3}
+  sprOutlineMultiPlanetTwo: {fileID: 21300000, guid: 7246a130e267469f86d03056127a8ae0, type: 3}
+  sprOutlineMultiPlanetThreeMore: {fileID: 21300000, guid: c20e7876e67c431597e384e564fe4310, type: 3}
+  sprOutlineMultiPlanetThreeLess: {fileID: 21300000, guid: c20e7876e67c431597e384e564fe4310, type: 3}
+  planetPolygonTex: {fileID: 2800000, guid: 30a45a88c3f1488db0c3212ea94a6427, type: 3}
+  holdShader: {fileID: 4800000, guid: eb334f91cceb4b4ba4227c5c81ba3e2d, type: 3}

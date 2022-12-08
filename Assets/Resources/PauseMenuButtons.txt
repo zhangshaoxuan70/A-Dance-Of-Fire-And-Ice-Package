@@ -1,0 +1,76 @@
+{
+    "Buttons": {
+        "Continue": {
+            "icon": "pause_continue_icon",
+            "rdString": "pauseMenu.continue",
+            "scale": [0.72, 0.72],
+            "platforms": ["Mac", "Windows", "Linux", "iOS", "Switch", "Android"],
+            "features": ["Pause", "NoPrevious", "NoNext", "NoPreviousOrNext", "Practice"]
+        },
+        "Previous": {
+            "icon": "pause_skip_icon",
+            "rdString": "pauseMenu.previous",
+            "scale": [-1, 1],
+            "features": ["Pause", "NoNext"]
+        },
+        "Next": {
+            "icon": "pause_skip_icon",
+            "rdString": "pauseMenu.next",
+            "scale": [1, 1],
+            "features": ["Pause", "NoPrevious"]
+        },
+        "LevelEditor": {
+            "icon": "edit_level_icon",
+            "rdString": "pauseMenu.levelEditor",
+            "scale": [1.3707, 1.3707]
+        },
+        "SteamWorkshop": {
+            "icon": "pause_steam_icon",
+            "rdString": "pauseMenu.workshop",
+            "scale": [1.3707, 1.3707]
+        },
+        "Refresh": {
+            "icon": "pause_refresh_icon",
+            "rdString": "pauseMenu.refresh",
+            "scale": [1.4, 1.4]
+        },
+        "Restart": {
+            "icon": "pause_restart_icon",
+            "rdString": "pauseMenu.restart",
+            "scale": [1.1058, 1.1058],
+            "features": ["Pause", "NoPrevious", "NoNext", "NoPreviousOrNext"]
+        },
+        "Practice": {
+            "icon": "pause_practice_icon",
+            "rdString": "pauseMenu.practice",
+            "scale": [1.3707, 1.3707],
+            "features": ["Practice"]
+        },
+        "Settings": {
+            "icon": "pause_settings_icon",
+            "rdString": "pauseMenu.settings",
+            "scale": [1, 1],
+            "platforms": ["Mac", "Windows", "Linux", "iOS", "Switch", "Android"],
+            "features": ["Pause", "NoPrevious", "NoNext", "NoPreviousOrNext", "Practice"]
+        },
+        "Calibration": {
+            "icon": "calibration_icon",
+            "rdString": "pauseMenu.calibration",
+            "scale": [1.1058, 1.1058],
+            "platforms": ["iOS", "Switch", "Android"]
+        },
+        "Quit": {
+            "icon": "pause_quit_icon",
+            "rdString": "pauseMenu.quit",
+            "scale": [-1, 1],
+            "platforms": ["Mac", "Windows", "Linux", "Android"],
+            "features": ["Pause", "NoPrevious", "NoNext", "NoPreviousOrNext", "Practice"]
+        },
+        "LoadLevel": {
+            "icon": "folder-icon",
+            "rdString": "pauseMenu.loadLevel",
+            "scale": [1.3707, 1.3707]
+        }
+    },
+    "CLSPause": ["Continue", "Settings", "SteamWorkshop", "Refresh", "Quit"]
+}
