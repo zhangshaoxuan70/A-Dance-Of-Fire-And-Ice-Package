@@ -1,0 +1,374 @@
+{
+    "rootGroup": "titleGroup",
+    "groups": 
+    [
+        {
+            "name": "titleGroup",
+            "caption": "homeScreen",
+            "downGroup": "extrasGroup",
+            "leftGroup": "colorGroup",
+            "rightGroup": "mainGroup",
+            "backgroundColor": "3C127D45",
+            "gradientColor": "822D5480",
+            "cloudColor": "3F283817",
+            "screens":
+            [
+                {
+                    "type": "title"
+                }
+            ]
+        },
+        {
+            "name": "mainGroup",
+            "caption": "worlds",
+            "screens":
+            [
+                {
+                    "type": "portal",
+                    "world": "1"
+                },
+                {
+                    "type": "portal",
+                    "world": "2",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIfStage": ["stage:1"]
+                },
+                {
+                    "type": "portal",
+                    "world": "3",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIfStage": ["stage:1"]
+                },
+                {
+                    "type": "portal",
+                    "world": "4",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIfStage": ["stage:1"]
+                },
+                {
+                    "type": "portal",
+                    "world": "5",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIfStage": ["stage:1"]
+                },
+                {
+                    "type": "portal",
+                    "world": "6",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIf": ["stage:3"]
+                },
+                {
+                    "type": "portal",
+                    "world": "7",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIf": ["completed:4"],
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["djivvi"],
+                        "soundcloud": "djivviLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "8",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIf": ["completed:5"]
+                },
+                {
+                    "type": "portal",
+                    "world": "9",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIf": ["completed:2"],
+                    "levelCredits":
+                    {
+                        "credit": "guestLevelDesign",
+                        "people": ["theDrawerTales"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["cysmix"],
+                        "soundcloud": "cysmixLink"
+                    },
+                    "secondarySongCredits":
+                    {
+                        "credit": "tutorialMusic",
+                        "people": ["riya"],
+                        "soundcloud": "riyaLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "10",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIf": ["completed:5"],
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["riya"],
+                        "soundcloud": "riyaLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "11",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIf": ["completed:8", "completed:9"],
+                    "levelCredits":
+                    {
+                        "credit": "guestLevelDesign",
+                        "people": ["exschwasion"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["yooh"],
+                        "soundcloud": "yoohLink"
+                    },
+                    "secondarySongCredits":
+                    {
+                        "credit": "tutorialMusic",
+                        "people": ["riya"],
+                        "soundcloud": "riyaLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "12",
+                    "visibleIf": ["stage:1"],
+                    "unlockedIf": ["completed:6"],
+                    "levelCredits":
+                    {
+                        "credit": "guestLevelDesign",
+                        "people": ["simsimHI"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["riya"],
+                        "soundcloud": "riyaLink"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "colorGroup",
+            "caption": "colorScreen",
+            "leftGroup": "creditsGroup",
+            "screens":
+            [
+                {
+                    "type": "colors",
+                    "visibleIf": ["stage:1"]
+                }
+            ]
+        },
+        {
+            "name": "creditsGroup",
+            "caption": "credits",
+            "screens": 
+            [
+                {
+                    "type": "credits"
+                }
+            ]
+        },
+        {
+            "name": "extrasGroup",
+            "caption": "extraScreen",
+            "backgroundColor": "1359A170",
+            "gradientColor": "FFA12D6D",
+            "rightGroup": "crownGroup",
+            "downGroup": "museDashGroup",
+            "screens":
+            [
+                {
+                    "type": "portal",
+                    "world": "PA",
+                    "visibleIf": ["completed:4"],
+                    "levelCredits":
+                    {
+                        "credit": "guestLevelDesign",
+                        "people": ["fancybread"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["meganeko"],
+                        "soundcloud": "meganekoLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "RJ",
+                    "visibleIf": ["completed:4"],
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["linky"]
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "XF",
+                    "visibleIf": ["condition:XF"],
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["laFlibuste"]
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "XC",
+                    "visibleIf": ["condition:XC"],
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["frums"],
+                        "soundcloud": "frumsLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "XH",
+                    "visibleIf": ["condition:XH"],
+                    "levelCredits":
+                    {
+                        "credit": "guestLevelDesign",
+                        "people": ["rikri"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["riya"],
+                        "soundcloud": "riyaLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "XR",
+                    "visibleIf": ["condition:XR"],
+                    "levelCredits":
+                    {
+                        "credit": "guestLevelDesign",
+                        "people": ["hotduck", "lumi", "number07"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["rodycode"],
+                        "youtube": "rodycodeLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "B",
+                    "visibleIf": ["stage:7"]
+                }
+            ]
+        },
+        {
+            "name": "crownGroup",
+            "backgroundColor": "000000FF",
+            "gradientColor": "28005EFF",
+            "horizontalGap" : 1.0,
+            "screens":
+            [
+                {
+                    "type": "portal",
+                    "world": "XO",
+                    "visibleIf": ["stage:8"],
+                    "crown": true,
+                    "levelCredits":
+                    {
+                        "credit": "guestLevelDesign",
+                        "people": ["star4th"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["quree"],
+                        "soundcloud": "qureeLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "XT",
+                    "visibleIf": ["stage:8"],
+                    "crown": true,
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["frums"],
+                        "soundcloud": "frumsLink"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "museDashGroup",
+            "caption": "museDash",
+            "backgroundColor": "000000FF",
+            "gradientColor": "28005EFF",
+            "screens":
+            [
+                {
+                    "type": "portal",
+                    "world": "MN",
+                    "visibleIf": ["stage:3"],
+                    "levelCredits":
+                    {
+                        "credit": "guestVFX",
+                        "people": ["rikri"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["cnsouka"],
+                        "soundcloud": "cnsoukaLink"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "ML",
+                    "visibleIf": ["stage:3"],
+                    "levelCredits":
+                    {
+                        "credit": "guestVFX",
+                        "people": ["rikri"]
+                    },
+                    "tertiaryLevelCredits":
+                    {
+                        "credit": "MLtutorial",
+                        "people": ["natebcarson"],
+                        "twitter": "natebcarsonLink"
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["polymath9"],
+                        "soundcloud": "polymath9Link"
+                    }
+                },
+                {
+                    "type": "portal",
+                    "world": "MO",
+                    "visibleIf": ["speedTrial:MN", "speedTrial:ML"],
+                    "levelCredits":
+                    {
+                        "credit": "guestLevelDesign",
+                        "people": ["nichipe", "riya"]
+                    },
+                    "songCredits":
+                    {
+                        "credit": "guestTrack",
+                        "people": ["ras"],
+                        "soundcloud": "rasLink"
+                    }
+                }
+            ]
+        }
+    ]
+}
