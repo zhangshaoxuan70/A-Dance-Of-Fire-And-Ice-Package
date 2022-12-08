@@ -1,0 +1,2909 @@
+{
+	"levelEvents": [
+		{
+			"name": "SetSpeed",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "speedType",
+					"type": "Enum:SpeedType",
+					"default": "Bpm",
+					"affectsFloors": true
+				},
+				{
+					"name": "beatsPerMinute",
+					"type": "Float",
+					"default": 100.0,
+					"min": 0.001,
+					"max": 10000.0,
+					"unit": "bpm",
+					"disableIf": [
+						"speedType",
+						"Multiplier"
+					],
+					"affectsFloors": true
+				},
+				{
+					"name": "bpmMultiplier",
+					"type": "Float",
+					"default": 1.0,
+					"min": 1.0E-7,
+					"max": 128.0,
+					"unit": "X",
+					"disableIf": [
+						"speedType",
+						"Bpm"
+					],
+					"affectsFloors": true
+				}
+			]
+		},
+		{
+			"name": "Twirl",
+			"executionTime": "OnBar",
+			"properties": []
+		},
+		{
+			"name": "Multitap",
+			"pro": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "taps",
+					"type": "Int",
+					"min": 2,
+					"max": 10,
+					"default": 2,
+					"unit": ""
+				}
+			]
+		},
+		{
+			"name": "Checkpoint",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "tileOffset",
+					"type": "Int",
+					"default": 0,
+					"unit": "tiles"
+				}
+			]
+		},
+		{
+			"name": "CustomBackground",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "color",
+					"type": "Color",
+					"default": "000000",
+					"usesAlpha": false,
+					"key": "editor.color"
+				},
+				{
+					"name": "bgImage",
+					"type": "File",
+					"fileType": "Image",
+					"default": "",
+					"key": "editor.image"
+				},
+				{
+					"name": "imageColor",
+					"type": "Color",
+					"default": "ffffff",
+					"usesAlpha": false,
+					"key": "editor.imageColor",
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "parallax",
+					"type": "Vector2",
+					"default": [
+						100,
+						100
+					],
+					"unit": "%",
+					"key": "editor.parallax",
+					"disableIf": [
+						"lockRot",
+						"Enabled",
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "bgDisplayMode",
+					"type": "Enum:BgDisplayMode",
+					"default": "FitToScreen",
+					"key": "editor.bgDisplayMode",
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "lockRot",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.lockRot",
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "loopBG",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.loopBG",
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "unscaledSize",
+					"type": "Int",
+					"min": 1,
+					"max": 1000,
+					"default": 100,
+					"unit": "%",
+					"key": "editor.unscaledSize",
+					"enableIf": [
+						"bgDisplayMode",
+						"Unscaled"
+					],
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "ChangeTrack",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "trackColorType",
+					"type": "Enum:TrackColorType",
+					"default": "Single",
+					"key": "editor.trackColor.type",
+					"affectsFloors": true
+				},
+				{
+					"name": "trackColor",
+					"type": "Color",
+					"default": "debb7b",
+					"key": "editor.trackColor.color",
+					"affectsFloors": true
+				},
+				{
+					"name": "secondaryTrackColor",
+					"type": "Color",
+					"default": "ffffff",
+					"key": "editor.trackColor.secondaryColor",
+					"affectsFloors": true
+				},
+				{
+					"name": "trackColorAnimDuration",
+					"type": "Float",
+					"default": 2,
+					"min": 1.401298E-45,
+					"max": 1000,
+					"unit": "seconds",
+					"key": "editor.trackColor.colorAnimDuration"
+				},
+				{
+					"name": "trackColorPulse",
+					"type": "Enum:TrackColorPulse",
+					"default": "None",
+					"key": "editor.trackColor.pulse"
+				},
+				{
+					"name": "trackPulseLength",
+					"type": "Int",
+					"default": 10,
+					"min": 2,
+					"max": 1000,
+					"unit": "tiles",
+					"key": "editor.trackColor.pulseLength"
+				},
+				{
+					"name": "trackStyle",
+					"type": "Enum:TrackStyle",
+					"default": "Standard",
+					"key": "editor.trackStyle",
+					"affectsFloors": true
+				},
+				{
+					"name": "trackAnimation",
+					"type": "Enum:TrackAnimationType",
+					"default": "None",
+					"key": "editor.trackAnimation"
+				},
+				{
+					"name": "beatsAhead",
+					"type": "Float",
+					"default": 3,
+					"unit": "beats",
+					"key": "editor.trackBeatsAhead"
+				},
+				{
+					"name": "trackDisappearAnimation",
+					"type": "Enum:TrackAnimationType2",
+					"default": "None",
+					"key": "editor.trackDisappearAnimation"
+				},
+				{
+					"name": "beatsBehind",
+					"type": "Float",
+					"default": 4,
+					"unit": "beats",
+					"key": "editor.trackBeatsBehind"
+				}
+			]
+		},
+		{
+			"name": "ColorTrack",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "trackColorType",
+					"type": "Enum:TrackColorType",
+					"default": "Single",
+					"key": "editor.trackColor.type",
+					"affectsFloors": true
+				},
+				{
+					"name": "trackColor",
+					"type": "Color",
+					"default": "debb7b",
+					"key": "editor.trackColor.color",
+					"affectsFloors": true
+				},
+				{
+					"name": "secondaryTrackColor",
+					"type": "Color",
+					"default": "ffffff",
+					"key": "editor.trackColor.secondaryColor",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Rainbow"
+					],
+					"affectsFloors": true
+				},
+				{
+					"name": "trackColorAnimDuration",
+					"type": "Float",
+					"default": 2,
+					"min": 1.401298E-45,
+					"max": 1000,
+					"unit": "seconds",
+					"key": "editor.trackColor.colorAnimDuration",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Stripes"
+					]
+				},
+				{
+					"name": "trackColorPulse",
+					"type": "Enum:TrackColorPulse",
+					"default": "None",
+					"key": "editor.trackColor.pulse",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Stripes"
+					]
+				},
+				{
+					"name": "trackPulseLength",
+					"type": "Int",
+					"default": 10,
+					"min": 2,
+					"max": 1000,
+					"unit": "tiles",
+					"key": "editor.trackColor.pulseLength",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Stripes",
+						"trackColorPulse",
+						"None"
+					]
+				},
+				{
+					"name": "trackStyle",
+					"type": "Enum:TrackStyle",
+					"default": "Standard",
+					"key": "editor.trackStyle",
+					"affectsFloors": true
+				},
+				{
+					"name": "trackTexture",
+					"type": "File",
+					"fileType": "Image",
+					"default": "",
+					"enableIf": [
+						"trackStyle",
+						"Standard"
+					],
+					"affectsFloors": true
+				},
+				{
+					"name": "trackTextureScale",
+					"type": "Float",
+					"default": 1.0,
+					"min": 1.401298E-45,
+					"max": 1000.0,
+					"disableIf": [
+						"trackTexture",
+						""
+					],
+					"affectsFloors": true
+				}
+			]
+		},
+		{
+			"name": "AnimateTrack",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "trackAnimation",
+					"type": "Enum:TrackAnimationType",
+					"default": "None",
+					"key": "editor.trackAnimation"
+				},
+				{
+					"name": "beatsAhead",
+					"type": "Float",
+					"default": 3,
+					"unit": "beats",
+					"key": "editor.trackBeatsAhead",
+					"disableIf": [
+						"trackAnimation",
+						"None"
+					]
+				},
+				{
+					"name": "trackDisappearAnimation",
+					"type": "Enum:TrackAnimationType2",
+					"default": "None",
+					"key": "editor.trackDisappearAnimation"
+				},
+				{
+					"name": "beatsBehind",
+					"type": "Float",
+					"default": 4,
+					"unit": "beats",
+					"key": "editor.trackBeatsBehind",
+					"disableIf": [
+						"trackDisappearAnimation",
+						"None"
+					]
+				}
+			]
+		},
+		{
+			"name": "AddDecoration",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "decorationImage",
+					"type": "File",
+					"fileType": "Image",
+					"default": "",
+					"key": "editor.image"
+				},
+				{
+					"name": "position",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles"
+				},
+				{
+					"name": "relativeTo",
+					"type": "Enum:DecPlacementType",
+					"default": "Global",
+					"key": "editor.AddDecoration.relativeTo"
+				},
+				{
+					"name": "floor",
+					"type": "Int",
+					"default": 0,
+					"key": "editor.tileNumber",
+					"enableIf": [
+						"relativeTo",
+						"Tile"
+					]
+				},
+				{
+					"name": "pivotOffset",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles"
+				},
+				{
+					"name": "rotation",
+					"type": "Float",
+					"default": 0,
+					"unit": "°"
+				},
+				{
+					"name": "scale",
+					"type": "Vector2",
+					"default": [
+						100,
+						100
+					],
+					"unit": "%"
+				},
+				{
+					"name": "tile",
+					"type": "Vector2",
+					"default": [
+						1,
+						1
+					],
+					"min": [
+						1,
+						1
+					]
+				},
+				{
+					"name": "color",
+					"type": "Color",
+					"default": "ffffff",
+					"key": "editor.color"
+				},
+				{
+					"name": "opacity",
+					"type": "Float",
+					"default": 100,
+					"unit": "%",
+					"key": "editor.opacity"
+				},
+				{
+					"name": "depth",
+					"type": "Int",
+					"default": 0
+				},
+				{
+					"name": "parallax",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"key": "editor.parallax",
+					"disableIf": [
+						"relativeTo",
+						"Camera"
+					]
+				},
+				{
+					"name": "tag",
+					"type": "String"
+				},
+				{
+					"name": "imageSmoothing",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "failHitbox",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.AddDecoration.failHitbox",
+					"affectsFloors": true
+				},
+				{
+					"name": "failHitboxType",
+					"type": "Enum:Hitbox",
+					"default": "Box",
+					"key": "editor.AddDecoration.failHitboxType",
+					"disableIf": [
+						"failHitbox",
+						"Disabled"
+					],
+					"affectsFloors": true
+				},
+				{
+					"name": "failHitboxScale",
+					"type": "Vector2",
+					"default": [
+						100,
+						100
+					],
+					"min": [
+						1,
+						1
+					],
+					"unit": "%",
+					"key": "editor.AddDecoration.failHitboxScale",
+					"disableIf": [
+						"failHitbox",
+						"Disabled"
+					],
+					"affectsFloors": true
+				},
+				{
+					"name": "failHitboxOffset",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"key": "editor.AddDecoration.failHitboxOffset",
+					"disableIf": [
+						"failHitbox",
+						"Disabled"
+					],
+					"affectsFloors": true
+				},
+				{
+					"name": "failHitboxRotation",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.AddDecoration.failHitboxRotation",
+					"disableIf": [
+						"failHitbox",
+						"Disabled"
+					],
+					"affectsFloors": true
+				},
+				{
+					"name": "components",
+					"pro": true,
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "Flash",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 1.0,
+					"min": 0,
+					"unit": "beats",
+					"key": "editor.duration"
+				},
+				{
+					"name": "plane",
+					"type": "Enum:FlashPlane",
+					"default": "Background"
+				},
+				{
+					"name": "startColor",
+					"type": "Color",
+					"default": "ffffff"
+				},
+				{
+					"name": "startOpacity",
+					"type": "Float",
+					"min": 0,
+					"max": 100,
+					"default": 100,
+					"unit": "%"
+				},
+				{
+					"name": "endColor",
+					"type": "Color",
+					"default": "ffffff"
+				},
+				{
+					"name": "endOpacity",
+					"type": "Float",
+					"min": 0,
+					"max": 100,
+					"default": 0,
+					"unit": "%"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "ease",
+					"type": "Enum:Ease",
+					"default": "Linear",
+					"key": "editor.ease"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "MoveCamera",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 1.0,
+					"min": 0.0,
+					"unit": "beats",
+					"key": "editor.duration",
+					"hasRandomValue": true
+				},
+				{
+					"name": "durationRandomMode",
+					"control": "Hidden",
+					"type": "Enum:RandomMode",
+					"default": "None",
+					"enabled": false
+				},
+				{
+					"name": "durationRandomValue",
+					"control": "Hidden",
+					"type": "Float",
+					"default": 1.0,
+					"min": 0.0,
+					"unit": "beats",
+					"enabled": false
+				},
+				{
+					"name": "relativeTo",
+					"type": "Enum:CamMovementType",
+					"default": "Player",
+					"canBeDisabled": true
+				},
+				{
+					"name": "position",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"hasRandomValue": true,
+					"canBeDisabled": true,
+					"startEnabled": true
+				},
+				{
+					"name": "positionRandomMode",
+					"control": "Hidden",
+					"type": "Enum:RandomMode",
+					"default": "None",
+					"enabled": false
+				},
+				{
+					"name": "positionRandomValue",
+					"control": "Hidden",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"enabled": false
+				},
+				{
+					"name": "rotation",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"hasRandomValue": true,
+					"canBeDisabled": true
+				},
+				{
+					"name": "rotationRandomMode",
+					"control": "Hidden",
+					"type": "Enum:RandomMode",
+					"default": "None",
+					"enabled": false
+				},
+				{
+					"name": "rotationRandomValue",
+					"control": "Hidden",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"enabled": false
+				},
+				{
+					"name": "zoom",
+					"type": "Float",
+					"default": 100,
+					"min": 1.401298E-45,
+					"max": 1000,
+					"unit": "%",
+					"hasRandomValue": true,
+					"canBeDisabled": true
+				},
+				{
+					"name": "zoomRandomMode",
+					"control": "Hidden",
+					"type": "Enum:RandomMode",
+					"default": "None",
+					"enabled": false
+				},
+				{
+					"name": "zoomRandomValue",
+					"control": "Hidden",
+					"type": "Int",
+					"default": 100,
+					"min": 1,
+					"max": 1000,
+					"unit": "%",
+					"enabled": false
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "ease",
+					"type": "Enum:Ease",
+					"default": "Linear",
+					"key": "editor.ease"
+				},
+				{
+					"name": "dontDisable",
+					"type": "Enum:ToggleBool",
+					"pro": true,
+					"default": "Disabled",
+					"key": "editor.dontDisable"
+				},
+				{
+					"name": "minVfxOnly",
+					"type": "Enum:ToggleBool",
+					"pro": true,
+					"default": "Disabled",
+					"key": "editor.minVfxOnly"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "SetHitsound",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "gameSound",
+					"type": "Enum:GameSound",
+					"default": "Hitsound",
+					"key": "editor.gameSound"
+				},
+				{
+					"name": "hitsound",
+					"type": "Enum:HitSound",
+					"default": "Kick",
+					"key": "editor.hitsound"
+				},
+				{
+					"name": "hitsoundVolume",
+					"type": "Int",
+					"default": 100,
+					"unit": "%",
+					"min": 1,
+					"max": 100,
+					"key": "editor.hitsoundVolume"
+				}
+			]
+		},
+		{
+			"name": "SetGameSound",
+			"enabled": false,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "gameSound",
+					"type": "Enum:GameSound",
+					"default": "Hitsound"
+				},
+				{
+					"name": "hitsound",
+					"type": "Enum:HitSound",
+					"default": "Kick",
+					"key": "editor.hitsound"
+				},
+				{
+					"name": "volume",
+					"type": "Int",
+					"default": 100,
+					"unit": "%",
+					"min": 1,
+					"max": 100,
+					"key": "editor.volume"
+				}
+			]
+		},
+		{
+			"name": "PlaySound",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "hitsound",
+					"type": "Enum:HitSound",
+					"default": "Kick",
+					"key": "editor.hitsound"
+				},
+				{
+					"name": "hitsoundVolume",
+					"type": "Int",
+					"default": 100,
+					"unit": "%",
+					"min": 1,
+					"max": 100,
+					"key": "editor.hitsoundVolume"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "RecolorTrack",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "startTile",
+					"type": "Tile",
+					"unit": "tilesFrom",
+					"key": "editor.startTile"
+				},
+				{
+					"name": "endTile",
+					"type": "Tile",
+					"unit": "tilesFrom",
+					"key": "editor.endTile"
+				},
+				{
+					"name": "trackColorType",
+					"type": "Enum:TrackColorType",
+					"default": "Single",
+					"key": "editor.trackColor.type"
+				},
+				{
+					"name": "trackColor",
+					"type": "Color",
+					"default": "debb7b",
+					"key": "editor.trackColor.color"
+				},
+				{
+					"name": "secondaryTrackColor",
+					"type": "Color",
+					"default": "ffffff",
+					"key": "editor.trackColor.secondaryColor",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Rainbow"
+					]
+				},
+				{
+					"name": "trackColorAnimDuration",
+					"type": "Float",
+					"default": 2,
+					"min": 1.401298E-45,
+					"max": 1000,
+					"unit": "seconds",
+					"key": "editor.trackColor.colorAnimDuration",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Stripes"
+					]
+				},
+				{
+					"name": "trackColorPulse",
+					"type": "Enum:TrackColorPulse",
+					"default": "None",
+					"key": "editor.trackColor.pulse",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Stripes"
+					]
+				},
+				{
+					"name": "trackPulseLength",
+					"type": "Int",
+					"default": 10,
+					"min": 2,
+					"max": 1000,
+					"unit": "tiles",
+					"key": "editor.trackColor.pulseLength",
+					"disableIf": [
+						"trackColorType", "Single",
+						"trackColorType", "Stripes",
+						"trackColorPulse", "None"
+					]
+				},
+				{
+					"name": "trackStyle",
+					"type": "Enum:TrackStyle",
+					"default": "Standard",
+					"key": "editor.trackStyle"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "MoveTrack",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "startTile",
+					"type": "Tile",
+					"unit": "tilesFrom",
+					"key": "editor.startTile"
+				},
+				{
+					"name": "endTile",
+					"type": "Tile",
+					"unit": "tilesFrom",
+					"key": "editor.endTile"
+				},
+				{
+					"name": "gapLength",
+					"type": "Int",
+					"default": 0,
+					"min": 0,
+					"max": 100
+				},
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 1.0,
+					"min": 0,
+					"unit": "beats",
+					"key": "editor.duration"
+				},
+				{
+					"name": "positionOffset",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"canBeDisabled": true,
+					"startEnabled": true
+				},
+				{
+					"name": "rotationOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"canBeDisabled": true
+				},
+				{
+					"name": "scale",
+					"type": "Vector2",
+					"default": [
+						100,
+						100
+					],
+					"unit": "%",
+					"canBeDisabled": true
+				},
+				{
+					"name": "opacity",
+					"type": "Float",
+					"default": 100,
+					"unit": "%",
+					"key": "editor.opacity",
+					"canBeDisabled": true
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "ease",
+					"type": "Enum:Ease",
+					"default": "Linear",
+					"key": "editor.ease"
+				},
+				{
+					"name": "maxVfxOnly",
+					"type": "Enum:ToggleBool",
+					"pro": true,
+					"default": "Disabled",
+					"key": "editor.maxVfxOnly"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "SetFilter",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "filter",
+					"type": "Enum:Filter",
+					"default": "Grayscale"
+				},
+				{
+					"name": "enabled",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "intensity",
+					"type": "Float",
+					"default": 100,
+					"unit": "%",
+					"disableIf": [
+						"enabled",
+						"Disabled"
+					],
+					"enableIf": [
+						"filter","VHS",
+						"filter","LED",
+						"filter","Drawing",
+						"filter","Compression",
+						"filter","Waves",
+						"filter","Pixelate",
+						"filter","Rain",
+						"filter","Blizzard",
+						"filter","PixelSnow",
+						"filter","Static",
+						"filter","Grain",
+						"filter","MotionBlur",
+						"filter","Fisheye",
+						"filter","Aberration",
+						"filter","Sepia",
+						"filter","Grayscale",
+						"filter","HexagonBlack",
+						"filter","Posterize",
+						"filter","Sharpen",
+						"filter","Contrast",
+						"filter","OilPaint",
+						"filter","Blur",
+						"filter","BlurFocus",
+						"filter","GaussianBlur",
+						"filter","WaterDrop",
+						"filter","LightWater"
+					]
+				},
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 0.0,
+					"min": 0.0,
+					"unit": "beats",
+					"key": "editor.duration",
+					"disableIf": [
+						"enabled",
+						"Disabled"
+					],
+					"enableIf": [
+						"filter","VHS",
+						"filter","LED",
+						"filter","Drawing",
+						"filter","Compression",
+						"filter","Waves",
+						"filter","Pixelate",
+						"filter","Rain",
+						"filter","Blizzard",
+						"filter","PixelSnow",
+						"filter","Static",
+						"filter","Grain",
+						"filter","MotionBlur",
+						"filter","Fisheye",
+						"filter","Aberration",
+						"filter","Sepia",
+						"filter","Grayscale",
+						"filter","HexagonBlack",
+						"filter","Posterize",
+						"filter","Sharpen",
+						"filter","Contrast",
+						"filter","OilPaint",
+						"filter","Blur",
+						"filter","BlurFocus",
+						"filter","GaussianBlur",
+						"filter","WaterDrop",
+						"filter","LightWater"
+					]
+				},
+				{
+					"name": "ease",
+					"type": "Enum:Ease",
+					"default": "Linear",
+					"key": "editor.ease",
+					"disableIf": [
+						"enabled",
+						"Disabled"
+					],
+					"enableIf": [
+						"filter","VHS",
+						"filter","LED",
+						"filter","Drawing",
+						"filter","Compression",
+						"filter","Waves",
+						"filter","Pixelate",
+						"filter","Rain",
+						"filter","Blizzard",
+						"filter","PixelSnow",
+						"filter","Static",
+						"filter","Grain",
+						"filter","MotionBlur",
+						"filter","Fisheye",
+						"filter","Aberration",
+						"filter","Sepia",
+						"filter","Grayscale",
+						"filter","HexagonBlack",
+						"filter","Posterize",
+						"filter","Sharpen",
+						"filter","Contrast",
+						"filter","OilPaint",
+						"filter","Blur",
+						"filter","BlurFocus",
+						"filter","GaussianBlur",
+						"filter","WaterDrop",
+						"filter","LightWater"
+					]
+				},
+				{
+					"name": "disableOthers",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "HallOfMirrors",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "enabled",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "ShakeScreen",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 1.0,
+					"min": 0,
+					"unit": "beats",
+					"key": "editor.duration"
+				},
+				{
+					"name": "strength",
+					"type": "Float",
+					"default": 100,
+					"unit": "%"
+				},
+				{
+					"name": "intensity",
+					"type": "Float",
+					"default": 100,
+					"unit": "%"
+				},
+				{
+					"name": "fadeOut",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "SetPlanetRotation",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "ease",
+					"type": "Enum:Ease",
+					"default": "Linear",
+					"key": "editor.ease"
+				},
+				{
+					"name": "easeParts",
+					"type": "Int",
+					"default": 1,
+					"min": 1,
+					"max": 20
+				},
+				{
+					"name": "easePartBehavior",
+					"type": "Enum:EasePartBehavior",
+					"default": "Mirror"
+				}
+			]
+		},
+		{
+			"name": "KillPlayer",
+			"executionTime": "OnBar",
+			"pro": true,
+			"properties": [
+				{
+					"name": "playAnimation",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "failMessage",
+					"type": "String"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "MoveDecorations",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 1.0,
+					"min": 0,
+					"unit": "beats",
+					"key": "editor.duration"
+				},
+				{
+					"name": "tag",
+					"type": "String",
+					"default": "editor.placeholder.sampleTag",
+					"placeholder": "editor.placeholder.sampleTag"
+				},
+				{
+					"name": "decorationImage",
+					"type": "File",
+					"fileType": "Image",
+					"default": "",
+					"key": "editor.image",
+					"canBeDisabled": true
+				},
+				{
+					"name": "positionOffset",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"canBeDisabled": true,
+					"startEnabled": true
+				},
+				{
+					"name": "rotationOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"canBeDisabled": true
+				},
+				{
+					"name": "scale",
+					"type": "Vector2",
+					"default": [
+						100,
+						100
+					],
+					"unit": "%",
+					"canBeDisabled": true
+				},
+				{
+					"name": "color",
+					"type": "Color",
+					"default": "ffffff",
+					"key": "editor.color",
+					"canBeDisabled": true
+				},
+				{
+					"name": "opacity",
+					"type": "Float",
+					"default": 100,
+					"unit": "%",
+					"key": "editor.opacity",
+					"canBeDisabled": true
+				},
+				{
+					"name": "depth",
+					"type": "Int",
+					"default": -1,
+					"key": "editor.depth",
+					"canBeDisabled": true
+				},
+				{
+					"name": "parallax",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"key": "editor.parallax",
+					"canBeDisabled": true
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "ease",
+					"type": "Enum:Ease",
+					"default": "Linear",
+					"key": "editor.ease"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "PositionTrack",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "positionOffset",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"key": "editor.positionOffset",
+					"affectsFloors": true
+				},
+				{
+					"name": "relativeTo",
+					"type": "Tile",
+					"unit": "tilesFrom",
+					"affectsFloors": true
+				},
+				{
+					"name": "rotation",
+					"type": "Float",
+					"default": 0,
+					"min": -7200,
+					"max": 7200,
+					"unit": "°",
+					"affectsFloors": true
+				},
+				{
+					"name": "scale",
+					"type": "Int",
+					"default": 100,
+					"min": 0,
+					"max": 300,
+					"unit": "%",
+					"affectsFloors": true
+				},
+				{
+					"name": "opacity",
+					"type": "Int",
+					"default": 100,
+					"min": 0,
+					"max": 100,
+					"unit": "%",
+					"affectsFloors": true
+				},
+				{
+					"name": "justThisTile",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"affectsFloors": true
+				},
+				{
+					"name": "editorOnly",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled"
+				}
+			]
+		},
+		{
+			"name": "Hold",
+			"executionTime": "OnBar",
+			"taroDLC": true,
+			"properties": [
+				{
+					"name": "duration",
+					"type": "Int",
+					"min": "0",
+					"max": 20,
+					"default": 0,
+					"unit": "loops",
+					"key": "editor.duration",
+					"affectsFloors": true
+				},
+				{
+					"name": "distanceMultiplier",
+					"type": "Int",
+					"min": "0",
+					"default": 100,
+					"unit": "%",
+					"affectsFloors": true
+				},
+				{
+					"name": "landingAnimation",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled"
+				}
+			]
+		},
+		{
+			"name": "SetHoldSound",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "holdStartSound",
+					"type": "Enum:HoldStartSound",
+					"default": "Fuse"
+				},
+				{
+					"name": "holdLoopSound",
+					"type": "Enum:HoldLoopSound",
+					"default": "Fuse"
+				},
+				{
+					"name": "holdEndSound",
+					"type": "Enum:HoldEndSound",
+					"default": "Fuse"
+				},
+				{
+					"name": "holdMidSound",
+					"type": "Enum:HoldMidSound",
+					"default": "Fuse"
+				},
+				{
+					"name": "holdMidSoundType",
+					"type": "Enum:HoldMidSoundType",
+					"default": "Once",
+					"key": "editor.holdMidSoundType",
+					"disableIf": [
+						"holdMidSound",
+						"None"
+					]
+				},
+				{
+					"name": "holdMidSoundDelay",
+					"type": "Float",
+					"default": 0.5,
+					"min": "0.25",
+					"unit": "beats",
+					"key": "editor.holdMidSoundDelay",
+					"disableIf": [
+						"holdMidSound",
+						"None"
+					]
+				},
+				{
+					"name": "holdMidSoundTimingRelativeTo",
+					"type": "Enum:HoldMidSoundTimingRelativeTo",
+					"default": "End",
+					"disableIf": [
+						"holdMidSound",
+						"None"
+					]
+				},
+				{
+					"name": "holdSoundVolume",
+					"type": "Int",
+					"default": 100,
+					"unit": "%",
+					"min": 1,
+					"max": 100,
+					"key": "editor.holdSoundVolume"
+				}
+			]
+		},
+		{
+			"name": "TileDimensions",
+			"executionTime": "OnBar",
+			"taroDLC": true,
+			"pro": true,
+			"properties": [
+				{
+					"name": "width",
+					"type": "Float",
+					"min": "0",
+					"default": 100,
+					"unit": "%",
+					"affectsFloors": true,
+					"key": "editor.TileDimensions.width"
+				},
+				{
+					"name": "length",
+					"type": "Float",
+					"min": "0",
+					"default": 100,
+					"unit": "%",
+					"affectsFloors": true,
+					"key": "editor.TileDimensions.length"
+				}
+			]
+		},
+		{
+			"name": "RepeatEvents",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "repetitions",
+					"type": "Int",
+					"default": 1,
+					"min": 1
+				},
+				{
+					"name": "interval",
+					"type": "Float",
+					"default": 1.0,
+					"min": 1.401298E-45,
+					"unit": "beats"
+				},
+				{
+					"name": "tag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "Bloom",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "enabled",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "threshold",
+					"type": "Float",
+					"default": 50,
+					"min": 0,
+					"unit": "%",
+					"disableIf": [
+						"enabled",
+						"Disabled"
+					]
+				},
+				{
+					"name": "intensity",
+					"type": "Float",
+					"default": 100,
+					"unit": "%",
+					"disableIf": [
+						"enabled",
+						"Disabled"
+					]
+				},
+				{
+					"name": "color",
+					"type": "Color",
+					"default": "ffffff",
+					"disableIf": [
+						"enabled",
+						"Disabled"
+					]
+				},
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 0.0,
+					"min": 0.0,
+					"unit": "beats",
+					"key": "editor.duration",
+					"disableIf": [
+						"enabled",
+						"Disabled"
+					]
+				},
+				{
+					"name": "ease",
+					"type": "Enum:Ease",
+					"default": "Linear",
+					"key": "editor.ease",
+					"disableIf": [
+						"enabled",
+						"Disabled"
+					]
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "SetConditionalEvents",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "perfectTag",
+					"type": "String",
+					"default": "NONE"
+				},
+				{
+					"name": "hitTag",
+					"type": "String",
+					"default": "NONE"
+				},
+				{
+					"name": "barelyTag",
+					"type": "String",
+					"default": "NONE"
+				},
+				{
+					"name": "missTag",
+					"type": "String",
+					"default": "NONE"
+				},
+				{
+					"name": "lossTag",
+					"type": "String",
+					"default": "NONE"
+				}
+			]
+		},
+		{
+			"name": "MultiPlanet",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "planets",
+					"type": "Enum:PlanetCount",
+					"default": "TwoPlanets",
+					"key": "editor.planets",
+					"affectsFloors": true
+				}
+			]
+		},
+		{
+			"name": "FreeRoam",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "duration",
+					"type": "Int",
+					"min": "4",
+					"max": "10000",
+					"default": 16,
+					"unit": "beats",
+					"key": "editor.duration"
+				},
+				{
+					"name": "size",
+					"type": "Vector2",
+					"default": [
+						4,
+						4
+					],
+					"min": [
+						2,
+						2
+					],
+					"max": [
+						50,
+						50
+					],
+					"unit": "tiles",
+					"affectsFloors": true
+				},
+				{
+					"name": "positionOffset",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"affectsFloors": true
+				},
+				{
+					"name": "outTime",
+					"type": "Int",
+					"min": "2",
+					"max": "10000",
+					"default": 4,
+					"unit": "beats",
+					"key": "editor.FreeRoam.outTime"
+				},
+				{
+					"name": "outEase",
+					"type": "Enum:Ease",
+					"default": "InOutSine",
+					"key": "editor.ease"
+				},
+				{
+					"name": "hitsoundOnBeats",
+					"type": "Enum:HitSound",
+					"default": "None",
+					"key": "editor.FreeRoam.hitsoundOnBeats"
+				},
+				{
+					"name": "hitsoundOffBeats",
+					"type": "Enum:HitSound",
+					"default": "None",
+					"key": "editor.FreeRoam.hitsoundOffBeats"
+				},
+				{
+					"name": "countdownTicks",
+					"type": "Int",
+					"default": 4,
+					"min": 0,
+					"max": 12,
+					"key": "editor.countdownTicks"
+				},
+				{
+					"name": "angleCorrectionDir",
+					"type": "Int",
+					"default": -1,
+					"min": -1,
+					"max": 1,
+					"key": "editor.Pause.angleCorrectionDir"
+				}
+			]
+		},
+		{
+			"name": "FreeRoamTwirl",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "position",
+					"type": "Vector2",
+					"default": [
+						1,
+						0
+					],
+					"unit": "tiles",
+					"key": "editor.positionOffset",
+					"affectsFloors": true
+				}
+			]
+		},
+		{
+			"name": "FreeRoamRemove",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "position",
+					"type": "Vector2",
+					"default": [
+						1,
+						0
+					],
+					"unit": "tiles",
+					"key": "editor.positionOffset",
+					"affectsFloors": true
+				},
+				{
+					"name": "size",
+					"type": "Vector2",
+					"default": [
+						1,
+						1
+					],
+					"unit": "tiles",
+					"key": "editor.FreeRoamRemove.size",
+					"affectsFloors": true
+				}
+			]
+		},
+		{
+			"name": "FreeRoamWarning",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "position",
+					"type": "Vector2",
+					"default": [
+						1,
+						0
+					],
+					"unit": "tiles",
+					"key": "editor.positionOffset",
+					"affectsFloors": true
+				}
+			]
+		},
+		{
+			"name": "Pause",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 1.0,
+					"min": 0.0,
+					"max": 1000.0,
+					"unit": "beats"
+				},
+				{
+					"name": "countdownTicks",
+					"type": "Int",
+					"default": 0,
+					"min": 0,
+					"max": 12,
+					"key": "editor.countdownTicks"
+				},
+				{
+					"name": "angleCorrectionDir",
+					"type": "Int",
+					"default": -1,
+					"min": -1,
+					"max": 1,
+					"key": "editor.Pause.angleCorrectionDir"
+				}
+			]
+		},
+		{
+			"name": "AutoPlayTiles",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "enabled",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "safetyTiles",
+					"pro": true,
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.AutoPlayTiles.safetyTiles"
+				}
+			]
+		},
+		{
+			"name": "Hide",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "hideJudgment",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.Hide.hideJudgment"
+				},
+				{
+					"name": "hideTileIcon",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.Hide.hideTileIcon",
+					"affectsFloors": true
+				}
+			]
+		},
+		{
+			"name": "ScaleMargin",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "scale",
+					"type": "Int",
+					"min": "25",
+					"max": "200",
+					"default": 100,
+					"unit": "%"
+				}
+			]
+		},
+		{
+			"name": "ScaleRadius",
+			"taroDLC": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "scale",
+					"type": "Int",
+					"min": "50",
+					"max": "500",
+					"default": 100,
+					"affectsFloors": true,
+					"unit": "%"
+				}
+			]
+		},
+		{
+			"name": "ScreenTile",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "tile",
+					"type": "Vector2",
+					"default": [
+						1,
+						1
+					],
+					"min": [
+						-20,
+						-20
+					],
+					"max": [
+						20,
+						20
+					]
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "ScreenScroll",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "scroll",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"min": [
+						-1000,
+						-1000
+					],
+					"max": [
+						1000,
+						1000
+					],
+					"unit": "%"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "AddText",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "decText",
+					"type": "String",
+					"default": "sampleText",
+					"key": "editor.text"
+				},
+				{
+					"name": "font",
+					"type": "Enum:FontName",
+					"default": "Default"
+				},
+				{
+					"name": "position",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"key": "editor.AddDecoration.position"
+				},
+				{
+					"name": "relativeTo",
+					"type": "Enum:DecPlacementType",
+					"default": "Global",
+					"key": "editor.AddDecoration.relativeTo"
+				},
+				{
+					"name": "floor",
+					"type": "Int",
+					"default": 0,
+					"min": 0,
+					"key": "editor.tileNumber",
+					"enableIf": [
+						"relativeTo",
+						"Tile"
+					]
+				},
+				{
+					"name": "pivotOffset",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"key": "editor.AddDecoration.pivotOffset"
+				},
+				{
+					"name": "rotation",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.AddDecoration.rotation"
+				},
+				{
+					"name": "scale",
+					"type": "Vector2",
+					"default": [
+						100,
+						100
+					],
+					"unit": "%"
+				},
+				{
+					"name": "color",
+					"type": "Color",
+					"default": "ffffff",
+					"key": "editor.color"
+				},
+				{
+					"name": "opacity",
+					"type": "Float",
+					"default": 100,
+					"unit": "%",
+					"key": "editor.opacity"
+				},
+				{
+					"name": "depth",
+					"type": "Int",
+					"default": -1,
+					"key": "editor.depth"
+				},
+				{
+					"name": "parallax",
+					"type": "Vector2",
+					"default": [
+						-1,
+						-1
+					],
+					"key": "editor.parallax"
+				},
+				{
+					"name": "tag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "SetText",
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "decText",
+					"type": "String",
+					"default": "sampleText",
+					"key": "editor.text"
+				},
+				{
+					"name": "tag",
+					"type": "String"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				},
+				{
+					"name": "eventTag",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "EditorComment",
+			"executionTime": "Special",
+			"properties": [
+				{
+					"name": "comment",
+					"type": "Text",
+					"default": "editor.EditorComment.defaultComment"
+				}
+			]
+		},
+		{
+			"name": "Bookmark",
+			"executionTime": "Special",
+			"properties": []
+		},
+		{
+			"name": "CallMethod",
+			"pro": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "method",
+					"type": "String"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				}
+			]
+		},
+		{
+			"name": "AddComponent",
+			"pro": true,
+			"executionTime": "OnBar",
+			"properties": [
+				{
+					"name": "component",
+					"type": "String"
+				},
+				{
+					"name": "properties",
+					"type": "String"
+				},
+				{
+					"name": "duration",
+					"type": "Float",
+					"default": 1.0,
+					"min": 0,
+					"unit": "beats",
+					"key": "editor.duration"
+				},
+				{
+					"name": "angleOffset",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.angleOffset"
+				}
+			]
+		}
+	],
+	"settings": [
+		{
+			"name": "SongSettings",
+			"executionTime": "Special",
+			"properties": [
+				{
+					"name": "songFilename",
+					"type": "File",
+					"fileType": "Audio",
+					"default": "",
+					"key": "editor.filename"
+				},
+				{
+					"name": "bpm",
+					"type": "Float",
+					"default": 100.0,
+					"min": 0.001,
+					"max": 10000.0,
+					"unit": "bpm",
+					"key": "editor.beatsPerMinute"
+				},
+				{
+					"name": "volume",
+					"type": "Int",
+					"default": 100,
+					"unit": "%",
+					"min": 0,
+					"max": 100,
+					"key": "editor.volume"
+				},
+				{
+					"name": "offset",
+					"type": "Int",
+					"default": 0,
+					"unit": "ms",
+					"min": -10000,
+					"max": 300000,
+					"key": "editor.offset"
+				},
+				{
+					"name": "pitch",
+					"type": "Int",
+					"default": 100,
+					"unit": "%",
+					"min": 1,
+					"max": 1000,
+					"key": "editor.pitch"
+				},
+				{
+					"name": "hitsound",
+					"type": "Enum:HitSound",
+					"default": "Kick",
+					"key": "editor.hitsound"
+				},
+				{
+					"name": "hitsoundVolume",
+					"type": "Int",
+					"default": 100,
+					"unit": "%",
+					"min": 0,
+					"max": 100,
+					"key": "editor.hitsoundVolume"
+				},
+				{
+					"name": "countdownTicks",
+					"type": "Int",
+					"default": 4,
+					"min": 2,
+					"max": 12,
+					"key": "editor.countdownTicks"
+				}
+			]
+		},
+		{
+			"name": "LevelSettings",
+			"executionTime": "Special",
+			"properties": [
+				{
+					"name": "artist",
+					"type": "String",
+					"key": "editor.artist",
+					"required": true
+				},
+				{
+					"name": "specialArtistType",
+					"type": "Enum:SpecialArtistType",
+					"default": "None",
+					"key": "editor.specialArtistType"
+				},
+				{
+					"name": "artistPermission",
+					"type": "File",
+					"fileType": "Image",
+					"default": "",
+					"key": "editor.artistPermission"
+				},
+				{
+					"name": "song",
+					"type": "String",
+					"key": "editor.song",
+					"required": true
+				},
+				{
+					"name": "author",
+					"type": "String",
+					"key": "editor.author",
+					"required": true
+				},
+				{
+					"name": "separateCountdownTime",
+					"control": "Hidden",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled",
+					"key": "editor.separateCountdownTime"
+				},
+				{
+					"name": "previewImage",
+					"type": "File",
+					"fileType": "Image",
+					"default": "",
+					"key": "editor.previewImage",
+					"required": true
+				},
+				{
+					"name": "previewIcon",
+					"type": "File",
+					"fileType": "Image",
+					"default": "",
+					"key": "editor.previewIcon"
+				},
+				{
+					"name": "previewIconColor",
+					"type": "Color",
+					"default": "003f52",
+					"usesAlpha": false,
+					"key": "editor.previewIconColor"
+				},
+				{
+					"name": "previewSongStart",
+					"type": "Int",
+					"default": 0,
+					"unit": "seconds",
+					"min": 0,
+					"max": 10000,
+					"key": "editor.previewSongStart"
+				},
+				{
+					"name": "previewSongDuration",
+					"type": "Int",
+					"default": 10,
+					"unit": "seconds",
+					"min": 0,
+					"max": 10000,
+					"key": "editor.previewSongDuration"
+				},
+				{
+					"name": "seizureWarning",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.seizureWarning"
+				},
+				{
+					"name": "levelDesc",
+					"type": "String",
+					"key": "editor.levelDesc"
+				},
+				{
+					"name": "levelTags",
+					"type": "String",
+					"key": "editor.levelTags"
+				},
+				{
+					"name": "artistLinks",
+					"type": "String",
+					"key": "editor.artistLinks"
+				},
+				{
+					"name": "difficulty",
+					"type": "Rating",
+					"default": 1,
+					"key": "editor.difficulty"
+				},
+				{
+					"name": "requiredMods",
+					"type": "Array",
+					"control": "Hidden",
+					"key": "",
+					"encode": false
+				},
+				{
+					"name": "export",
+					"type": "Export",
+					"key": "",
+					"encode": false
+				}
+			]
+		},
+		{
+			"name": "TrackSettings",
+			"executionTime": "Special",
+			"properties": [
+				{
+					"name": "trackColorType",
+					"type": "Enum:TrackColorType",
+					"default": "Single",
+					"key": "editor.trackColor.type",
+					"affectsFloors": true
+				},
+				{
+					"name": "trackColor",
+					"type": "Color",
+					"default": "debb7b",
+					"key": "editor.trackColor.color",
+					"affectsFloors": true
+				},
+				{
+					"name": "secondaryTrackColor",
+					"type": "Color",
+					"default": "ffffff",
+					"key": "editor.trackColor.secondaryColor",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Rainbow"
+					],
+					"affectsFloors": true
+				},
+				{
+					"name": "trackColorAnimDuration",
+					"type": "Float",
+					"default": 2.0,
+					"min": 1.401298E-45,
+					"max": 1000,
+					"unit": "seconds",
+					"key": "editor.trackColor.colorAnimDuration",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Stripes"
+					]
+				},
+				{
+					"name": "trackColorPulse",
+					"type": "Enum:TrackColorPulse",
+					"default": "None",
+					"key": "editor.trackColor.pulse",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Stripes"
+					]
+				},
+				{
+					"name": "trackPulseLength",
+					"type": "Int",
+					"default": 10,
+					"min": 2,
+					"max": 1000,
+					"unit": "tiles",
+					"key": "editor.trackColor.pulseLength",
+					"disableIf": [
+						"trackColorType",
+						"Single",
+						"trackColorType",
+						"Stripes",
+						"trackColorPulse",
+						"None"
+					]
+				},
+				{
+					"name": "trackStyle",
+					"type": "Enum:TrackStyle",
+					"default": "Standard",
+					"key": "editor.trackStyle",
+					"affectsFloors": true
+				},
+				{
+					"name": "trackAnimation",
+					"type": "Enum:TrackAnimationType",
+					"default": "None",
+					"key": "editor.trackAnimation"
+				},
+				{
+					"name": "beatsAhead",
+					"type": "Float",
+					"default": 3.0,
+					"unit": "beats",
+					"key": "editor.trackBeatsAhead",
+					"disableIf": [
+						"trackAnimation",
+						"None"
+					]
+				},
+				{
+					"name": "trackDisappearAnimation",
+					"type": "Enum:TrackAnimationType2",
+					"default": "None",
+					"key": "editor.trackDisappearAnimation"
+				},
+				{
+					"name": "beatsBehind",
+					"type": "Float",
+					"default": 4.0,
+					"unit": "beats",
+					"key": "editor.trackBeatsBehind",
+					"disableIf": [
+						"trackDisappearAnimation",
+						"None"
+					]
+				}
+			]
+		},
+		{
+			"name": "BackgroundSettings",
+			"executionTime": "Special",
+			"properties": [
+				{
+					"name": "backgroundColor",
+					"type": "Color",
+					"default": "000000",
+					"usesAlpha": false,
+					"key": "editor.backgroundColor"
+				},
+				{
+					"name": "showDefaultBGIfNoImage",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "bgImage",
+					"type": "File",
+					"fileType": "Image",
+					"default": "",
+					"key": "editor.backgroundImage"
+				},
+				{
+					"name": "bgImageColor",
+					"type": "Color",
+					"default": "ffffff",
+					"usesAlpha": false,
+					"key": "editor.imageColor",
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "parallax",
+					"type": "Vector2",
+					"default": [
+						100,
+						100
+					],
+					"unit": "%",
+					"key": "editor.parallax",
+					"disableIf": [
+						"lockRot",
+						"Enabled",
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "bgDisplayMode",
+					"type": "Enum:BgDisplayMode",
+					"default": "FitToScreen",
+					"key": "editor.bgDisplayMode",
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "lockRot",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.lockRot",
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "loopBG",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"key": "editor.loopBG",
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				},
+				{
+					"name": "unscaledSize",
+					"type": "Int",
+					"min": 1,
+					"max": 1000,
+					"default": 100,
+					"unit": "%",
+					"key": "editor.unscaledSize",
+					"enableIf": [
+						"bgDisplayMode",
+						"Unscaled"
+					],
+					"disableIf": [
+						"bgImage",
+						""
+					]
+				}
+			]
+		},
+		{
+			"name": "CameraSettings",
+			"executionTime": "Special",
+			"properties": [
+				{
+					"name": "relativeTo",
+					"type": "Enum:CamMovementType",
+					"default": "Player",
+					"key": "editor.MoveCamera.relativeTo"
+				},
+				{
+					"name": "position",
+					"type": "Vector2",
+					"default": [
+						0,
+						0
+					],
+					"unit": "tiles",
+					"key": "editor.MoveCamera.position"
+				},
+				{
+					"name": "rotation",
+					"type": "Float",
+					"default": 0,
+					"unit": "°",
+					"key": "editor.MoveCamera.rotation"
+				},
+				{
+					"name": "zoom",
+					"type": "Float",
+					"default": 100,
+					"min": 1.401298E-45,
+					"max": 1000.0,
+					"unit": "%",
+					"key": "editor.MoveCamera.zoom"
+				}
+			]
+		},
+		{
+			"name": "MiscSettings",
+			"executionTime": "Special",
+			"properties": [
+				{
+					"name": "bgVideo",
+					"type": "File",
+					"fileType": "Video",
+					"default": ""
+				},
+				{
+					"name": "loopVideo",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"disableIf": [
+						"bgVideo",
+						""
+					]
+				},
+				{
+					"name": "vidOffset",
+					"type": "Int",
+					"default": 0,
+					"unit": "ms",
+					"min": -10000,
+					"max": 300000,
+					"key": "editor.offset",
+					"disableIf": [
+						"bgVideo",
+						""
+					]
+				},
+				{
+					"name": "floorIconOutlines",
+					"type": "Enum:ToggleBool",
+					"default": "Disabled",
+					"affectsFloors": true
+				},
+				{
+					"name": "stickToFloors",
+					"type": "Enum:ToggleBool",
+					"default": "Enabled"
+				},
+				{
+					"name": "planetEase",
+					"type": "Enum:Ease",
+					"default": "Linear"
+				},
+				{
+					"name": "planetEaseParts",
+					"type": "Int",
+					"default": 1,
+					"min": 1,
+					"max": 20
+				},
+				{
+					"name": "planetEasePartBehavior",
+					"type": "Enum:EasePartBehavior",
+					"default": "Mirror"
+				},
+				{
+					"name": "customClass",
+					"type": "String",
+					"pro": true
+				},
+				{
+					"name": "selectTarget",
+					"type": "Enum:EditorSelectTarget",
+					"default": "Floor",
+					"encode": false
+				}
+			]
+		},
+		{
+			"name": "DecorationSettings",
+			"executionTime": "Special",
+			"properties": [
+				{
+					"enabled": false,
+					"name": "filter",
+					"type": "Enum:DecorationListFilter",
+					"key": "",
+					"encode": false
+				},
+				{
+					"name": "decorations",
+					"type": "List"
+				}
+			]
+		}
+	],
+	"categories": [
+		{
+			"name": "Gameplay",
+			"events": [
+				"SetSpeed",
+				"Twirl",
+				"Multitap",
+				"Checkpoint",
+				"SetHitsound",
+				"SetPlanetRotation",
+				"AutoPlayTiles",
+				"Pause",
+				"KillPlayer",
+				"PlaySound"
+			]
+		},
+		{
+			"name": "TrackFx",
+			"events": [
+				"ColorTrack",
+				"AnimateTrack",
+				"RecolorTrack",
+				"MoveTrack",
+				"PositionTrack",
+				"TileDimensions"
+			]
+		},
+		{
+			"name": "DecorationFx",
+			"events": [
+				"AddDecoration",
+				"AddText",
+				"MoveDecorations",
+				"SetText"
+			]
+		},
+		{
+			"name": "VisualFx",
+			"events": [
+				"CustomBackground",
+				"Flash",
+				"MoveCamera",
+				"SetFilter",
+				"HallOfMirrors",
+				"ShakeScreen",
+				"Bloom",
+				"ScreenTile",
+				"ScreenScroll"
+			]
+		},
+		{
+			"name": "FxModifiers",
+			"events": [
+				"RepeatEvents",
+				"SetConditionalEvents"
+			]
+		},
+		{
+			"name": "Jank",
+			"taroDLC": true,
+			"events": [
+				"Hold",
+				"SetHoldSound",
+				"MultiPlanet",
+				"ScaleMargin",
+				"ScaleRadius",
+				"FreeRoam",
+				"FreeRoamTwirl",
+				"FreeRoamRemove",
+				"FreeRoamWarning",
+				"Hide"
+			]
+		},
+		{
+			"name": "Conveniences",
+			"events": [
+				"EditorComment",
+				"Bookmark",
+				"CallMethod",
+				"AddComponent"
+			]
+		},
+		{
+			"name": "Favorites",
+			"events": []
+		}
+	]
+}
