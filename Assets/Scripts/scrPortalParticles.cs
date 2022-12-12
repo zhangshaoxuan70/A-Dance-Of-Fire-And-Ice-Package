@@ -69,7 +69,8 @@ public class scrPortalParticles : ADOBase
 			}
 			Color color = speedTrial ? ADOBase.gc.speedPortalColor : this.color;
 			icon.enabled = speedTrial;
-			ps.main.startColor = color;
+			ParticleSystem.MainModule main = ps.main;
+			main.startColor = color;
 			float alpha = num * color.a;
 			glowSprite.color = color.WithAlpha(alpha);
 			cap.color = cap.color.WithAlpha(num);

@@ -908,16 +908,16 @@ public class scrConductor : ADOBase
 		}
 		if (UnityEngine.Input.GetKeyDown(KeyCode.G) && Application.isEditor)
 		{
-			float time2 = song.time;
+			_ = song.time;
 			if (separateCountdownTime)
 			{
-				double crotchetAtStart2 = crotchetAtStart;
-				float adjustedCountdownTick = adjustedCountdownTicks;
+				_ = crotchetAtStart;
+				_ = adjustedCountdownTicks;
 			}
-			double songposition_minusi2 = this.songposition_minusi;
-			float calibration_i = calibration_i;
-			float pitch = song.pitch;
-			double addoffset2 = addoffset;
+			_ = this.songposition_minusi;
+			_ = calibration_i;
+			_ = song.pitch;
+			_ = addoffset;
 		}
 		if (GCS.d_calibration)
 		{

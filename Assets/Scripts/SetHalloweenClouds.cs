@@ -8,7 +8,8 @@ public class SetHalloweenClouds : ADOBase
 	{
 		if (ADOBase.IsHalloweenWeek())
 		{
-			GetComponent<ParticleSystem>().main.startColor = color;
+			ParticleSystem.MainModule main = GetComponent<ParticleSystem>().main;
+			main.startColor = color;
 		}
 	}
 }

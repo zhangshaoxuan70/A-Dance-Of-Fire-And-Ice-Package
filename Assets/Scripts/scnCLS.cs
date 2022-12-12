@@ -1,21 +1,18 @@
+// scnCLS
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using ADOFAI;
 using DG.Tweening;
 using GDMiniJSON;
 using RDTools;
 using SFB;
 using Steamworks;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -28,796 +25,6 @@ public class scnCLS : ADOBase
 		Song,
 		Artist,
 		Author
-	}
-
-	[Serializable]
-	[CompilerGenerated]
-	private sealed class _003C_003Ec
-	{
-		public static readonly _003C_003Ec _003C_003E9 = new _003C_003Ec();
-
-		public static UnityAction _003C_003E9__109_0;
-
-		public static UnityAction _003C_003E9__109_1;
-
-		internal void _003CStart_003Eb__109_0()
-		{
-			SteamWorkshop.OpenWorkshop();
-		}
-
-		internal void _003CStart_003Eb__109_1()
-		{
-			SteamWorkshop.OpenWorkshop();
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003CLoadSong_003Ed__114 : IEnumerator<object>, IEnumerator, IDisposable
-	{
-		private int _003C_003E1__state;
-
-		private object _003C_003E2__current;
-
-		public string path;
-
-		public string songKey;
-
-		public scnCLS _003C_003E4__this;
-
-		object IEnumerator<object>.Current
-		{
-			[DebuggerHidden]
-			get
-			{
-				return _003C_003E2__current;
-			}
-		}
-
-		object IEnumerator.Current
-		{
-			[DebuggerHidden]
-			get
-			{
-				return _003C_003E2__current;
-			}
-		}
-
-		[DebuggerHidden]
-		public _003CLoadSong_003Ed__114(int _003C_003E1__state)
-		{
-			this._003C_003E1__state = _003C_003E1__state;
-		}
-
-		[DebuggerHidden]
-		void IDisposable.Dispose()
-		{
-		}
-
-		private bool MoveNext()
-		{
-			int num = _003C_003E1__state;
-			scnCLS scnCLS = _003C_003E4__this;
-			switch (num)
-			{
-			default:
-				return false;
-			case 0:
-				_003C_003E1__state = -1;
-				_003C_003E2__current = AudioManager.Instance.FindOrLoadAudioClipExternal(path, mp3Streaming: true);
-				_003C_003E1__state = 1;
-				return true;
-			case 1:
-			{
-				_003C_003E1__state = -1;
-				Dictionary<string, AudioClip> audioLib = ADOBase.audioManager.audioLib;
-				if (audioLib.ContainsKey(songKey))
-				{
-					AudioClip audioClip = audioLib[songKey];
-					if (audioClip != null && scnCLS.loadedLevels[scnCLS.levelToSelect].isLevel)
-					{
-						LevelDataCLS level = scnCLS.loadedLevels[scnCLS.levelToSelect].level;
-						if (songKey == scnCLS.newSongKey)
-						{
-							scnCLS.previewSongPlayer.Play(audioClip, level.previewSongStart, level.previewSongDuration, scnCLS.currentSongVolume);
-						}
-						else
-						{
-							scnCLS.printe("song was quickly changed!");
-						}
-						scnCLS.lastSongsLoaded.Add(songKey);
-						while (scnCLS.lastSongsLoaded.Count > 5)
-						{
-							string key = scnCLS.lastSongsLoaded[0];
-							scnCLS.lastSongsLoaded.RemoveAt(0);
-							if (ADOBase.audioManager.audioLib.ContainsKey(key))
-							{
-								AudioClip audioClip2 = ADOBase.audioManager.audioLib[key];
-								ADOBase.audioManager.audioLib.Remove(key);
-								audioClip2.UnloadAudioData();
-								UnityEngine.Object.DestroyImmediate(audioClip2, allowDestroyingAssets: true);
-								Resources.UnloadAsset(audioClip2);
-							}
-						}
-					}
-				}
-				else
-				{
-					UnityEngine.Debug.LogWarning("Couldn't load preview: " + songKey);
-				}
-				scnCLS.loadSongCoroutine = null;
-				return false;
-			}
-			}
-		}
-
-		bool IEnumerator.MoveNext()
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in MoveNext
-			return this.MoveNext();
-		}
-
-		[DebuggerHidden]
-		void IEnumerator.Reset()
-		{
-			throw new NotSupportedException();
-		}
-	}
-
-	[StructLayout(LayoutKind.Auto)]
-	[CompilerGenerated]
-	private struct _003CRefresh_003Ed__116 : IAsyncStateMachine
-	{
-		public int _003C_003E1__state;
-
-		public AsyncTaskMethodBuilder _003C_003Et__builder;
-
-		public scnCLS _003C_003E4__this;
-
-		public bool setup;
-
-		private CancellationToken _003CcancelToken_003E5__2;
-
-		private float _003CsteamWaitStartTime_003E5__3;
-
-		private TaskAwaiter _003C_003Eu__1;
-
-		private void MoveNext()
-		{
-			int num = _003C_003E1__state;
-			scnCLS scnCLS = _003C_003E4__this;
-			try
-			{
-				TaskAwaiter awaiter;
-				switch (num)
-				{
-				default:
-					if (!scnCLS.showingInitialMenu)
-					{
-						scnCLS.refreshing = true;
-						scnCLS.printe("Start CLS refresh");
-						float realtimeSinceStartup = Time.realtimeSinceStartup;
-						if (scnCLS.refreshTokenSource != null)
-						{
-							scnCLS.refreshTokenSource.Cancel();
-						}
-						scnCLS.refreshTokenSource = new CancellationTokenSource();
-						_003CcancelToken_003E5__2 = scnCLS.refreshTokenSource.Token;
-						scnCLS.DisableCLS(disable: true);
-						scnCLS.DisablePlanets(disable: true);
-						scnCLS.levelToSelect = null;
-						scnCLS.loadingText.gameObject.SetActive(value: true);
-						scnCLS.lastSongsLoaded = new List<string>();
-						scnCLS.lastTexturesLoaded = new List<string>();
-						scnCLS.StartCoroutine(SteamWorkshop.GetSubscribedItems());
-						awaiter = Task.Delay(500, _003CcancelToken_003E5__2).GetAwaiter();
-						if (!awaiter.IsCompleted)
-						{
-							num = (_003C_003E1__state = 0);
-							_003C_003Eu__1 = awaiter;
-							_003C_003Et__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
-							return;
-						}
-						goto IL_011a;
-					}
-					goto end_IL_000e;
-				case 0:
-					awaiter = _003C_003Eu__1;
-					_003C_003Eu__1 = default(TaskAwaiter);
-					num = (_003C_003E1__state = -1);
-					goto IL_011a;
-				case 1:
-					awaiter = _003C_003Eu__1;
-					_003C_003Eu__1 = default(TaskAwaiter);
-					num = (_003C_003E1__state = -1);
-					goto IL_0207;
-				case 2:
-					break;
-					IL_0219:
-					if (!SteamWorkshop.gettingSubscribedItemsInProgress || !(Time.realtimeSinceStartup - _003CsteamWaitStartTime_003E5__3 < 5f))
-					{
-						break;
-					}
-					awaiter = Task.Delay(500, _003CcancelToken_003E5__2).GetAwaiter();
-					if (!awaiter.IsCompleted)
-					{
-						num = (_003C_003E1__state = 1);
-						_003C_003Eu__1 = awaiter;
-						_003C_003Et__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
-						return;
-					}
-					goto IL_0207;
-					IL_0207:
-					awaiter.GetResult();
-					_003CcancelToken_003E5__2.ThrowIfCancellationRequested();
-					goto IL_0219;
-					IL_011a:
-					awaiter.GetResult();
-					if (!setup && scnCLS.levelCount > 0)
-					{
-						Dictionary<string, CustomLevelTile>.ValueCollection.Enumerator enumerator = scnCLS.loadedLevelTiles.Values.GetEnumerator();
-						try
-						{
-							while (enumerator.MoveNext())
-							{
-								UnityEngine.Object.Destroy(enumerator.Current.gameObject);
-							}
-						}
-						finally
-						{
-							if (num < 0)
-							{
-								((IDisposable)enumerator).Dispose();
-							}
-						}
-						scnCLS.loadedLevels = new Dictionary<string, GenericDataCLS>();
-						scnCLS.loadedLevelDirs = new Dictionary<string, string>();
-						scnCLS.loadedLevelTiles = new Dictionary<string, CustomLevelTile>();
-						scnCLS.levelCount = 0;
-					}
-					_003CsteamWaitStartTime_003E5__3 = Time.realtimeSinceStartup;
-					goto IL_0219;
-				}
-				try
-				{
-					if (num != 2)
-					{
-						awaiter = scnCLS.ScanLevels(_003CcancelToken_003E5__2).GetAwaiter();
-						if (!awaiter.IsCompleted)
-						{
-							num = (_003C_003E1__state = 2);
-							_003C_003Eu__1 = awaiter;
-							_003C_003Et__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
-							return;
-						}
-					}
-					else
-					{
-						awaiter = _003C_003Eu__1;
-						_003C_003Eu__1 = default(TaskAwaiter);
-						num = (_003C_003E1__state = -1);
-					}
-					awaiter.GetResult();
-					scnCLS.loadingText.gameObject.SetActive(value: false);
-				}
-				catch (Exception ex)
-				{
-					scnCLS.printe("Cancelled CLS refresh: " + ex?.ToString());
-					scnCLS.refreshing = false;
-					goto IL_039e;
-				}
-				bool flag = scnCLS.levelCount > 0;
-				if (flag)
-				{
-					scnCLS.DisableCLS(disable: false);
-					scnCLS.DisablePlanets(disable: false);
-					scnCLS.CreateFloors();
-				}
-				scnCLS.errorCanvas.gameObject.SetActive(!flag);
-				scnCLS.optionsPanels.searchMode = false;
-				scnCLS.optionsPanels.searchInputField.text = string.Empty;
-				scnCLS.currentSearchText.text = RDString.Get("cls.shortcut.find");
-				scnCLS.currentSearchText.SetLocalizedFont();
-				scnCLS.optionsPanels.UpdateOrderText();
-				float realtimeSinceStartup2 = Time.realtimeSinceStartup;
-				scnCLS.printe("refreshing = false");
-				scnCLS.refreshing = false;
-				end_IL_000e:;
-			}
-			catch (Exception exception)
-			{
-				_003C_003E1__state = -2;
-				_003CcancelToken_003E5__2 = default(CancellationToken);
-				_003C_003Et__builder.SetException(exception);
-				return;
-			}
-			goto IL_039e;
-			IL_039e:
-			_003C_003E1__state = -2;
-			_003CcancelToken_003E5__2 = default(CancellationToken);
-			_003C_003Et__builder.SetResult();
-		}
-
-		void IAsyncStateMachine.MoveNext()
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in MoveNext
-			this.MoveNext();
-		}
-
-		[DebuggerHidden]
-		private void SetStateMachine(IAsyncStateMachine stateMachine)
-		{
-			_003C_003Et__builder.SetStateMachine(stateMachine);
-		}
-
-		void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine)
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in SetStateMachine
-			this.SetStateMachine(stateMachine);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass129_0
-	{
-		public scnCLS _003C_003E4__this;
-
-		public string levelKey;
-
-		public float animDur;
-
-		internal void _003CDisplayLevel_003Eb__1()
-		{
-			_003C_003E4__this.portalQuad.SetTexture(_003C_003E4__this.emptyTexture);
-		}
-
-		private void _003CDisplayLevel_003Eg__DoWarningAnimation_007C0(RectTransform rt, Tween tween)
-		{
-			tween?.Pause();
-			rt.DOKill();
-			tween = rt.DOScale(Vector3.zero, animDur * 0.5f).SetEase(Ease.InBack);
-		}
-	}
-
-	[StructLayout(LayoutKind.Auto)]
-	[CompilerGenerated]
-	private struct _003C_003Ec__DisplayClass129_1
-	{
-		public bool purePerfected;
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass129_2
-	{
-		public string link;
-
-		public _003C_003Ec__DisplayClass129_0 CS_0024_003C_003E8__locals1;
-
-		internal void _003CDisplayLevel_003Eb__4()
-		{
-			if (!link.StartsWith("http://") && !link.StartsWith("https://") && !link.StartsWith("www."))
-			{
-				link = "https://" + link;
-			}
-			CS_0024_003C_003E8__locals1._003C_003E4__this.printe("Attempting to open URL: " + link);
-			Application.OpenURL(link);
-			EventSystem.current.SetSelectedGameObject(null);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass129_3
-	{
-		public Texture2D texture;
-
-		public _003C_003Ec__DisplayClass129_0 CS_0024_003C_003E8__locals2;
-
-		internal void _003CDisplayLevel_003Eb__5()
-		{
-			CS_0024_003C_003E8__locals2._003C_003E4__this.portalQuad.SetTexture(texture);
-			CS_0024_003C_003E8__locals2._003C_003E4__this.portalTransitionParticle.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass129_4
-	{
-		public string portalImagePath;
-
-		public _003C_003Ec__DisplayClass129_0 CS_0024_003C_003E8__locals3;
-
-		internal void _003CDisplayLevel_003Eb__6()
-		{
-			CS_0024_003C_003E8__locals3._003C_003E4__this.LoadTexture(portalImagePath, CS_0024_003C_003E8__locals3.levelKey);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass135_0
-	{
-		public string levelPath;
-
-		internal Dictionary<string, object> _003CScanLevels_003Eb__0()
-		{
-			return Json.Deserialize(RDFile.ReadAllText(levelPath)) as Dictionary<string, object>;
-		}
-	}
-
-	[StructLayout(LayoutKind.Auto)]
-	[CompilerGenerated]
-	private struct _003CScanLevels_003Ed__135 : IAsyncStateMachine
-	{
-		public int _003C_003E1__state;
-
-		public AsyncTaskMethodBuilder _003C_003Et__builder;
-
-		public bool local;
-
-		public scnCLS _003C_003E4__this;
-
-		public bool workshop;
-
-		public CancellationToken cancelToken;
-
-		private string[] _003CitemDirs_003E5__2;
-
-		private TaskAwaiter<Dictionary<string, object>[]> _003C_003Eu__1;
-
-		private void MoveNext()
-		{
-			int num = _003C_003E1__state;
-			scnCLS scnCLS = _003C_003E4__this;
-			try
-			{
-				TaskAwaiter<Dictionary<string, object>[]> awaiter;
-				if (num == 0)
-				{
-					awaiter = _003C_003Eu__1;
-					_003C_003Eu__1 = default(TaskAwaiter<Dictionary<string, object>[]>);
-					num = (_003C_003E1__state = -1);
-					goto IL_0218;
-				}
-				if (!local || Directory.Exists(scnCLS.levelsDir))
-				{
-					if (!featuredLevelsMode)
-					{
-						string[] array = new string[0];
-						string[] first = new string[0];
-						if (workshop)
-						{
-							array = new string[SteamWorkshop.resultItems.Count];
-							for (int i = 0; i < SteamWorkshop.resultItems.Count; i++)
-							{
-								array[i] = SteamWorkshop.resultItems[i].path;
-								scnCLS.isWorkshopLevel[Path.GetFileName(array[i])] = true;
-							}
-						}
-						if (local)
-						{
-							first = Directory.GetDirectories(scnCLS.levelsDir);
-						}
-						_003CitemDirs_003E5__2 = first.Concat(array).ToArray();
-						cancelToken.ThrowIfCancellationRequested();
-						List<Task<Dictionary<string, object>>> list = new List<Task<Dictionary<string, object>>>();
-						string[] array2 = _003CitemDirs_003E5__2;
-						foreach (string text in array2)
-						{
-							string levelPath = Path.Combine(text, "main.adofai");
-							string fileName = Path.GetFileName(text);
-							bool flag = false;
-							if (scnCLS.loadedLevelIsDeleted.ContainsKey(fileName))
-							{
-								flag = scnCLS.loadedLevelIsDeleted[fileName];
-							}
-							if (RDFile.Exists(levelPath) && !flag)
-							{
-								list.Add(Task.Run(() => Json.Deserialize(RDFile.ReadAllText(levelPath)) as Dictionary<string, object>, cancelToken));
-							}
-							else if (!flag)
-							{
-								UnityEngine.Debug.LogWarning("No level file at " + text + "!");
-								list.Add(Task.FromResult<Dictionary<string, object>>(null));
-							}
-						}
-						cancelToken.ThrowIfCancellationRequested();
-						awaiter = Task.WhenAll(list).GetAwaiter();
-						if (!awaiter.IsCompleted)
-						{
-							num = (_003C_003E1__state = 0);
-							_003C_003Eu__1 = awaiter;
-							_003C_003Et__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
-							return;
-						}
-						goto IL_0218;
-					}
-					Dictionary<string, GenericDataCLS>.Enumerator enumerator = scnCLS.extraLevels.GetEnumerator();
-					try
-					{
-						while (enumerator.MoveNext())
-						{
-							KeyValuePair<string, GenericDataCLS> current = enumerator.Current;
-							string key = current.Key;
-							if (!scnCLS.loadedLevels.ContainsKey(key))
-							{
-								scnCLS.loadedLevels.Add(key, current.Value);
-								scnCLS.loadedLevelDirs.Add(key, null);
-								scnCLS.loadedLevelIsDeleted[key] = false;
-								scnCLS.isWorkshopLevel[key] = true;
-							}
-						}
-					}
-					finally
-					{
-						if (num < 0)
-						{
-							((IDisposable)enumerator).Dispose();
-						}
-					}
-					goto IL_033e;
-				}
-				UnityEngine.Debug.LogWarning("First time launching CLS, making directory");
-				RDDirectory.CreateDirectory(scnCLS.levelsDir);
-				goto end_IL_000e;
-				IL_033e:
-				scnCLS.levelCount = scnCLS.loadedLevels.Count;
-				goto end_IL_000e;
-				IL_0218:
-				Dictionary<string, object>[] result = awaiter.GetResult();
-				cancelToken.ThrowIfCancellationRequested();
-				for (int k = 0; k < _003CitemDirs_003E5__2.Length; k++)
-				{
-					string text2 = _003CitemDirs_003E5__2[k];
-					string fileName2 = Path.GetFileName(text2);
-					Dictionary<string, object> dictionary = result[k];
-					if (dictionary != null)
-					{
-						LevelDataCLS levelDataCLS = new LevelDataCLS();
-						levelDataCLS.Setup();
-						if (levelDataCLS.Decode(dictionary))
-						{
-							scnCLS.loadedLevels.Add(fileName2, levelDataCLS);
-							scnCLS.loadedLevelDirs.Add(fileName2, text2);
-							scnCLS.loadedLevelIsDeleted[fileName2] = false;
-						}
-					}
-				}
-				_003CitemDirs_003E5__2 = null;
-				goto IL_033e;
-				end_IL_000e:;
-			}
-			catch (Exception exception)
-			{
-				_003C_003E1__state = -2;
-				_003C_003Et__builder.SetException(exception);
-				return;
-			}
-			_003C_003E1__state = -2;
-			_003C_003Et__builder.SetResult();
-		}
-
-		void IAsyncStateMachine.MoveNext()
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in MoveNext
-			this.MoveNext();
-		}
-
-		[DebuggerHidden]
-		private void SetStateMachine(IAsyncStateMachine stateMachine)
-		{
-			_003C_003Et__builder.SetStateMachine(stateMachine);
-		}
-
-		void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine)
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in SetStateMachine
-			this.SetStateMachine(stateMachine);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003CEnableInputCo_003Ed__138 : IEnumerator<object>, IEnumerator, IDisposable
-	{
-		private int _003C_003E1__state;
-
-		private object _003C_003E2__current;
-
-		object IEnumerator<object>.Current
-		{
-			[DebuggerHidden]
-			get
-			{
-				return _003C_003E2__current;
-			}
-		}
-
-		object IEnumerator.Current
-		{
-			[DebuggerHidden]
-			get
-			{
-				return _003C_003E2__current;
-			}
-		}
-
-		[DebuggerHidden]
-		public _003CEnableInputCo_003Ed__138(int _003C_003E1__state)
-		{
-			this._003C_003E1__state = _003C_003E1__state;
-		}
-
-		[DebuggerHidden]
-		void IDisposable.Dispose()
-		{
-		}
-
-		private bool MoveNext()
-		{
-			switch (_003C_003E1__state)
-			{
-			default:
-				return false;
-			case 0:
-				_003C_003E1__state = -1;
-				_003C_003E2__current = new WaitForEndOfFrame();
-				_003C_003E1__state = 1;
-				return true;
-			case 1:
-				_003C_003E1__state = -1;
-				ADOBase.controller.responsive = true;
-				return false;
-			}
-		}
-
-		bool IEnumerator.MoveNext()
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in MoveNext
-			return this.MoveNext();
-		}
-
-		[DebuggerHidden]
-		void IEnumerator.Reset()
-		{
-			throw new NotSupportedException();
-		}
-	}
-
-	[StructLayout(LayoutKind.Auto)]
-	[CompilerGenerated]
-	private struct _003CFeaturedLevelsPortal_003Ed__142 : IAsyncStateMachine
-	{
-		public int _003C_003E1__state;
-
-		public AsyncVoidMethodBuilder _003C_003Et__builder;
-
-		public scnCLS _003C_003E4__this;
-
-		private TaskAwaiter _003C_003Eu__1;
-
-		private void MoveNext()
-		{
-			int num = _003C_003E1__state;
-			scnCLS scnCLS = _003C_003E4__this;
-			try
-			{
-				TaskAwaiter awaiter;
-				if (num != 0)
-				{
-					scnCLS.HideInitialMenu();
-					featuredLevelsMode = true;
-					awaiter = scnCLS.Refresh(setup: true).GetAwaiter();
-					if (!awaiter.IsCompleted)
-					{
-						num = (_003C_003E1__state = 0);
-						_003C_003Eu__1 = awaiter;
-						_003C_003Et__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
-						return;
-					}
-				}
-				else
-				{
-					awaiter = _003C_003Eu__1;
-					_003C_003Eu__1 = default(TaskAwaiter);
-					num = (_003C_003E1__state = -1);
-				}
-				awaiter.GetResult();
-				RDBaseDll.printem("");
-			}
-			catch (Exception exception)
-			{
-				_003C_003E1__state = -2;
-				_003C_003Et__builder.SetException(exception);
-				return;
-			}
-			_003C_003E1__state = -2;
-			_003C_003Et__builder.SetResult();
-		}
-
-		void IAsyncStateMachine.MoveNext()
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in MoveNext
-			this.MoveNext();
-		}
-
-		[DebuggerHidden]
-		private void SetStateMachine(IAsyncStateMachine stateMachine)
-		{
-			_003C_003Et__builder.SetStateMachine(stateMachine);
-		}
-
-		void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine)
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in SetStateMachine
-			this.SetStateMachine(stateMachine);
-		}
-	}
-
-	[StructLayout(LayoutKind.Auto)]
-	[CompilerGenerated]
-	private struct _003CWorkshopLevelsPortal_003Ed__143 : IAsyncStateMachine
-	{
-		public int _003C_003E1__state;
-
-		public AsyncVoidMethodBuilder _003C_003Et__builder;
-
-		public scnCLS _003C_003E4__this;
-
-		private TaskAwaiter _003C_003Eu__1;
-
-		private void MoveNext()
-		{
-			int num = _003C_003E1__state;
-			scnCLS scnCLS = _003C_003E4__this;
-			try
-			{
-				TaskAwaiter awaiter;
-				if (num != 0)
-				{
-					scnCLS.HideInitialMenu();
-					featuredLevelsMode = false;
-					awaiter = scnCLS.Refresh(setup: true).GetAwaiter();
-					if (!awaiter.IsCompleted)
-					{
-						num = (_003C_003E1__state = 0);
-						_003C_003Eu__1 = awaiter;
-						_003C_003Et__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
-						return;
-					}
-				}
-				else
-				{
-					awaiter = _003C_003Eu__1;
-					_003C_003Eu__1 = default(TaskAwaiter);
-					num = (_003C_003E1__state = -1);
-				}
-				awaiter.GetResult();
-				RDBaseDll.printem("");
-			}
-			catch (Exception exception)
-			{
-				_003C_003E1__state = -2;
-				_003C_003Et__builder.SetException(exception);
-				return;
-			}
-			_003C_003E1__state = -2;
-			_003C_003Et__builder.SetResult();
-		}
-
-		void IAsyncStateMachine.MoveNext()
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in MoveNext
-			this.MoveNext();
-		}
-
-		[DebuggerHidden]
-		private void SetStateMachine(IAsyncStateMachine stateMachine)
-		{
-			_003C_003Et__builder.SetStateMachine(stateMachine);
-		}
-
-		void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine)
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in SetStateMachine
-			this.SetStateMachine(stateMachine);
-		}
 	}
 
 	private const string FeaturedLevelsLocalPath = "FeaturedLevels";
@@ -1055,16 +262,7 @@ public class scnCLS : ADOBase
 
 	private Tween delayedTextureLoad;
 
-	private Text[] portalTexts => new Text[7]
-	{
-		portalStats,
-		portalDifficultyText,
-		portalScript.worldName,
-		portalAuthor,
-		portalDescription,
-		portalArtist,
-		portalName
-	};
+	private Text[] portalTexts => new Text[7] { portalStats, portalDifficultyText, portalScript.worldName, portalAuthor, portalDescription, portalArtist, portalName };
 
 	public bool levelDeleted => loadedLevelIsDeleted[levelToSelect];
 
@@ -1075,8 +273,8 @@ public class scnCLS : ADOBase
 		levelsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "A Dance of Fire and Ice", "Worlds");
 		floorLayerMask = LayerMask.GetMask("Floor");
 		camera = scrCamera.instance;
-		Text[] portalTexts = this.portalTexts;
-		foreach (Text obj in portalTexts)
+		Text[] array = portalTexts;
+		foreach (Text obj in array)
 		{
 			obj.SetLocalizedFont();
 			obj.text = "";
@@ -1087,18 +285,18 @@ public class scnCLS : ADOBase
 		uint[] extraLevelsIds = GCNS.ExtraLevelsIds;
 		for (int i = 0; i < extraLevelsIds.Length; i++)
 		{
-			uint id = extraLevelsIds[i];
-			extraLevels.Add(id.ToString(), _003CAwake_003Eg__DecodeLevel_007C108_0(id));
+			uint id2 = extraLevelsIds[i];
+			extraLevels.Add(id2.ToString(), DecodeLevel(id2));
 		}
 		string text = "Folder:Feral";
 		FolderDataCLS folderDataCLS = new FolderDataCLS("Feral", 4, "meganeko", "", RDString.Get("workshop.FeralFolder.description"), "portal.png", "icon.png", "EEAAFF".HexToColor());
 		extraLevelsIds = GCNS.FeralNormalLevelsIds;
 		for (int i = 0; i < extraLevelsIds.Length; i++)
 		{
-			uint id2 = extraLevelsIds[i];
-			LevelDataCLS value = _003CAwake_003Eg__DecodeLevel_007C108_0(id2);
-			folderDataCLS.containingLevels.Add(id2.ToString(), value);
-			extraLevels[id2.ToString()].parentFolderName = text;
+			uint id3 = extraLevelsIds[i];
+			LevelDataCLS value = DecodeLevel(id3);
+			folderDataCLS.containingLevels.Add(id3.ToString(), value);
+			extraLevels[id3.ToString()].parentFolderName = text;
 		}
 		extraLevels.Add(text, folderDataCLS);
 		string text2 = "Folder:Skyscape";
@@ -1106,10 +304,10 @@ public class scnCLS : ADOBase
 		extraLevelsIds = GCNS.SkyscapeLevelsIds;
 		for (int i = 0; i < extraLevelsIds.Length; i++)
 		{
-			uint id3 = extraLevelsIds[i];
-			LevelDataCLS value2 = _003CAwake_003Eg__DecodeLevel_007C108_0(id3);
-			folderDataCLS2.containingLevels.Add(id3.ToString(), value2);
-			extraLevels[id3.ToString()].parentFolderName = text2;
+			uint id4 = extraLevelsIds[i];
+			LevelDataCLS value2 = DecodeLevel(id4);
+			folderDataCLS2.containingLevels.Add(id4.ToString(), value2);
+			extraLevels[id4.ToString()].parentFolderName = text2;
 		}
 		extraLevels.Add(text2, folderDataCLS2);
 		featuredPortalQuad.SetTexture(featuredPortalTexture);
@@ -1121,6 +319,14 @@ public class scnCLS : ADOBase
 		DLCWarningText[0].SetLocalizedFont();
 		DLCWarningText[1].text = text4.Substring(num + text3.Length);
 		DLCWarningText[1].SetLocalizedFont();
+		static LevelDataCLS DecodeLevel(uint id)
+		{
+			Dictionary<string, object> rootDict = Json.Deserialize(Resources.Load<TextAsset>(Path.Combine("FeaturedLevels", id.ToString(), "main")).text) as Dictionary<string, object>;
+			LevelDataCLS levelDataCLS = new LevelDataCLS();
+			levelDataCLS.Setup();
+			levelDataCLS.Decode(rootDict);
+			return levelDataCLS;
+		}
 	}
 
 	private void Start()
@@ -1182,14 +388,12 @@ public class scnCLS : ADOBase
 		SteamIntegration.Instance.CheckCallbacks();
 		SteamWorkshop.CheckDownloadInfo();
 		bool flag2 = Mathf.Approximately(ADOBase.controller.chosenplanet.transform.localPosition.x, -1f);
-		bool flag3;
-		int num6;
 		if (flag2)
 		{
-			flag3 = !wasInPortalPreviousFrame;
+			_ = !wasInPortalPreviousFrame;
 		}
 		else
-			num6 = 0;
+			_ = 0;
 		wasInPortalPreviousFrame = flag2;
 		if (disablePlanets)
 		{
@@ -1197,7 +401,7 @@ public class scnCLS : ADOBase
 		}
 		if (levelToSelect != null)
 		{
-			if (loadedLevels[levelToSelect].isLevel && ulong.TryParse(levelToSelect, out ulong result))
+			if (loadedLevels[levelToSelect].isLevel && ulong.TryParse(levelToSelect, out var result))
 			{
 				PublishedFileId_t publishedFileId_t = new PublishedFileId_t(result);
 				EItemState itemState = (EItemState)SteamUGC.GetItemState(publishedFileId_t);
@@ -1210,7 +414,7 @@ public class scnCLS : ADOBase
 					if (loadedLevelDirs.ContainsKey(levelToSelect) && loadedLevelDirs[levelToSelect] == null)
 					{
 						string pchFolder = "";
-						if (SteamUGC.GetItemInstallInfo(publishedFileId_t, out ulong _, out pchFolder, 1024u, out uint _))
+						if (SteamUGC.GetItemInstallInfo(publishedFileId_t, out var _, out pchFolder, 1024u, out var _))
 						{
 							loadedLevelDirs[levelToSelect] = pchFolder;
 							if (flag2)
@@ -1250,7 +454,7 @@ public class scnCLS : ADOBase
 			{
 				return;
 			}
-			if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha7))
+			if (Input.GetKeyDown(KeyCode.Alpha7))
 			{
 				loadSongMode = (loadSongMode + 1) % 3;
 				if (loadSongMode == 0)
@@ -1279,7 +483,7 @@ public class scnCLS : ADOBase
 				}
 				if (holdTimer > secondsForHold)
 				{
-					float num4 = (holdTimer > secondsForHoldExtra) ? 2f : 1f;
+					float num4 = ((holdTimer > secondsForHoldExtra) ? 2f : 1f);
 					autoscrollTimer += Time.deltaTime * num4;
 					if (autoscrollTimer > autoScrollInterval)
 					{
@@ -1301,7 +505,7 @@ public class scnCLS : ADOBase
 		{
 			return;
 		}
-		float num5 = instantSelect ? portalTransitionTimeInstant : portalTransitionTimeNormal;
+		float num5 = (instantSelect ? portalTransitionTimeInstant : portalTransitionTimeNormal);
 		if (levelTransitionTimer >= num5)
 		{
 			DisplayLevel(levelToSelect);
@@ -1380,7 +584,7 @@ public class scnCLS : ADOBase
 		}
 		else
 		{
-			UnityEngine.Debug.LogWarning("Couldn't load preview: " + songKey);
+			Debug.LogWarning("Couldn't load preview: " + songKey);
 		}
 		loadSongCoroutine = null;
 	}
@@ -1397,7 +601,7 @@ public class scnCLS : ADOBase
 		loadedLevelTiles[levelToSelect].SetDeleted();
 		if (isWorkshopLevel.ContainsKey(levelToSelect) && isWorkshopLevel[levelToSelect])
 		{
-			if (ulong.TryParse(levelToSelect, out ulong result))
+			if (ulong.TryParse(levelToSelect, out var result))
 			{
 				foreach (SteamWorkshop.ResultItem resultItem in SteamWorkshop.resultItems)
 				{
@@ -1424,16 +628,73 @@ public class scnCLS : ADOBase
 		DisplayLevel();
 	}
 
-	[AsyncStateMachine(typeof(_003CRefresh_003Ed__116))]
-	public Task Refresh(bool setup = false)
+	public async Task Refresh(bool setup = false)
 	{
-		_003CRefresh_003Ed__116 stateMachine = default(_003CRefresh_003Ed__116);
-		stateMachine._003C_003Et__builder = AsyncTaskMethodBuilder.Create();
-		stateMachine._003C_003E4__this = this;
-		stateMachine.setup = setup;
-		stateMachine._003C_003E1__state = -1;
-		stateMachine._003C_003Et__builder.Start(ref stateMachine);
-		return stateMachine._003C_003Et__builder.Task;
+		if (showingInitialMenu)
+		{
+			return;
+		}
+		refreshing = true;
+		printe("Start CLS refresh");
+		_ = Time.realtimeSinceStartup;
+		if (refreshTokenSource != null)
+		{
+			refreshTokenSource.Cancel();
+		}
+		refreshTokenSource = new CancellationTokenSource();
+		CancellationToken cancelToken = refreshTokenSource.Token;
+		DisableCLS(disable: true);
+		DisablePlanets(disable: true);
+		levelToSelect = null;
+		loadingText.gameObject.SetActive(value: true);
+		lastSongsLoaded = new List<string>();
+		lastTexturesLoaded = new List<string>();
+		StartCoroutine(SteamWorkshop.GetSubscribedItems());
+		await Task.Delay(500, cancelToken);
+		if (!setup && levelCount > 0)
+		{
+			foreach (CustomLevelTile value in loadedLevelTiles.Values)
+			{
+				UnityEngine.Object.Destroy(value.gameObject);
+			}
+			loadedLevels = new Dictionary<string, GenericDataCLS>();
+			loadedLevelDirs = new Dictionary<string, string>();
+			loadedLevelTiles = new Dictionary<string, CustomLevelTile>();
+			levelCount = 0;
+		}
+		float steamWaitStartTime = Time.realtimeSinceStartup;
+		while (SteamWorkshop.gettingSubscribedItemsInProgress && Time.realtimeSinceStartup - steamWaitStartTime < 5f)
+		{
+			await Task.Delay(500, cancelToken);
+			cancelToken.ThrowIfCancellationRequested();
+		}
+		try
+		{
+			await ScanLevels(cancelToken);
+			loadingText.gameObject.SetActive(value: false);
+		}
+		catch (Exception ex)
+		{
+			printe("Cancelled CLS refresh: " + ex);
+			refreshing = false;
+			return;
+		}
+		bool flag = levelCount > 0;
+		if (flag)
+		{
+			DisableCLS(disable: false);
+			DisablePlanets(disable: false);
+			CreateFloors();
+		}
+		errorCanvas.gameObject.SetActive(!flag);
+		optionsPanels.searchMode = false;
+		optionsPanels.searchInputField.text = string.Empty;
+		currentSearchText.text = RDString.Get("cls.shortcut.find");
+		currentSearchText.SetLocalizedFont();
+		optionsPanels.UpdateOrderText();
+		_ = Time.realtimeSinceStartup;
+		printe("refreshing = false");
+		refreshing = false;
 	}
 
 	private void DisableCLS(bool disable)
@@ -1458,7 +719,7 @@ public class scnCLS : ADOBase
 
 	private void ShiftPlanet(bool down)
 	{
-		int num = (!down) ? 1 : (-1);
+		int num = ((!down) ? 1 : (-1));
 		Vector3 position = ADOBase.controller.chosenplanet.transform.position;
 		position = new Vector3(position.x, position.y + (float)num, position.z);
 		MoveToFloorAtPosition(position);
@@ -1548,7 +809,7 @@ public class scnCLS : ADOBase
 		}
 		if (!imgHolder.customTextures.ContainsKey(levelKey))
 		{
-			imgHolder.AddTexture(levelKey, out LoadResult _, path, 512);
+			imgHolder.AddTexture(levelKey, out var _, path, 512);
 			lastTexturesLoaded.Add(levelKey);
 			while (lastTexturesLoaded.Count > 5)
 			{
@@ -1575,10 +836,11 @@ public class scnCLS : ADOBase
 		}
 		float animDur = 0.5f;
 		bool flag2 = flag;
+		bool purePerfected;
 		if (flag)
 		{
-			string str = "<color=white>";
-			string text = "</color>";
+			string text = "<color=white>";
+			string text2 = "</color>";
 			bool flag3 = false;
 			bool flag4 = false;
 			foreach (Transform item in artistMediaContainer.transform)
@@ -1609,60 +871,51 @@ public class scnCLS : ADOBase
 				float customWorldAccuracy = Persistence.GetCustomWorldAccuracy(hash);
 				float customWorldXAccuracy = Persistence.GetCustomWorldXAccuracy(hash);
 				bool flag6 = Persistence.GetShowXAccuracy() && customWorldXAccuracy != 0f;
-				float num3 = flag6 ? customWorldXAccuracy : customWorldAccuracy;
+				float num3 = (flag6 ? customWorldXAccuracy : customWorldAccuracy);
 				int customWorldAttempts = Persistence.GetCustomWorldAttempts(hash);
 				float customWorldSpeedTrial = Persistence.GetCustomWorldSpeedTrial(hash);
 				int customWorldMinDeaths = Persistence.GetCustomWorldMinDeaths(hash);
-				_003C_003Ec__DisplayClass129_1 _003C_003Ec__DisplayClass129_ = default(_003C_003Ec__DisplayClass129_1);
-				_003C_003Ec__DisplayClass129_.purePerfected = (flag6 ? (customWorldXAccuracy == 1f) : Persistence.GetCustomWorldIsHighestPossibleAcc(hash));
-				string str2 = RDString.Get("levelSelect.multiplier", new Dictionary<string, object>
+				purePerfected = (flag6 ? (customWorldXAccuracy == 1f) : Persistence.GetCustomWorldIsHighestPossibleAcc(hash));
+				string text3 = RDString.Get("levelSelect.multiplier", new Dictionary<string, object> {
 				{
-					{
-						"multiplier",
-						customWorldSpeedTrial.ToString("0.0")
-					}
-				});
+					"multiplier",
+					customWorldSpeedTrial.ToString("0.0")
+				} });
 				Dictionary<string, object> parameters = new Dictionary<string, object>
 				{
 					{
 						"pctCompleted",
-						str + Mathf.FloorToInt(num * 100f).ToString("0") + "%" + text
+						text + Mathf.FloorToInt(num * 100f).ToString("0") + "%" + text2
 					},
 					{
 						"pctAccuracy",
-						str + _003CDisplayLevel_003Eg__GoldAccuracy_007C129_3((num3 * 100f).ToString("0.00") + "%", ref _003C_003Ec__DisplayClass129_) + text
+						text + GoldAccuracy((num3 * 100f).ToString("0.00") + "%") + text2
 					},
 					{
 						"speedTrial",
-						str + str2 + text
+						text + text3 + text2
 					},
 					{
 						"attempts",
-						str + customWorldAttempts.ToString("0") + text
+						text + customWorldAttempts.ToString("0") + text2
 					}
 				};
-				string text2 = (!num2) ? RDString.Get("levelSelect.neverPlayed", parameters) : ((!flag5) ? RDString.Get("cls.worldStatsIncomplete", parameters) : ((!flag6) ? RDString.Get("cls.worldStatsComplete", parameters) : RDString.Get("cls.worldStatsCompleteXAccuracy", parameters)));
+				string text4 = ((!num2) ? RDString.Get("levelSelect.neverPlayed", parameters) : ((!flag5) ? RDString.Get("cls.worldStatsIncomplete", parameters) : ((!flag6) ? RDString.Get("cls.worldStatsComplete", parameters) : RDString.Get("cls.worldStatsCompleteXAccuracy", parameters))));
 				if (customWorldMinDeaths >= 0)
 				{
-					string str3 = (customWorldMinDeaths == 0) ? RDString.Get("cls.noCheckpointsUsed") : customWorldMinDeaths.ToString();
-					text2 = text2 + "\n" + RDString.Get("cls.lowestCheckpointsUsed", new Dictionary<string, object>
+					string text5 = ((customWorldMinDeaths == 0) ? RDString.Get("cls.noCheckpointsUsed") : customWorldMinDeaths.ToString());
+					text4 = text4 + "\n" + RDString.Get("cls.lowestCheckpointsUsed", new Dictionary<string, object> {
 					{
-						{
-							"checkpoints",
-							str + str3 + text
-						}
-					});
+						"checkpoints",
+						text + text5 + text2
+					} });
 				}
-				portalStats.text = text2;
+				portalStats.text = text4;
 				portalScript.UpdateLanternStates(flag5, customWorldAccuracy >= 1f, customWorldSpeedTrial > 1f);
-				int num4 = CustomLevel.GetWorldPaths(loadedLevelDirs[levelKey] + Path.DirectorySeparatorChar.ToString() + "main.adofai").Length;
-				portalScript.worldName.text = ((num4 > 1) ? (RDString.Get("cls.worldCount", new Dictionary<string, object>
-				{
-					{
-						"levelCount",
-						num4
-					}
-				}).Replace("\n", $"\n<size={Mathf.RoundToInt((float)portalScript.worldName.fontSize * 0.5f)}>") + "</size>") : RDString.Get("cls.singleLevel"));
+				string text6 = loadedLevelDirs[levelKey];
+				char directorySeparatorChar = Path.DirectorySeparatorChar;
+				int num4 = CustomLevel.GetWorldPaths(text6 + directorySeparatorChar + "main.adofai").Length;
+				portalScript.worldName.text = ((num4 > 1) ? (RDString.Get("cls.worldCount", new Dictionary<string, object> { { "levelCount", num4 } }).Replace("\n", $"\n<size={Mathf.RoundToInt((float)portalScript.worldName.fontSize * 0.5f)}>") + "</size>") : RDString.Get("cls.singleLevel"));
 				currentSongVolume = (float)level.volume / 100f;
 				string artistLinks = level.artistLinks;
 				if (artistLinks != "")
@@ -1679,26 +932,26 @@ public class scnCLS : ADOBase
 							continue;
 						}
 						GameObject gameObject = UnityEngine.Object.Instantiate(mediaButton, artistMediaContainer);
-						string str4 = "link_white";
+						string text7 = "link_white";
 						switch (array2[0])
 						{
-						case "youtube":
-						case "youtu":
-							str4 = "youtube";
-							break;
-						case "spotify":
-						case "bandcamp":
-						case "twitter":
-						case "soundcloud":
-							str4 = array2[0];
-							break;
+							case "youtube":
+							case "youtu":
+								text7 = "youtube";
+								break;
+							case "spotify":
+							case "bandcamp":
+							case "twitter":
+							case "soundcloud":
+								text7 = array2[0];
+								break;
 						}
-						string a = array2[1];
-						if (a == "bandcamp" || a == "spotify")
+						string text8 = array2[1];
+						if (text8 == "bandcamp" || text8 == "spotify")
 						{
-							str4 = array2[1];
+							text7 = array2[1];
 						}
-						gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("CLS/MediaIcons/" + str4);
+						gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("CLS/MediaIcons/" + text7);
 						gameObject.GetComponent<Button>().onClick.AddListener(delegate
 						{
 							if (!link.StartsWith("http://") && !link.StartsWith("https://") && !link.StartsWith("www."))
@@ -1732,27 +985,25 @@ public class scnCLS : ADOBase
 			{
 				withCheck = RDString.GetWithCheck(genericDataCLS.description, out exists);
 			}
-			string text3 = (exists && !withCheck.IsNullOrEmpty()) ? withCheck : ((genericDataCLS.description == string.Empty) ? string.Empty : ("\"" + RDUtils.RemoveRichTags(genericDataCLS.description) + "\""));
-			portalDescription.text = text3;
+			string text9 = ((exists && !withCheck.IsNullOrEmpty()) ? withCheck : ((genericDataCLS.description == string.Empty) ? string.Empty : ("\"" + RDUtils.RemoveRichTags(genericDataCLS.description) + "\"")));
+			portalDescription.text = text9;
 			portalDescription.SetLocalizedFont();
-			string text4 = RDUtils.RemoveRichTags(genericDataCLS.artist);
-			portalArtist.text = text4;
+			string text10 = RDUtils.RemoveRichTags(genericDataCLS.artist);
+			portalArtist.text = text10;
 			portalArtist.SetLocalizedFont();
-			string text5 = RDUtils.RemoveRichTags(genericDataCLS.title);
-			portalName.text = text5;
+			string text11 = RDUtils.RemoveRichTags(genericDataCLS.title);
+			portalName.text = text11;
 			portalName.SetLocalizedFont();
-			string text6 = RDString.Get("cls.difficulty");
-			portalDifficultyText.text = text6;
+			string text12 = RDString.Get("cls.difficulty");
+			portalDifficultyText.text = text12;
 			int difficulty = genericDataCLS.difficulty;
 			portalDifficulty.SetStars(difficulty);
-			string text7 = RDString.Get("cls.worldAuthor", new Dictionary<string, object>
+			string text13 = RDString.Get("cls.worldAuthor", new Dictionary<string, object> {
 			{
-				{
-					"author",
-					str + RDUtils.RemoveRichTags(genericDataCLS.author) + text
-				}
-			});
-			portalAuthor.text = text7;
+				"author",
+				text + RDUtils.RemoveRichTags(genericDataCLS.author) + text2
+			} });
+			portalAuthor.text = text13;
 			portalAuthor.SetLocalizedFont();
 			if (delayedTextureLoad != null && delayedTextureLoad.IsActive())
 			{
@@ -1770,10 +1021,10 @@ public class scnCLS : ADOBase
 			}
 			else if (genericDataCLS.previewImage != "")
 			{
-				string text8 = loadedLevelDirs[levelKey];
-				if (text8 != null)
+				string text14 = loadedLevelDirs[levelKey];
+				if (text14 != null)
 				{
-					string portalImagePath = Path.Combine(text8, genericDataCLS.previewImage);
+					string portalImagePath = Path.Combine(text14, genericDataCLS.previewImage);
 					delayedTextureLoad = DOVirtual.DelayedCall(portalImageLoadDelay, delegate
 					{
 						LoadTexture(portalImagePath, levelKey);
@@ -1791,15 +1042,15 @@ public class scnCLS : ADOBase
 			portalQuad.Fade(1f, animDur);
 			if (flag4)
 			{
-				_003CDisplayLevel_003Eg__DoWarningAnimation_007C129_2(DLCWarningSign, DLCWarningAnimation, left: false);
+				DoWarningAnimation(DLCWarningSign, DLCWarningAnimation, left: false);
 			}
 			else if (flag3)
 			{
-				_003CDisplayLevel_003Eg__DoWarningAnimation_007C129_2(seizureWarning, seizureWarningAnimation, left: false);
+				DoWarningAnimation(seizureWarning, seizureWarningAnimation, left: false);
 			}
 			if (newlyInstalledLevelKeys.Contains(levelKey))
 			{
-				_003CDisplayLevel_003Eg__DoWarningAnimation_007C129_2(newlyInstalledSign, newLevelAnimation, left: true);
+				DoWarningAnimation(newlyInstalledSign, newLevelAnimation, left: true);
 			}
 			DLCEntranceIcon.SetActive(flag4);
 			padlockContainer.SetActive(flag4);
@@ -1813,16 +1064,37 @@ public class scnCLS : ADOBase
 			portalQuad.Fade(0f, animDur);
 			DLCEntranceIcon.SetActive(value: false);
 			padlockContainer.SetActive(value: false);
-			_003C_003Ec__DisplayClass129_0 CS_0024_003C_003E8__locals3;
-			CS_0024_003C_003E8__locals3._003CDisplayLevel_003Eg__DoWarningAnimation_007C0(seizureWarning, seizureWarningAnimation);
-			CS_0024_003C_003E8__locals3._003CDisplayLevel_003Eg__DoWarningAnimation_007C0(newlyInstalledSign, newLevelAnimation);
-			CS_0024_003C_003E8__locals3._003CDisplayLevel_003Eg__DoWarningAnimation_007C0(DLCWarningSign, DLCWarningAnimation);
+			DoWarningAnimation1(seizureWarning, seizureWarningAnimation);
+			DoWarningAnimation1(newlyInstalledSign, newLevelAnimation);
+			DoWarningAnimation1(DLCWarningSign, DLCWarningAnimation);
 		}
-		float num5 = flag ? 1f : 0f;
+		float num5 = (flag ? 1f : 0f);
 		levelInfoCanvasGroup.DOFade(num5, animDur);
 		entranceIcon.DOFade(flag2 ? num5 : 0f, animDur);
 		portalSign.DOLocalMoveY(flag ? 0f : 11f, animDur).SetEase((!flag) ? Ease.Linear : Ease.OutSine);
 		entranceTile.isLandable = flag2;
+		static void DoWarningAnimation(RectTransform rt, Tween tween, bool left)
+		{
+			tween?.Kill();
+			int num6 = ((!left) ? 1 : (-1));
+			tween = DOTween.Sequence().Append(rt.DOScale(Vector3.zero, 0f)).Join(rt.DORotate(new Vector3(0f, 0f, 30 * num6), 0f))
+				.Join(rt.DOScale(new Vector3(1f, 1f, 1f), 1f / 3f).SetEase(Ease.OutBack))
+				.Join(rt.DORotate(new Vector3(0f, 0f, -30 * num6), 0.5f).SetEase(Ease.OutBack));
+		}
+		void DoWarningAnimation1(RectTransform rt, Tween tween)
+		{
+			tween?.Pause();
+			rt.DOKill();
+			tween = rt.DOScale(Vector3.zero, animDur * 0.5f).SetEase(Ease.InBack);
+		}
+		string GoldAccuracy(string accText)
+		{
+			if (!purePerfected)
+			{
+				return accText;
+			}
+			return "<color=#FFDA00>" + accText + "</color>";
+		}
 	}
 
 	public void EnterLevel()
@@ -1847,12 +1119,12 @@ public class scnCLS : ADOBase
 		}
 		if (!ADOBase.ownsTaroDLC && genericDataCLS.isLevel && genericDataCLS.level.requiresNeoCosmos)
 		{
-			SteamFriends.ActivateGameOverlayToWebPage("https://store.steampowered.com/app/" + 1977570u.ToString());
+			SteamFriends.ActivateGameOverlayToWebPage("https://store.steampowered.com/app/" + 1977570u);
 			return;
 		}
 		GCS.customLevelIndex = 0;
 		GCS.speedTrialMode = optionsPanels.speedTrial;
-		string levelPath = Path.Combine(text, "main.adofai");
+		string text2 = Path.Combine(text, "main.adofai");
 		ADOBase.audioManager.StopLoadingMP3File();
 		string hash = loadedLevels[levelToSelect].Hash;
 		Persistence.IncrementCLSTotalPlays();
@@ -1861,11 +1133,11 @@ public class scnCLS : ADOBase
 		bool skipToMain = Persistence.GetCustomWorldAttempts(hash) > 0;
 		if (GCS.speedTrialMode)
 		{
-			ADOBase.controller.LoadCustomLevel(levelPath);
+			ADOBase.controller.LoadCustomLevel(text2);
 		}
 		else
 		{
-			ADOBase.controller.LoadCustomWorld(levelPath, skipToMain);
+			ADOBase.controller.LoadCustomWorld(text2, skipToMain);
 		}
 	}
 
@@ -1905,7 +1177,7 @@ public class scnCLS : ADOBase
 			string[] array2 = array;
 			for (int i = 0; i < array2.Length; i++)
 			{
-				string text = array2[i];
+				_ = array2[i];
 				UnpackZip(array[num]);
 				num++;
 			}
@@ -1922,30 +1194,101 @@ public class scnCLS : ADOBase
 			try
 			{
 				ZipUtil.Unzip(zip, text);
+				return;
 			}
 			catch (Exception ex)
 			{
-				UnityEngine.Debug.LogError("Unzip failed: " + ex.ToString());
+				Debug.LogError("Unzip failed: " + ex.ToString());
+				return;
+			}
+		}
+		Debug.LogWarning("Level not unpacked: Directory already exists!");
+	}
+
+	private async Task ScanLevels(CancellationToken cancelToken, bool workshop = true, bool local = false)
+	{
+		if (local && !Directory.Exists(levelsDir))
+		{
+			Debug.LogWarning("First time launching CLS, making directory");
+			RDDirectory.CreateDirectory(levelsDir);
+			return;
+		}
+		if (!featuredLevelsMode)
+		{
+			string[] array = new string[0];
+			string[] first = new string[0];
+			if (workshop)
+			{
+				array = new string[SteamWorkshop.resultItems.Count];
+				for (int i = 0; i < SteamWorkshop.resultItems.Count; i++)
+				{
+					array[i] = SteamWorkshop.resultItems[i].path;
+					isWorkshopLevel[Path.GetFileName(array[i])] = true;
+				}
+			}
+			if (local)
+			{
+				first = Directory.GetDirectories(levelsDir);
+			}
+			string[] itemDirs = first.Concat(array).ToArray();
+			cancelToken.ThrowIfCancellationRequested();
+			List<Task<Dictionary<string, object>>> list = new List<Task<Dictionary<string, object>>>();
+			string[] array2 = itemDirs;
+			foreach (string text in array2)
+			{
+				string levelPath = Path.Combine(text, "main.adofai");
+				string fileName = Path.GetFileName(text);
+				bool flag = false;
+				if (loadedLevelIsDeleted.ContainsKey(fileName))
+				{
+					flag = loadedLevelIsDeleted[fileName];
+				}
+				if (RDFile.Exists(levelPath) && !flag)
+				{
+					list.Add(Task.Run(() => Json.Deserialize(RDFile.ReadAllText(levelPath)) as Dictionary<string, object>, cancelToken));
+				}
+				else if (!flag)
+				{
+					Debug.LogWarning("No level file at " + text + "!");
+					list.Add(Task.FromResult<Dictionary<string, object>>(null));
+				}
+			}
+			cancelToken.ThrowIfCancellationRequested();
+			Dictionary<string, object>[] array3 = await Task.WhenAll(list);
+			cancelToken.ThrowIfCancellationRequested();
+			for (int k = 0; k < itemDirs.Length; k++)
+			{
+				string text2 = itemDirs[k];
+				string fileName2 = Path.GetFileName(text2);
+				Dictionary<string, object> dictionary = array3[k];
+				if (dictionary != null)
+				{
+					LevelDataCLS levelDataCLS = new LevelDataCLS();
+					levelDataCLS.Setup();
+					if (levelDataCLS.Decode(dictionary))
+					{
+						loadedLevels.Add(fileName2, levelDataCLS);
+						loadedLevelDirs.Add(fileName2, text2);
+						loadedLevelIsDeleted[fileName2] = false;
+					}
+				}
 			}
 		}
 		else
 		{
-			UnityEngine.Debug.LogWarning("Level not unpacked: Directory already exists!");
+			foreach (KeyValuePair<string, GenericDataCLS> extraLevel in extraLevels)
+			{
+				string key = extraLevel.Key;
+				if (!loadedLevels.ContainsKey(key))
+				{
+					loadedLevels.Add(key, extraLevel.Value);
+					loadedLevelDirs.Add(key, null);
+					loadedLevelIsDeleted[key] = false;
+					isWorkshopLevel[key] = true;
+				}
+			}
 		}
-	}
-
-	[AsyncStateMachine(typeof(_003CScanLevels_003Ed__135))]
-	private Task ScanLevels(CancellationToken cancelToken, bool workshop = true, bool local = false)
-	{
-		_003CScanLevels_003Ed__135 stateMachine = default(_003CScanLevels_003Ed__135);
-		stateMachine._003C_003Et__builder = AsyncTaskMethodBuilder.Create();
-		stateMachine._003C_003E4__this = this;
-		stateMachine.cancelToken = cancelToken;
-		stateMachine.workshop = workshop;
-		stateMachine.local = local;
-		stateMachine._003C_003E1__state = -1;
-		stateMachine._003C_003Et__builder.Start(ref stateMachine);
-		return stateMachine._003C_003Et__builder.Task;
+		levelCount = loadedLevels.Count;
 	}
 
 	private void CreateFloors()
@@ -1958,7 +1301,9 @@ public class scnCLS : ADOBase
 		sortedLevelKeys = optionsPanels.SortedLevelKeys();
 		if (!featuredLevelsMode)
 		{
-			string path = Persistence.DataPath + Path.DirectorySeparatorChar.ToString() + "clslevels.txt";
+			string dataPath = Persistence.DataPath;
+			char directorySeparatorChar = Path.DirectorySeparatorChar;
+			string path = dataPath + directorySeparatorChar + "clslevels.txt";
 			newlyInstalledLevelKeys = new List<string>();
 			if (File.Exists(path))
 			{
@@ -2010,7 +1355,7 @@ public class scnCLS : ADOBase
 			loadedLevelTiles.Add(sortedLevelKey2, component);
 			if (genericDataCLS.isFolder)
 			{
-				FolderDataCLS folder = genericDataCLS.folder;
+				_ = genericDataCLS.folder;
 			}
 			else
 			{
@@ -2038,16 +1383,14 @@ public class scnCLS : ADOBase
 			if (genericDataCLS.parentFolderName != currentFolderName)
 			{
 				component.gameObject.SetActive(value: false);
+				continue;
 			}
-			else
+			if (num2 == 0)
 			{
-				if (num2 == 0)
-				{
-					customLevelTile3 = component;
-				}
-				customLevelTile4 = component;
-				num2++;
+				customLevelTile3 = component;
 			}
+			customLevelTile4 = component;
+			num2++;
 		}
 		bool flag3 = currentFolderName != null;
 		bool flag4 = (float)levelCount >= levelCountForLoop && !flag3;
@@ -2099,12 +1442,7 @@ public class scnCLS : ADOBase
 		{
 			CustomLevelTile customLevelTile = loadedLevelTiles[sortedLevelKey];
 			GenericDataCLS genericDataCLS = loadedLevels[sortedLevelKey];
-			string[] array = new string[3]
-			{
-				genericDataCLS.artist,
-				genericDataCLS.author,
-				genericDataCLS.title
-			};
+			string[] array = new string[3] { genericDataCLS.artist, genericDataCLS.author, genericDataCLS.title };
 			bool flag = false;
 			if (loadedLevels[sortedLevelKey].parentFolderName == currentFolderName)
 			{
@@ -2184,13 +1522,7 @@ public class scnCLS : ADOBase
 		string text = RDString.Get("cls.shortcut.find");
 		if (!sub.IsNullOrEmpty())
 		{
-			text = text + " <color=#ffd000><i>" + RDString.Get("cls.currentlySearching", new Dictionary<string, object>
-			{
-				{
-					"filter",
-					sub
-				}
-			}) + "</i></color>";
+			text = text + " <color=#ffd000><i>" + RDString.Get("cls.currentlySearching", new Dictionary<string, object> { { "filter", sub } }) + "</i></color>";
 		}
 		currentSearchText.text = text;
 	}
@@ -2209,7 +1541,7 @@ public class scnCLS : ADOBase
 			{
 				if (featuredLevelsMode)
 				{
-					string path = genericDataCLS.isFolder ? text.Replace("Folder:", "") : text;
+					string path = (genericDataCLS.isFolder ? text.Replace("Folder:", "") : text);
 					Texture2D icon = Resources.Load<Texture2D>(Path.Combine("FeaturedLevels", path, "icon"));
 					customLevelTile.ProcessIconTexture(icon, genericDataCLS.previewIconColor);
 				}
@@ -2236,59 +1568,25 @@ public class scnCLS : ADOBase
 		optionsPanels.currentOrderText.SetLocalizedFont();
 	}
 
-	[AsyncStateMachine(typeof(_003CFeaturedLevelsPortal_003Ed__142))]
-	public void FeaturedLevelsPortal()
+	public async void FeaturedLevelsPortal()
 	{
-		_003CFeaturedLevelsPortal_003Ed__142 stateMachine = default(_003CFeaturedLevelsPortal_003Ed__142);
-		stateMachine._003C_003Et__builder = AsyncVoidMethodBuilder.Create();
-		stateMachine._003C_003E4__this = this;
-		stateMachine._003C_003E1__state = -1;
-		stateMachine._003C_003Et__builder.Start(ref stateMachine);
+		HideInitialMenu();
+		featuredLevelsMode = true;
+		await Refresh(setup: true);
+		RDBaseDll.printem("");
 	}
 
-	[AsyncStateMachine(typeof(_003CWorkshopLevelsPortal_003Ed__143))]
-	public void WorkshopLevelsPortal()
+	public async void WorkshopLevelsPortal()
 	{
-		_003CWorkshopLevelsPortal_003Ed__143 stateMachine = default(_003CWorkshopLevelsPortal_003Ed__143);
-		stateMachine._003C_003Et__builder = AsyncVoidMethodBuilder.Create();
-		stateMachine._003C_003E4__this = this;
-		stateMachine._003C_003E1__state = -1;
-		stateMachine._003C_003Et__builder.Start(ref stateMachine);
+		HideInitialMenu();
+		featuredLevelsMode = false;
+		await Refresh(setup: true);
+		RDBaseDll.printem("");
 	}
 
 	public void QuitPortal()
 	{
 		GCS.customLevelPaths = null;
 		ADOBase.controller.QuitToMainMenu();
-	}
-
-	[CompilerGenerated]
-	private static LevelDataCLS _003CAwake_003Eg__DecodeLevel_007C108_0(uint id)
-	{
-		Dictionary<string, object> rootDict = Json.Deserialize(Resources.Load<TextAsset>(Path.Combine("FeaturedLevels", id.ToString(), "main")).text) as Dictionary<string, object>;
-		LevelDataCLS levelDataCLS = new LevelDataCLS();
-		levelDataCLS.Setup();
-		levelDataCLS.Decode(rootDict);
-		return levelDataCLS;
-	}
-
-	[CompilerGenerated]
-	private static string _003CDisplayLevel_003Eg__GoldAccuracy_007C129_3(string accText, ref _003C_003Ec__DisplayClass129_1 P_1)
-	{
-		if (!P_1.purePerfected)
-		{
-			return accText;
-		}
-		return "<color=#FFDA00>" + accText + "</color>";
-	}
-
-	[CompilerGenerated]
-	private static void _003CDisplayLevel_003Eg__DoWarningAnimation_007C129_2(RectTransform rt, Tween tween, bool left)
-	{
-		tween?.Kill();
-		int num = (!left) ? 1 : (-1);
-		tween = DOTween.Sequence().Append(rt.DOScale(Vector3.zero, 0f)).Join(rt.DORotate(new Vector3(0f, 0f, 30 * num), 0f))
-			.Join(rt.DOScale(new Vector3(1f, 1f, 1f), 0.333333343f).SetEase(Ease.OutBack))
-			.Join(rt.DORotate(new Vector3(0f, 0f, -30 * num), 0.5f).SetEase(Ease.OutBack));
 	}
 }

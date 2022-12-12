@@ -87,7 +87,7 @@ public class CustomLevelTile : ffxBase
 	private IEnumerator LoadTexture(string iconPath, Color iconColor)
 	{
 		yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 1f));
-		Texture2D texture;
+		Texture2D texture = null;
 		using (UnityWebRequest imageRequest = UnityWebRequestTexture.GetTexture("file://" + iconPath))
 		{
 			yield return imageRequest.SendWebRequest();

@@ -2249,7 +2249,7 @@ public class Mawaru : TaroBGScript
 
 	private void SoccerUpdate()
 	{
-		double songBeat = songBeat;
+		_ = songBeat;
 		kickRad = kickTranslation.position.x;
 		kickRad2 = kickTranslation2.position.x;
 		kickPos = kickRad * Mathf.Sin((float)base.redPlanet.angle) * Vector3.right + kickRad * Mathf.Cos((float)base.redPlanet.angle) * Vector3.up;

@@ -1,126 +1,11 @@
+// scrPlanet
+using System;
 using DG.Tweening;
 using RDTools;
-using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class scrPlanet : ADOBase
 {
-	[StructLayout(LayoutKind.Auto)]
-	[CompilerGenerated]
-	private struct _003C_003Ec__DisplayClass87_0
-	{
-		public scrPlanet _003C_003E4__this;
-
-		public Transform t;
-
-		public bool on;
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass143_0
-	{
-		public scrFloor f;
-
-		internal void _003CSwitchChosen_003Eb__0()
-		{
-			f.enabled = false;
-			f.transform.position += Vector3.up * 9999f;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass144_0
-	{
-		public scrPlanet _003C_003E4__this;
-
-		public scrFloor floor;
-
-		public Predicate<scrPlanet> _003C_003E9__6;
-
-		internal float _003CMoveToNextFloor_003Eb__2()
-		{
-			return _003C_003E4__this.movingToNext.swirlTween;
-		}
-
-		internal void _003CMoveToNextFloor_003Eb__3(float x)
-		{
-			_003C_003E4__this.movingToNext.swirlTween = x;
-		}
-
-		internal float _003CMoveToNextFloor_003Eb__4()
-		{
-			return _003C_003E4__this.movingToNext.mpHoldTween;
-		}
-
-		internal void _003CMoveToNextFloor_003Eb__5(float x)
-		{
-			_003C_003E4__this.movingToNext.mpHoldTween = x;
-		}
-
-		internal bool _003CMoveToNextFloor_003Eb__6(scrPlanet x)
-		{
-			return x.transform.parent == floor.transform;
-		}
-
-		internal float _003CMoveToNextFloor_003Eb__0()
-		{
-			return _003C_003E4__this.movingToNext.endingTween;
-		}
-
-		internal void _003CMoveToNextFloor_003Eb__1(float x)
-		{
-			_003C_003E4__this.movingToNext.endingTween = x;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass144_1
-	{
-		public LineRenderer l;
-
-		internal float _003CMoveToNextFloor_003Eb__7()
-		{
-			return l.startColor.a;
-		}
-
-		internal void _003CMoveToNextFloor_003Eb__8(float x)
-		{
-			l.startColor = new Color(l.startColor.r, l.startColor.g, l.startColor.b, x);
-		}
-
-		internal float _003CMoveToNextFloor_003Eb__9()
-		{
-			return l.endColor.a;
-		}
-
-		internal void _003CMoveToNextFloor_003Eb__10(float x)
-		{
-			l.endColor = new Color(l.endColor.r, l.endColor.g, l.endColor.b, x);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass147_0
-	{
-		public int i;
-
-		public Predicate<scrPlanet> _003C_003E9__2;
-
-		public Predicate<LineRenderer> _003C_003E9__3;
-
-		internal bool _003CScrubToFloorNumber_003Eb__2(scrPlanet x)
-		{
-			return x.attachedDummyFloor == i;
-		}
-
-		internal bool _003CScrubToFloorNumber_003Eb__3(LineRenderer x)
-		{
-			return x.transform.parent == scrLevelMaker.instance.listFloors[i].transform;
-		}
-	}
-
 	public static readonly Color goldColor = new Color(1f, 0f, 0f, 0f);
 
 	public static readonly Color rainbowColor = new Color(0f, 1f, 0f, 0f);
@@ -372,13 +257,26 @@ public class scrPlanet : ADOBase
 
 	public void Rewind()
 	{
-		_003CRewind_003Eg__Revive_007C76_0();
+		Revive();
 		cosmeticRadius = 0f;
 		angle = 0.0;
 		snappedLastAngle = 0.0;
 		currfloor = null;
 		aliveTime = 0f;
 		Start();
+		void Revive()
+		{
+			sprite.enabled = true;
+			ring.enabled = true;
+			glow.enabled = true;
+			dead = false;
+			hittable = true;
+			tailParticles.Play();
+			coreParticles.Play();
+			sparks.Play();
+			deathExplosion.gameObject.SetActive(value: false);
+			faceHolder.gameObject.SetActive(faceMode);
+		}
 	}
 
 	private void Start()
@@ -400,7 +298,7 @@ public class scrPlanet : ADOBase
 		deathPos = Vector3.zero;
 		holdOffsetPos = Vector3.zero;
 		addBob = Vector3.zero;
-		hifi = (controller.visualQuality == VisualQuality.High);
+		hifi = controller.visualQuality == VisualQuality.High;
 	}
 
 	public void SetColor(PlanetColor planetColor)
@@ -409,37 +307,37 @@ public class scrPlanet : ADOBase
 		Color color = planetColor.GetColor();
 		switch (planetColor)
 		{
-		case PlanetColor.DefaultRed:
-			DisableCustomColor(0);
-			DisableAllSpecialPlanets();
-			Persistence.SetPlayerColor(Color.red, isRed);
-			break;
-		case PlanetColor.DefaultBlue:
-			DisableCustomColor(1);
-			DisableAllSpecialPlanets();
-			Persistence.SetPlayerColor(Color.blue, isRed);
-			break;
-		case PlanetColor.Gold:
-			DisableCustomColor();
-			SwitchToGold();
-			Persistence.SetPlayerColor(goldColor, isRed);
-			break;
-		case PlanetColor.Rainbow:
-			EnableCustomColor();
-			SetRainbow(enabled: true);
-			Persistence.SetPlayerColor(rainbowColor, isRed);
-			break;
-		case PlanetColor.Overseer:
-			DisableCustomColor();
-			SwitchToOverseer();
-			Persistence.SetPlayerColor(overseerColor, isRed);
-			break;
-		default:
-			EnableCustomColor();
-			SetPlanetColor(color);
-			SetTailColor(color);
-			Persistence.SetPlayerColor(color, isRed);
-			break;
+			case PlanetColor.DefaultRed:
+				DisableCustomColor(0);
+				DisableAllSpecialPlanets();
+				Persistence.SetPlayerColor(Color.red, isRed);
+				break;
+			case PlanetColor.DefaultBlue:
+				DisableCustomColor(1);
+				DisableAllSpecialPlanets();
+				Persistence.SetPlayerColor(Color.blue, isRed);
+				break;
+			case PlanetColor.Gold:
+				DisableCustomColor();
+				SwitchToGold();
+				Persistence.SetPlayerColor(goldColor, isRed);
+				break;
+			case PlanetColor.Rainbow:
+				EnableCustomColor();
+				SetRainbow(enabled: true);
+				Persistence.SetPlayerColor(rainbowColor, isRed);
+				break;
+			case PlanetColor.Overseer:
+				DisableCustomColor();
+				SwitchToOverseer();
+				Persistence.SetPlayerColor(overseerColor, isRed);
+				break;
+			default:
+				EnableCustomColor();
+				SetPlanetColor(color);
+				SetTailColor(color);
+				Persistence.SetPlayerColor(color, isRed);
+				break;
 		}
 	}
 
@@ -469,24 +367,39 @@ public class scrPlanet : ADOBase
 
 	public void ToggleSpecialPlanet(GameObject specialP, bool on, string specialSuffix = "")
 	{
-		_003C_003Ec__DisplayClass87_0 _003C_003Ec__DisplayClass87_ = default(_003C_003Ec__DisplayClass87_0);
-		_003C_003Ec__DisplayClass87_._003C_003E4__this = this;
-		_003C_003Ec__DisplayClass87_.on = on;
-		if (_003C_003Ec__DisplayClass87_.on)
+		if (on)
 		{
 			DisableAllSpecialPlanets();
 		}
-		specialP.gameObject.SetActive(_003C_003Ec__DisplayClass87_.on);
-		_003C_003Ec__DisplayClass87_.t = (_003C_003Ec__DisplayClass87_.on ? specialP.transform : base.transform);
-		if (_003C_003Ec__DisplayClass87_.on)
+		specialP.gameObject.SetActive(on);
+		Transform t = (on ? specialP.transform : base.transform);
+		if (on)
 		{
-			_003CToggleSpecialPlanet_003Eg__SetBasePlanetElementsActive_007C87_1(false, ref _003C_003Ec__DisplayClass87_);
-			_003CToggleSpecialPlanet_003Eg__SetupNewPlanetElements_007C87_0(specialSuffix, ref _003C_003Ec__DisplayClass87_);
+			SetBasePlanetElementsActive(active: false);
+			SetupNewPlanetElements(specialSuffix);
 		}
 		else
 		{
-			_003CToggleSpecialPlanet_003Eg__SetupNewPlanetElements_007C87_0("", ref _003C_003Ec__DisplayClass87_);
-			_003CToggleSpecialPlanet_003Eg__SetBasePlanetElementsActive_007C87_1(true, ref _003C_003Ec__DisplayClass87_);
+			SetupNewPlanetElements("");
+			SetBasePlanetElementsActive(active: true);
+		}
+		void SetBasePlanetElementsActive(bool active)
+		{
+			tailParticles.gameObject.SetActive(active);
+			sparks.gameObject.SetActive(active);
+			coreParticles.gameObject.SetActive(active);
+			ring.gameObject.SetActive(active);
+			glow.gameObject.SetActive(active);
+			sprite.enabled = active;
+		}
+		void SetupNewPlanetElements(string suffix)
+		{
+			coreParticles = t.Find("Core" + suffix)?.GetComponent<ParticleSystem>() ?? coreParticles;
+			tailParticles = t.Find("Tail" + suffix).GetComponent<ParticleSystem>() ?? tailParticles;
+			sparks = t.Find("Sparks" + suffix).GetComponent<ParticleSystem>() ?? sparks;
+			ring = t.Find("Ring" + suffix).GetComponent<SpriteRenderer>() ?? ring;
+			glow = t.Find("Glow" + suffix).GetComponent<SpriteRenderer>() ?? glow;
+			sprite = (on ? t.Find("Planet" + suffix) : base.transform).GetComponent<SpriteRenderer>() ?? sprite;
 		}
 	}
 
@@ -516,32 +429,32 @@ public class scrPlanet : ADOBase
 		sprite.color = Color.white;
 		switch (defaultColor)
 		{
-		case -1:
-		{
-			animator.runtimeAnimatorController = origController;
-			sprite.sprite = origSprite;
-			Color color = isRed ? Color.red : Color.blue;
-			SetRingColor(color);
-			SetTailColor(color);
-			SetFaceColor(color);
-			break;
-		}
-		case 0:
-			animator.runtimeAnimatorController = redPlanet.origController;
-			sprite.sprite = redPlanet.origSprite;
-			SetRingColor(Color.red);
-			SetCoreColor(Color.red);
-			SetTailColor(Color.red);
-			SetFaceColor(Color.red);
-			break;
-		case 1:
-			animator.runtimeAnimatorController = bluePlanet.origController;
-			sprite.sprite = bluePlanet.origSprite;
-			SetRingColor(Color.blue);
-			SetCoreColor(Color.blue);
-			SetTailColor(Color.blue);
-			SetFaceColor(Color.blue);
-			break;
+			case -1:
+				{
+					animator.runtimeAnimatorController = origController;
+					sprite.sprite = origSprite;
+					Color color = (isRed ? Color.red : Color.blue);
+					SetRingColor(color);
+					SetTailColor(color);
+					SetFaceColor(color);
+					break;
+				}
+			case 0:
+				animator.runtimeAnimatorController = redPlanet.origController;
+				sprite.sprite = redPlanet.origSprite;
+				SetRingColor(Color.red);
+				SetCoreColor(Color.red);
+				SetTailColor(Color.red);
+				SetFaceColor(Color.red);
+				break;
+			case 1:
+				animator.runtimeAnimatorController = bluePlanet.origController;
+				sprite.sprite = bluePlanet.origSprite;
+				SetRingColor(Color.blue);
+				SetCoreColor(Color.blue);
+				SetTailColor(Color.blue);
+				SetFaceColor(Color.blue);
+				break;
 		}
 	}
 
@@ -575,7 +488,7 @@ public class scrPlanet : ADOBase
 	{
 		ParticleSystem.MainModule main = deathExplosion.main;
 		Gradient gradient = new Gradient();
-		Color col = (color2 != Color.clear) ? color2 : color;
+		Color col = ((color2 != Color.clear) ? color2 : color);
 		gradient.SetKeys(new GradientColorKey[3]
 		{
 			new GradientColorKey(color, 0f),
@@ -605,13 +518,15 @@ public class scrPlanet : ADOBase
 	public void SetCoreColor(Color color)
 	{
 		glow.color = color.WithAlpha(glow.color.a * color.a);
-		coreParticles.main.startColor = new ParticleSystem.MinMaxGradient(color);
+		ParticleSystem.MainModule main = coreParticles.main;
+		main.startColor = new ParticleSystem.MinMaxGradient(color);
 		SetParticleSystemColor(coreParticles, color, color);
 	}
 
 	private void SetParticleSystemColor(ParticleSystem particleSystem, Color baseColor, Color startColor)
 	{
-		particleSystem.main.startColor = new ParticleSystem.MinMaxGradient(startColor);
+		ParticleSystem.MainModule main = particleSystem.main;
+		main.startColor = new ParticleSystem.MinMaxGradient(startColor);
 		Color color = Color.Lerp(baseColor, Color.black, 0.4f);
 		ParticleSystem.ColorOverLifetimeModule colorOverLifetime = particleSystem.colorOverLifetime;
 		Gradient gradient = new Gradient();
@@ -653,10 +568,14 @@ public class scrPlanet : ADOBase
 				rainbowSeq.Kill();
 			}
 		}
-		else if (rainbowSeq == null || !rainbowSeq.IsActive())
+		else
 		{
+			if (rainbowSeq != null && rainbowSeq.IsActive())
+			{
+				return;
+			}
 			sprite.color = Color.red;
-			Color.RGBToHSV(Color.red, out float _, out float S, out float V);
+			Color.RGBToHSV(Color.red, out var _, out var S, out var V);
 			Tween[] array = new Tween[10];
 			rainbowSeq = DOTween.Sequence();
 			for (int i = 0; i < array.Length; i++)
@@ -695,7 +614,7 @@ public class scrPlanet : ADOBase
 		}
 		SetFaceMode(Persistence.GetFaceMode(isRed));
 		Color playerColor = Persistence.GetPlayerColor(isRed);
-		Color white = Color.white;
+		_ = Color.white;
 		if (playerColor == goldColor || GCS.d_forceGoldPlanets)
 		{
 			DisableAllSpecialPlanets();
@@ -715,7 +634,7 @@ public class scrPlanet : ADOBase
 		}
 		else if (playerColor == Color.red || playerColor == Color.blue)
 		{
-			int defaultColor = (!(playerColor == Color.red)) ? 1 : 0;
+			int defaultColor = ((!(playerColor == Color.red)) ? 1 : 0);
 			DisableCustomColor(defaultColor);
 		}
 		else
@@ -730,7 +649,7 @@ public class scrPlanet : ADOBase
 			}
 			else if (playerColor == transPinkColor)
 			{
-				planetColor = new Color(0.9568627f, 164f / 255f, 0.7098039f);
+				planetColor = new Color(0.9568627f, 0.6431373f, 0.7098039f);
 				tailColor = Color.white;
 			}
 			else if (playerColor == nbYellowColor)
@@ -816,7 +735,7 @@ public class scrPlanet : ADOBase
 	private void PrintImportantVariables()
 	{
 		string text = "\n";
-		string o = "planet: " + base.gameObject.name + text + "angle: " + angle.ToString() + text + "snappedLastAngle: " + snappedLastAngle.ToString() + text + "conductor.songposition_minusi: " + conductor.songposition_minusi.ToString() + text + "conductor.lastHit: " + conductor.lastHit.ToString() + text + "conductor.crotchet: " + conductor.crotchet.ToString() + text + "controller.speed: " + controller.speed.ToString() + text + "controller.isCW: " + controller.isCW.ToString();
+		string o = "planet: " + base.gameObject.name + text + "angle: " + angle + text + "snappedLastAngle: " + snappedLastAngle + text + "conductor.songposition_minusi: " + conductor.songposition_minusi + text + "conductor.lastHit: " + conductor.lastHit + text + "conductor.crotchet: " + conductor.crotchet + text + "controller.speed: " + controller.speed + text + "controller.isCW: " + controller.isCW;
 		printe(o);
 	}
 
@@ -853,7 +772,8 @@ public class scrPlanet : ADOBase
 		}
 		scrMisc.ScaleSymmetric2D(base.transform, 0.9f);
 		Update_RefreshAngles();
-		coreParticles.emission.enabled = isChosen;
+		ParticleSystem.EmissionModule emission = coreParticles.emission;
+		emission.enabled = isChosen;
 		if (controller.state == States.PlayerControl)
 		{
 			holdOffsetPos = Vector3.zero;
@@ -987,11 +907,11 @@ public class scrPlanet : ADOBase
 		}
 		else
 		{
-			if (UnityEngine.Input.GetKey(KeyCode.DownArrow))
+			if (Input.GetKey(KeyCode.DownArrow))
 			{
 				angle += 0.10000000149011612;
 			}
-			if (UnityEngine.Input.GetKey(KeyCode.UpArrow))
+			if (Input.GetKey(KeyCode.UpArrow))
 			{
 				angle -= 0.10000000149011612;
 			}
@@ -1004,24 +924,24 @@ public class scrPlanet : ADOBase
 		float num6 = 0f;
 		double num7 = 0.0;
 		float num8 = 0f;
-		scrFloor scrFloor = null;
+		scrFloor scrFloor2 = null;
 		movingToNext = next;
 		bool flag = false;
 		if (currfloor != null)
 		{
-			scrFloor = (scrController.isGameWorld ? ((currfloor.seqID > 0) ? scrLevelMaker.instance.listFloors[currfloor.seqID - 1] : currfloor) : currfloor);
+			scrFloor2 = (scrController.isGameWorld ? ((currfloor.seqID > 0) ? scrLevelMaker.instance.listFloors[currfloor.seqID - 1] : currfloor) : currfloor);
 			if (currfloor.nextfloor != null && currfloor.nextfloor.entryTime - currfloor.entryTime > 0.0)
 			{
 				num7 = (conductor.songposition_minusi - currfloor.entryTime) / (currfloor.nextfloor.entryTime - currfloor.entryTime);
 			}
 			num2 = currfloor.numPlanets;
-			if (currfloor.nextfloor != null && currfloor.numPlanets < currfloor.nextfloor.numPlanets && scrFloor.numPlanets > currfloor.numPlanets)
+			if (currfloor.nextfloor != null && currfloor.numPlanets < currfloor.nextfloor.numPlanets && scrFloor2.numPlanets > currfloor.numPlanets)
 			{
-				num6 = Mathf.Lerp((float)scrFloor.numPlanets - (float)currfloor.numPlanets, 0f, (float)num7);
-				num3 = scrFloor.numPlanets;
+				num6 = Mathf.Lerp((float)scrFloor2.numPlanets - (float)currfloor.numPlanets, 0f, (float)num7);
+				num3 = scrFloor2.numPlanets;
 				flag = true;
 			}
-			else if (currfloor.nextfloor != null && currfloor.numPlanets > currfloor.nextfloor.numPlanets && scrFloor.numPlanets < currfloor.numPlanets)
+			else if (currfloor.nextfloor != null && currfloor.numPlanets > currfloor.nextfloor.numPlanets && scrFloor2.numPlanets < currfloor.numPlanets)
 			{
 				num3 = currfloor.numPlanets;
 			}
@@ -1029,10 +949,10 @@ public class scrPlanet : ADOBase
 			{
 				num3 = Mathf.Lerp(currfloor.numPlanets, currfloor.nextfloor.numPlanets, (float)num7);
 			}
-			else if (scrFloor.numPlanets > currfloor.numPlanets)
+			else if (scrFloor2.numPlanets > currfloor.numPlanets)
 			{
-				num3 = Mathf.Lerp(scrFloor.numPlanets, currfloor.numPlanets, (float)num7);
-				num6 = Mathf.Lerp((float)scrFloor.numPlanets - (float)currfloor.numPlanets, 0f, (float)num7);
+				num3 = Mathf.Lerp(scrFloor2.numPlanets, currfloor.numPlanets, (float)num7);
+				num6 = Mathf.Lerp((float)scrFloor2.numPlanets - (float)currfloor.numPlanets, 0f, (float)num7);
 			}
 			else
 			{
@@ -1042,7 +962,7 @@ public class scrPlanet : ADOBase
 			{
 				if (num6 > 0f && num2 > 2f)
 				{
-					num8 = (float)((!currfloor.isCCW) ? 1 : (-1)) * ((float)scrMisc.GetInverseAnglePerBeatMultiplanet(num3) - (float)scrMisc.GetInverseAnglePerBeatMultiplanet(num2 + ((float)(scrFloor.numPlanets - currfloor.numPlanets) - num6)));
+					num8 = (float)((!currfloor.isCCW) ? 1 : (-1)) * ((float)scrMisc.GetInverseAnglePerBeatMultiplanet(num3) - (float)scrMisc.GetInverseAnglePerBeatMultiplanet(num2 + ((float)(scrFloor2.numPlanets - currfloor.numPlanets) - num6)));
 				}
 			}
 			else if (num6 > 0f && num2 > 2f)
@@ -1168,10 +1088,10 @@ public class scrPlanet : ADOBase
 	public void FirstFloorAngleSetup()
 	{
 		snappedLastAngle = MathF.PI * (0.5f - conductor.adjustedCountdownTicks);
-		scrFloor scrFloor = currfloor;
+		scrFloor scrFloor2 = currfloor;
 		if (ADOBase.isLevelEditor)
 		{
-			scrFloor = ADOBase.lm.listFloors[0];
+			scrFloor2 = ADOBase.lm.listFloors[0];
 		}
 		else if (currfloor == null)
 		{
@@ -1187,21 +1107,21 @@ public class scrPlanet : ADOBase
 					}
 					if (component != null && component.seqID == 0)
 					{
-						scrFloor = component;
+						scrFloor2 = component;
 					}
 				}
 			}
 		}
-		currfloor = scrFloor;
-		float d = 2f - base.transform.localScale.x;
+		currfloor = scrFloor2;
+		float num = 2f - base.transform.localScale.x;
 		if (controller.isbigtiles)
 		{
-			d = 1.6f;
+			num = 1.6f;
 		}
 		if (currfloor != null && !dummyPlanets)
 		{
-			scrFloor scrFloor2 = currfloor.nextfloor ?? currfloor;
-			ringComp.scaleEnd = Vector3.one * d * scrFloor2.radiusScale;
+			scrFloor scrFloor3 = currfloor.nextfloor ?? currfloor;
+			ringComp.scaleEnd = Vector3.one * num * scrFloor3.radiusScale;
 		}
 		if (currfloor == null)
 		{
@@ -1238,7 +1158,7 @@ public class scrPlanet : ADOBase
 			num = 0.5f;
 		}
 		float num2 = num * (MathF.PI / 180f);
-		float num3 = (float)angle % (MathF.PI * 2f);
+		_ = (float)angle % (MathF.PI * 2f);
 		bool result = false;
 		if (scrController.isGameWorld && ((controller.isCW && angle > targetExitAngle - (double)num2) || (!controller.isCW && angle < targetExitAngle + (double)num2)))
 		{
@@ -1249,24 +1169,24 @@ public class scrPlanet : ADOBase
 
 	public scrPlanet SwitchChosen()
 	{
-		scrFloor scrFloor = null;
-		double marginScale = (currfloor.nextfloor == null) ? 1.0 : currfloor.nextfloor.marginScale;
+		scrFloor scrFloor2 = null;
+		double marginScale = ((currfloor.nextfloor == null) ? 1.0 : currfloor.nextfloor.marginScale);
 		bool flag = currfloor.nextfloor != null && currfloor.nextfloor.auto;
 		if (!GCS.perfectOnlyMode)
 		{
-			float hITMARGIN_COUNTED = GCS.HITMARGIN_COUNTED;
+			_ = GCS.HITMARGIN_COUNTED;
 		}
 		HitMargin hitMargin = scrMisc.GetHitMargin((float)cachedAngle, (float)targetExitAngle, controller.isCW, (float)((double)conductor.bpm * controller.speed), conductor.song.pitch, marginScale);
 		double num = 0.0;
 		if (scrController.isGameWorld)
 		{
-			if (scrMisc.IsValidHit(hitMargin) || RDC.debug || ((RDC.auto | flag) && !RDC.useOldAuto) || controller.midspinInfiniteMargin || controller.noFailInfiniteMargin)
+			if (scrMisc.IsValidHit(hitMargin) || RDC.debug || ((RDC.auto || flag) && !RDC.useOldAuto) || controller.midspinInfiniteMargin || controller.noFailInfiniteMargin)
 			{
 				if (bgbars != null)
 				{
 					bgbars.Flash(scrBackgroundBars.BarStatus.hit);
 				}
-				scrFloor = currfloor.nextfloor;
+				scrFloor2 = currfloor.nextfloor;
 				num = targetExitAngle;
 				controller.forceOK = false;
 				if (controller.noFailInfiniteMargin)
@@ -1286,7 +1206,7 @@ public class scrPlanet : ADOBase
 			{
 				for (int i = 0; i < array.Length; i++)
 				{
-					Collider2D collider2D2 = array[i];
+					_ = array[i];
 					collider2D = array[i];
 					scrFloor component = collider2D.GetComponent<scrFloor>();
 					if (component == null)
@@ -1319,7 +1239,7 @@ public class scrPlanet : ADOBase
 						currfloor.topGlow.enabled = false;
 						currfloor.bottomGlow.enabled = false;
 					}
-					scrFloor = component;
+					scrFloor2 = component;
 					num = SnapAngleCardinal(angle, interval, offset);
 					storedPosition = component.transform.position;
 					component.entryTime = GetNearestIntervalToTime(conductor.songposition_minusi, controller.freeroamAngleInterval / 180f);
@@ -1328,7 +1248,7 @@ public class scrPlanet : ADOBase
 			}
 		}
 		HitMargin hitMargin2 = HitMargin.Perfect;
-		if (scrFloor == null || (controller.failbar.DidFail(checkForDuplicateDeath: false) && !controller.noFail))
+		if (scrFloor2 == null || (controller.failbar.DidFail(checkForDuplicateDeath: false) && !controller.noFail))
 		{
 			if (GCS.d_drumcontroller && controller.boothModeDebounceCounter > 0f)
 			{
@@ -1396,14 +1316,14 @@ public class scrPlanet : ADOBase
 				double angleMoved = scrMisc.GetAngleMoved(currfloor.entryangle, currfloor.exitangle, !currfloor.isCCW);
 				double num3 = scrMisc.AngleToTime(angleMoved, bpm);
 				double num4 = 1.5690509853884578;
-				flag4 = (flag4 && angleMoved > num4);
+				flag4 = flag4 && angleMoved > num4;
 				double num5 = controller.averageFrameTime * 3.5f;
-				flag4 = (flag4 && num3 > num5);
+				flag4 = flag4 && num3 > num5;
 				double num6 = 0.039999999105930328;
-				flag4 = (flag4 && num3 > num6);
+				flag4 = flag4 && num3 > num6;
 			}
 			controller.OnDamage(multipress: true, flag4);
-			if ((controller.consecMultipressCounter > 5) | flag4)
+			if (controller.consecMultipressCounter > 5 || flag4)
 			{
 				flag3 = true;
 			}
@@ -1418,11 +1338,11 @@ public class scrPlanet : ADOBase
 			controller.boothModeDebounceCounter = 0.1f;
 		}
 		bool flag5 = Persistence.GetMultitapTileBehavior() == MultitapTileBehavior.HitOnce;
-		scrFloor.tapsSoFar++;
-		if (scrFloor.tapsNeeded > scrFloor.tapsSoFar)
+		scrFloor2.tapsSoFar++;
+		if (scrFloor2.tapsNeeded > scrFloor2.tapsSoFar)
 		{
-			Texture2D value = (scrFloor.tapsNeeded - scrFloor.tapsSoFar == 2) ? ADOBase.gc.tex_floorEdgeNeon2 : ADOBase.gc.tex_floorEdgeNeon;
-			Material material = scrFloor.floorRenderer.material;
+			Texture2D value = ((scrFloor2.tapsNeeded - scrFloor2.tapsSoFar == 2) ? ADOBase.gc.tex_floorEdgeNeon2 : ADOBase.gc.tex_floorEdgeNeon);
+			Material material = scrFloor2.floorRenderer.material;
 			material.SetTexture("_MainTex", value);
 			material.SetFloat("_FlashColor", 1.4f);
 			material.DOFloat(0f, "_FlashColor", (float)conductor.crotchet * 0.5f);
@@ -1433,8 +1353,8 @@ public class scrPlanet : ADOBase
 		}
 		if (controller.gameworld)
 		{
-			hitMargin2 = (scrFloor.grade = hitMargin);
-			if (controller.midspinInfiniteMargin || ((RDC.auto | flag) && !RDC.useOldAuto))
+			hitMargin2 = (scrFloor2.grade = hitMargin);
+			if (controller.midspinInfiniteMargin || ((RDC.auto || flag) && !RDC.useOldAuto))
 			{
 				hitMargin2 = HitMargin.Perfect;
 			}
@@ -1448,36 +1368,36 @@ public class scrPlanet : ADOBase
 				hitMargin2 = HitMargin.Perfect;
 			}
 			controller.ClearMisses();
-			if (scrFloor.hasConditionalChange)
+			if (scrFloor2.hasConditionalChange)
 			{
-				controller.perfectEffects = scrFloor.perfectEffects;
-				controller.hitEffects = scrFloor.hitEffects;
-				controller.barelyEffects = scrFloor.barelyEffects;
-				controller.missEffects = scrFloor.missEffects;
-				controller.lossEffects = scrFloor.lossEffects;
+				controller.perfectEffects = scrFloor2.perfectEffects;
+				controller.hitEffects = scrFloor2.hitEffects;
+				controller.barelyEffects = scrFloor2.barelyEffects;
+				controller.missEffects = scrFloor2.missEffects;
+				controller.lossEffects = scrFloor2.lossEffects;
 			}
 			switch (hitMargin2)
 			{
-			case HitMargin.Perfect:
-				foreach (ffxPlusBase perfectEffect in controller.perfectEffects)
-				{
-					perfectEffect.StartEffect();
-				}
-				break;
-			case HitMargin.EarlyPerfect:
-			case HitMargin.LatePerfect:
-				foreach (ffxPlusBase hitEffect in controller.hitEffects)
-				{
-					hitEffect.StartEffect();
-				}
-				break;
-			case HitMargin.VeryEarly:
-			case HitMargin.VeryLate:
-				foreach (ffxPlusBase barelyEffect in controller.barelyEffects)
-				{
-					barelyEffect.StartEffect();
-				}
-				break;
+				case HitMargin.Perfect:
+					foreach (ffxPlusBase perfectEffect in controller.perfectEffects)
+					{
+						perfectEffect.StartEffect();
+					}
+					break;
+				case HitMargin.EarlyPerfect:
+				case HitMargin.LatePerfect:
+					foreach (ffxPlusBase hitEffect in controller.hitEffects)
+					{
+						hitEffect.StartEffect();
+					}
+					break;
+				case HitMargin.VeryEarly:
+				case HitMargin.VeryLate:
+					foreach (ffxPlusBase barelyEffect in controller.barelyEffects)
+					{
+						barelyEffect.StartEffect();
+					}
+					break;
 			}
 		}
 		movingToNext = next;
@@ -1488,16 +1408,16 @@ public class scrPlanet : ADOBase
 				planet.iFrames = 15f / (conductor.bpm * (float)controller.speed) / conductor.song.pitch;
 			}
 		}
-		if ((bool)scrFloor && scrFloor.midSpin && scrFloor.numPlanets > 2)
+		if ((bool)scrFloor2 && scrFloor2.midSpin && scrFloor2.numPlanets > 2)
 		{
 			movingToNext = prev;
 		}
-		MoveToNextFloor(scrFloor, (float)num, hitMargin2);
+		MoveToNextFloor(scrFloor2, (float)num, hitMargin2);
 		if (controller.gameworld)
 		{
 			Vector3 position2 = movingToNext.transform.position;
 			position2.y += 1f;
-			if (!RDC.noHud && !scrFloor.hideJudgment)
+			if (!RDC.noHud && !scrFloor2.hideJudgment)
 			{
 				controller.ShowHitText(flag3 ? HitMargin.Multipress : hitMargin2, position2, flag3 ? 0f : ((float)(targetExitAngle - angle)));
 			}
@@ -1604,7 +1524,7 @@ public class scrPlanet : ADOBase
 				movingToNext.swirlTween = 0.5f;
 				num = (float)(conductor.crotchet * (double)floor.speed) * 0.5f * ((float)floor.numPlanets * 0.5f);
 			}
-			DOTween.To(() => movingToNext.swirlTween, delegate(float x)
+			DOTween.To(() => movingToNext.swirlTween, delegate (float x)
 			{
 				movingToNext.swirlTween = x;
 			}, FOOL_SWIRL ? 1 : 0, 0.5f * num).SetEase(Ease.OutSine);
@@ -1622,7 +1542,7 @@ public class scrPlanet : ADOBase
 				num2 = (float)floor.entryTimePitchAdj - (float)floor.prevfloor.entryTimePitchAdj;
 			}
 			float duration = Mathf.Min(num2 * 0.5f, (float)(conductor.crotchet * (double)floor.speed) / conductor.song.pitch);
-			DOTween.To(() => movingToNext.mpHoldTween, delegate(float x)
+			DOTween.To(() => movingToNext.mpHoldTween, delegate (float x)
 			{
 				movingToNext.mpHoldTween = x;
 			}, 1f, duration).SetEase(Ease.OutExpo);
@@ -1640,11 +1560,11 @@ public class scrPlanet : ADOBase
 			if (floor.multiplanetLine != null)
 			{
 				LineRenderer i = floor.multiplanetLine;
-				DOTween.To(() => i.startColor.a, delegate(float x)
+				DOTween.To(() => i.startColor.a, delegate (float x)
 				{
 					i.startColor = new Color(i.startColor.r, i.startColor.g, i.startColor.b, x);
 				}, 0f, 0.5f).SetUpdate(isIndependentUpdate: true);
-				DOTween.To(() => i.endColor.a, delegate(float x)
+				DOTween.To(() => i.endColor.a, delegate (float x)
 				{
 					i.endColor = new Color(i.endColor.r, i.endColor.g, i.endColor.b, x);
 				}, 0f, 0.5f).SetUpdate(isIndependentUpdate: true);
@@ -1722,7 +1642,7 @@ public class scrPlanet : ADOBase
 			{
 				for (int k = 0; k < array.Length; k++)
 				{
-					Collider2D collider2D2 = array[k];
+					_ = array[k];
 					collider2D = array[k];
 					scrFloor component = collider2D.GetComponent<scrFloor>();
 					if (component == null)
@@ -1734,24 +1654,25 @@ public class scrPlanet : ADOBase
 						continue;
 					}
 					flag2 = true;
-					if (component.isLandable)
+					if (!component.isLandable)
 					{
-						if (component.isSwirl)
-						{
-							foreach (scrFloor item4 in ADOBase.lm.listFreeroam[component.freeroamRegion])
-							{
-								item4.isCCW = !item4.isCCW;
-								if (item4.isSwirl)
-								{
-									item4.UpdateIconSprite();
-								}
-							}
-							controller.isCW = !component.isCCW;
-						}
-						movingToNext.currfloor = component;
-						component.LightUp(hitMargin);
-						component.SetToRandomColor();
+						continue;
 					}
+					if (component.isSwirl)
+					{
+						foreach (scrFloor item4 in ADOBase.lm.listFreeroam[component.freeroamRegion])
+						{
+							item4.isCCW = !item4.isCCW;
+							if (item4.isSwirl)
+							{
+								item4.UpdateIconSprite();
+							}
+						}
+						controller.isCW = !component.isCCW;
+					}
+					movingToNext.currfloor = component;
+					component.LightUp(hitMargin);
+					component.SetToRandomColor();
 				}
 			}
 			if (!flag2)
@@ -1762,7 +1683,7 @@ public class scrPlanet : ADOBase
 		}
 		if (floor.nextfloor == null)
 		{
-			DOTween.To(() => movingToNext.endingTween, delegate(float x)
+			DOTween.To(() => movingToNext.endingTween, delegate (float x)
 			{
 				movingToNext.endingTween = x;
 			}, 1f, 0.3f).SetEase(Ease.OutSine);
@@ -1856,7 +1777,7 @@ public class scrPlanet : ADOBase
 	{
 		if (floorNum > scrLevelMaker.instance.listFloors.Count)
 		{
-			UnityEngine.Debug.LogError("Trying to scrub past last tile. Is CustomCheckpoint ticked by accident in LevelSwitcher?");
+			Debug.LogError("Trying to scrub past last tile. Is CustomCheckpoint ticked by accident in LevelSwitcher?");
 		}
 		if (scrController.instance != null)
 		{
@@ -1879,94 +1800,95 @@ public class scrPlanet : ADOBase
 				}
 			}
 		}
-		scrFloor scrFloor = currfloor = scrLevelMaker.instance.listFloors[floorNum];
+		scrFloor scrFloor2 = (currfloor = scrLevelMaker.instance.listFloors[floorNum]);
 		controller.currentSeqID = floorNum;
 		if (!dummyPlanets)
 		{
-			float d = 2f - base.transform.localScale.x;
+			float num = 2f - base.transform.localScale.x;
 			if (controller.isbigtiles)
 			{
-				d = 1.6f;
+				num = 1.6f;
 			}
 			if (currfloor.nextfloor == null)
 			{
-				ringComp.scaleEnd = Vector3.one * d * currfloor.radiusScale;
+				ringComp.scaleEnd = Vector3.one * num * currfloor.radiusScale;
 			}
 			else
 			{
-				ringComp.scaleEnd = Vector3.one * d * currfloor.nextfloor.radiusScale;
+				ringComp.scaleEnd = Vector3.one * num * currfloor.nextfloor.radiusScale;
 			}
 		}
 		if (movePos)
 		{
 			if (controller.stickToFloor)
 			{
-				base.transform.position = scrFloor.transform.position;
+				base.transform.position = scrFloor2.transform.position;
 			}
 			else
 			{
-				base.transform.position = scrFloor.startPos;
+				base.transform.position = scrFloor2.startPos;
 			}
 		}
-		double num = 0.0;
-		num = scrMisc.GetInverseAnglePerBeatMultiplanet(scrFloor.numPlanets) * (double)((!scrFloor.isCCW) ? 1 : (-1));
-		if ((bool)scrFloor.prevfloor && scrFloor.prevfloor.midSpin && scrFloor.numPlanets > 2)
+		double num2 = 0.0;
+		num2 = scrMisc.GetInverseAnglePerBeatMultiplanet(scrFloor2.numPlanets) * (double)((!scrFloor2.isCCW) ? 1 : (-1));
+		if ((bool)scrFloor2.prevfloor && scrFloor2.prevfloor.midSpin && scrFloor2.numPlanets > 2)
 		{
-			num -= 1.0 * scrMisc.GetInverseAnglePerBeatMultiplanet(scrFloor.prevfloor.numPlanets) * (double)((!scrFloor.prevfloor.isCCW) ? 1 : (-1));
+			num2 -= 1.0 * scrMisc.GetInverseAnglePerBeatMultiplanet(scrFloor2.prevfloor.numPlanets) * (double)((!scrFloor2.prevfloor.isCCW) ? 1 : (-1));
 		}
-		snappedLastAngle = scrFloor.entryangle + num;
-		controller.isCW = !scrFloor.isCCW;
-		controller.rotationEase = scrFloor.planetEase;
-		targetExitAngle = snappedLastAngle + scrFloor.angleLength * (double)((!scrFloor.isCCW) ? 1 : (-1));
-		storedPosition = scrFloor.transform.position;
+		snappedLastAngle = scrFloor2.entryangle + num2;
+		controller.isCW = !scrFloor2.isCCW;
+		controller.rotationEase = scrFloor2.planetEase;
+		targetExitAngle = snappedLastAngle + scrFloor2.angleLength * (double)((!scrFloor2.isCCW) ? 1 : (-1));
+		storedPosition = scrFloor2.transform.position;
 		scrubbedStartPos = floorNum;
-		if (scrFloor.nextfloor == null)
+		if (scrFloor2.nextfloor == null)
 		{
-			DOTween.To(() => endingTween, delegate(float x)
+			DOTween.To(() => endingTween, delegate (float x)
 			{
 				endingTween = x;
 			}, 1f, 0.3f).SetEase(Ease.OutSine);
 		}
-		double num2 = 0.0;
+		double num3 = 0.0;
 		double timeDiff = 0.0;
 		if (windbackTime != -1f)
 		{
-			double num3 = 0.0;
-			num3 = scrFloor.entryTimePitchAdj - (double)windbackTime;
-			timeDiff = scrFloor.entryTime - scrFloor.entryTime;
-			num2 = scrMisc.TimeToAngleInRad(scrFloor.entryTimePitchAdj - num3, conductor.bpm * scrFloor.speed, conductor.song.pitch);
-			snappedLastAngle -= num2 * (double)(controller.isCW ? 1 : (-1));
+			double num4 = 0.0;
+			num4 = scrFloor2.entryTimePitchAdj - (double)windbackTime;
+			timeDiff = scrFloor2.entryTime - scrFloor2.entryTime;
+			num3 = scrMisc.TimeToAngleInRad(scrFloor2.entryTimePitchAdj - num4, conductor.bpm * scrFloor2.speed, conductor.song.pitch);
+			snappedLastAngle -= num3 * (double)(controller.isCW ? 1 : (-1));
 		}
 		Update_RefreshAngles();
-		scrFloor scrFloor2 = null;
-		for (int num4 = floorNum; num4 > 0; num4--)
+		scrFloor scrFloor3 = null;
+		for (int num5 = floorNum; num5 > 0; num5--)
 		{
-			scrFloor scrFloor3 = ADOBase.lm.listFloors[num4];
-			if (scrFloor3.hasConditionalChange)
+			scrFloor scrFloor4 = ADOBase.lm.listFloors[num5];
+			if (scrFloor4.hasConditionalChange)
 			{
-				scrFloor2 = scrFloor3;
+				scrFloor3 = scrFloor4;
 				break;
 			}
 		}
-		if (scrFloor2 != null)
+		if (scrFloor3 != null)
 		{
-			controller.perfectEffects = scrFloor2.perfectEffects;
-			controller.hitEffects = scrFloor2.hitEffects;
-			controller.barelyEffects = scrFloor2.barelyEffects;
-			controller.missEffects = scrFloor2.missEffects;
-			controller.lossEffects = scrFloor2.lossEffects;
+			controller.perfectEffects = scrFloor3.perfectEffects;
+			controller.hitEffects = scrFloor3.hitEffects;
+			controller.barelyEffects = scrFloor3.barelyEffects;
+			controller.missEffects = scrFloor3.missEffects;
+			controller.lossEffects = scrFloor3.lossEffects;
 		}
 		if (!GCS.standaloneLevelMode)
 		{
 			timeDiff = 0.0;
 		}
-		HandlePause(currfloor, this, num2 * (double)(controller.isCW ? 1 : (-1)), timeDiff);
-		if (currfloor.radiusScale != 1f && controller.planetList != null)
+		HandlePause(currfloor, this, num3 * (double)(controller.isCW ? 1 : (-1)), timeDiff);
+		if (currfloor.radiusScale == 1f || controller.planetList == null)
 		{
-			foreach (scrPlanet planet in controller.planetList)
-			{
-				planet.cosmeticRadius = scrController.instance.startRadius * currfloor.radiusScale;
-			}
+			return;
+		}
+		foreach (scrPlanet planet in controller.planetList)
+		{
+			planet.cosmeticRadius = scrController.instance.startRadius * currfloor.radiusScale;
 		}
 	}
 
@@ -1980,33 +1902,33 @@ public class scrPlanet : ADOBase
 	private Vector3 SnappedCardinalDirection(float snappedAngle, float interval = MathF.PI / 2f, float offset = 0f)
 	{
 		Vector3 zero = Vector3.zero;
-		int x = Mathf.RoundToInt((snappedAngle + offset) / interval);
+		int num = Mathf.RoundToInt((snappedAngle + offset) / interval);
 		int m = Mathf.RoundToInt(MathF.PI * 2f / interval);
-		float f = 0f - ((float)scrMisc.ModInt(x, m) - offset) * interval + MathF.PI / 2f;
+		float f = 0f - ((float)scrMisc.ModInt(num, m) - offset) * interval + MathF.PI / 2f;
 		zero = new Vector3(Mathf.Cos(f), Mathf.Sin(f), 0f);
 		return base.transform.position + zero * scrController.instance.startRadius * currfloor.radiusScale;
 	}
 
 	private void SnapToCardinalDirection(float snappedAngle)
 	{
-		Vector3 b = Vector3.zero;
+		Vector3 vector = Vector3.zero;
 		int num = Mathf.RoundToInt(snappedAngle / (MathF.PI / 2f));
 		switch (num % 4)
 		{
-		case 0:
-			b = Vector3.up;
-			break;
-		case 1:
-			b = Vector3.right;
-			break;
-		case 2:
-			b = Vector3.down;
-			break;
-		case 3:
-			b = Vector3.left;
-			break;
+			case 0:
+				vector = Vector3.up;
+				break;
+			case 1:
+				vector = Vector3.right;
+				break;
+			case 2:
+				vector = Vector3.down;
+				break;
+			case 3:
+				vector = Vector3.left;
+				break;
 		}
-		base.transform.position = prev.transform.position + b;
+		base.transform.position = prev.transform.position + vector;
 	}
 
 	private void MoveOneUnitInDirection(float snappedAngle)
@@ -2169,7 +2091,7 @@ public class scrPlanet : ADOBase
 	public void TweenSnappedLastAngle(double startVal, double newVal)
 	{
 		snappedLastAngle = startVal;
-		DOTween.To(() => snappedLastAngle, delegate(double x)
+		DOTween.To(() => snappedLastAngle, delegate (double x)
 		{
 			snappedLastAngle = x;
 		}, newVal, (float)conductor.crotchet / conductor.song.pitch).SetEase(Ease.OutSine);
@@ -2177,7 +2099,7 @@ public class scrPlanet : ADOBase
 
 	public void TweenSnappedLastAngle(double newVal)
 	{
-		DOTween.To(() => snappedLastAngle, delegate(double x)
+		DOTween.To(() => snappedLastAngle, delegate (double x)
 		{
 			snappedLastAngle = x;
 		}, newVal, (float)conductor.crotchet / conductor.song.pitch).SetEase(Ease.OutSine);
@@ -2207,8 +2129,8 @@ public class scrPlanet : ADOBase
 				scrController.instance.LockInput(lockTime);
 			}
 			p.angle = p.snappedLastAngle - angleDiff + (conductor.songposition_minusi - conductor.lastHit) / conductor.crotchet * 3.1415927410125732 * controller.speed * (double)(controller.isCW ? 1 : (-1));
-			int num = (!floor.isCCW) ? 1 : (-1);
-			bool isCCW = floor.nextfloor.isCCW;
+			int num = ((!floor.isCCW) ? 1 : (-1));
+			_ = floor.nextfloor.isCCW;
 			double num2 = scrMisc.mod(p.angle, 6.2831852);
 			conductor.lastHit = floor.entryTime;
 			double num3 = (3.1415926 - floor.angleLength) * (double)num;
@@ -2235,42 +2157,5 @@ public class scrPlanet : ADOBase
 	public scrMissIndicator MarkFail()
 	{
 		return UnityEngine.Object.Instantiate(ADOBase.gc.failIndicator, next.transform.position, Quaternion.identity).GetComponent<scrMissIndicator>();
-	}
-
-	[CompilerGenerated]
-	private void _003CRewind_003Eg__Revive_007C76_0()
-	{
-		sprite.enabled = true;
-		ring.enabled = true;
-		glow.enabled = true;
-		dead = false;
-		hittable = true;
-		tailParticles.Play();
-		coreParticles.Play();
-		sparks.Play();
-		deathExplosion.gameObject.SetActive(value: false);
-		faceHolder.gameObject.SetActive(faceMode);
-	}
-
-	[CompilerGenerated]
-	private void _003CToggleSpecialPlanet_003Eg__SetupNewPlanetElements_007C87_0(string suffix, ref _003C_003Ec__DisplayClass87_0 P_1)
-	{
-		coreParticles = (P_1.t.Find("Core" + suffix)?.GetComponent<ParticleSystem>() ?? coreParticles);
-		tailParticles = (P_1.t.Find("Tail" + suffix).GetComponent<ParticleSystem>() ?? tailParticles);
-		sparks = (P_1.t.Find("Sparks" + suffix).GetComponent<ParticleSystem>() ?? sparks);
-		ring = (P_1.t.Find("Ring" + suffix).GetComponent<SpriteRenderer>() ?? ring);
-		glow = (P_1.t.Find("Glow" + suffix).GetComponent<SpriteRenderer>() ?? glow);
-		sprite = ((P_1.on ? P_1.t.Find("Planet" + suffix) : base.transform).GetComponent<SpriteRenderer>() ?? sprite);
-	}
-
-	[CompilerGenerated]
-	private void _003CToggleSpecialPlanet_003Eg__SetBasePlanetElementsActive_007C87_1(bool active, ref _003C_003Ec__DisplayClass87_0 P_1)
-	{
-		tailParticles.gameObject.SetActive(active);
-		sparks.gameObject.SetActive(active);
-		coreParticles.gameObject.SetActive(active);
-		ring.gameObject.SetActive(active);
-		glow.gameObject.SetActive(active);
-		sprite.enabled = active;
 	}
 }

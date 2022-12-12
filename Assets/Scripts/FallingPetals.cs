@@ -39,7 +39,8 @@ public class FallingPetals : MonoBehaviour
 		ParticleSystem[] array = petalParticles;
 		for (int i = 0; i < array.Length; i++)
 		{
-			array[i].main.gravityModifierMultiplier = petalsHolder.transform.localScale.x / 10f;
+			ParticleSystem.MainModule main = array[i].main;
+			main.gravityModifierMultiplier = petalsHolder.transform.localScale.x / 10f;
 		}
 	}
 }

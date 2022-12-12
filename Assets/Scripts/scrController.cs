@@ -1,16 +1,14 @@
+// scrController
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
 using DG.Tweening;
 using MonsterLove.StateMachine;
 using RDTools;
 using SharpHook.Native;
 using Steamworks;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -18,491 +16,6 @@ using UnityStandardAssets.ImageEffects;
 
 public class scrController : StateBehaviour
 {
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass176_0
-	{
-		public scrController _003C_003E4__this;
-
-		public GameObject planetContainer;
-
-		private scrPlanet _003CAwake_003Eg__InitPlanet_007C0(string name, Color c)
-		{
-			scrPlanet scrPlanet = UnityEngine.Object.Instantiate(_003C_003E4__this.bluePlanet, planetContainer.transform);
-			scrPlanet.name = name;
-			scrPlanet.EnableCustomColor();
-			scrPlanet.SetPlanetColor(c);
-			scrPlanet.SetTailColor(c);
-			scrPlanet.isExtra = true;
-			return scrPlanet;
-		}
-
-		internal void _003CAwake_003Eb__1()
-		{
-			_003C_003E4__this.TogglePauseGame();
-		}
-	}
-
-	[Serializable]
-	[CompilerGenerated]
-	private sealed class _003C_003Ec
-	{
-		public static readonly _003C_003Ec _003C_003E9 = new _003C_003Ec();
-
-		public static Predicate<scrFloor> _003C_003E9__186_0;
-
-		public static TweenCallback _003C_003E9__197_0;
-
-		public static TweenCallback _003C_003E9__197_1;
-
-		public static TweenCallback _003C_003E9__287_0;
-
-		internal bool _003CWaitForStartCo_003Eb__186_0(scrFloor x)
-		{
-			return x.seqID <= GCS.checkpointNum;
-		}
-
-		internal void _003COnLandOnPortal_003Eb__197_0()
-		{
-			RDUtils.SetGarbageCollectionEnabled(enabled: true);
-		}
-
-		internal void _003COnLandOnPortal_003Eb__197_1()
-		{
-			ADOBase.conductor.song.Stop();
-		}
-
-		internal void _003CFail2Action_003Eb__287_0()
-		{
-			RDUtils.SetGarbageCollectionEnabled(enabled: true);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003CWaitForStartCo_003Ed__186 : IEnumerator<object>, IEnumerator, IDisposable
-	{
-		private int _003C_003E1__state;
-
-		private object _003C_003E2__current;
-
-		public scrController _003C_003E4__this;
-
-		public int seqID;
-
-		private scrPressToStart _003CpressToStart_003E5__2;
-
-		private bool _003CprevIsEditingLevel_003E5__3;
-
-		private HashSet<Filter> _003Cfilters_003E5__4;
-
-		object IEnumerator<object>.Current
-		{
-			[DebuggerHidden]
-			get
-			{
-				return _003C_003E2__current;
-			}
-		}
-
-		object IEnumerator.Current
-		{
-			[DebuggerHidden]
-			get
-			{
-				return _003C_003E2__current;
-			}
-		}
-
-		[DebuggerHidden]
-		public _003CWaitForStartCo_003Ed__186(int _003C_003E1__state)
-		{
-			this._003C_003E1__state = _003C_003E1__state;
-		}
-
-		[DebuggerHidden]
-		void IDisposable.Dispose()
-		{
-		}
-
-		private bool MoveNext()
-		{
-			int num = _003C_003E1__state;
-			scrController scrController = _003C_003E4__this;
-			switch (num)
-			{
-			default:
-				return false;
-			case 0:
-				_003C_003E1__state = -1;
-				scrUIController.instance.canvas.enabled = true;
-				scrController.txtCaption.text = scrController.caption;
-				if (GCS.speedTrialMode)
-				{
-					string str = RDString.Get("levelSelect.multiplier", new Dictionary<string, object>
-					{
-						{
-							"multiplier",
-							GCS.currentSpeedTrial.ToString("0.0#")
-						}
-					});
-					scrController.txtCaption.text = scrController.caption + " (" + str + ")";
-				}
-				else if (GCS.practiceMode)
-				{
-					string str2 = RDString.Get("status.practiceMode");
-					scrController.txtCaption.text = scrController.caption + "\n(" + str2 + ")";
-				}
-				scrController.txtCaption.SetLocalizedFont();
-				if (!GCS.standaloneLevelMode)
-				{
-					ADOBase.lm.CalculateFloorEntryTimes();
-				}
-				scrController.chosenplanet.FirstFloorAngleSetup();
-				_003Cfilters_003E5__4 = new HashSet<Filter>();
-				foreach (scrFloor listFloor in ADOBase.lm.listFloors)
-				{
-					Component[] components = listFloor.GetComponents(typeof(ffxSetFilterPlus));
-					for (int i = 0; i < components.Length; i++)
-					{
-						ffxSetFilterPlus ffxSetFilterPlus = ((ffxPlusBase)components[i]) as ffxSetFilterPlus;
-						if (ffxSetFilterPlus.enableFilter)
-						{
-							_003Cfilters_003E5__4.Add(ffxSetFilterPlus.filter);
-						}
-					}
-				}
-				foreach (Filter item in _003Cfilters_003E5__4)
-				{
-					scrVfxPlus.instance.filterToComp[item].enabled = true;
-				}
-				_003C_003E2__current = null;
-				_003C_003E1__state = 1;
-				return true;
-			case 1:
-				_003C_003E1__state = -1;
-				_003C_003E2__current = null;
-				_003C_003E1__state = 2;
-				return true;
-			case 2:
-				_003C_003E1__state = -1;
-				foreach (Filter item2 in _003Cfilters_003E5__4)
-				{
-					scrVfxPlus.instance.filterToComp[item2].enabled = false;
-				}
-				_003Cfilters_003E5__4 = null;
-				if (!GCS.standaloneLevelMode)
-				{
-					CustomLevel.SetFxPlusFromComponents(ADOBase.lm.listFloors, scrController.useComponentNotationForFx);
-					CustomLevel.PrepVfx(ADOBase.lm.listFloors, GCS.checkpointNum == 0);
-					ADOBase.lm.ColorFreeroam();
-					ADOBase.lm.DrawHolds();
-					ADOBase.lm.DrawMultiPlanet();
-				}
-				else
-				{
-					ADOBase.customLevel.PrepVfx(seqID == 0);
-				}
-				if (GCS.standaloneLevelMode)
-				{
-					ADOBase.customLevel.UpdateDecorationObjects();
-				}
-				if (GCS.checkpointNum != 0)
-				{
-					foreach (scrFloor item3 in ADOBase.lm.listFloors.FindAll((scrFloor x) => x.seqID <= GCS.checkpointNum))
-					{
-						scrController.camy.torot += item3.rotatecamera;
-						scrController.camy.fromrot = scrController.camy.torot;
-						ffxBase[] componentsInChildren = item3.GetComponentsInChildren<ffxBase>();
-						foreach (ffxBase ffxBase in componentsInChildren)
-						{
-							if (!(ffxBase is ffxCheckpoint))
-							{
-								ffxBase.doEffect();
-							}
-							else
-							{
-								item3.floorIcon = FloorIcon.Checkpoint;
-								item3.UpdateIconSprite();
-							}
-						}
-						DOTween.CompleteAll(withCallbacks: true);
-					}
-					scrController.chosenplanet.ScrubToFloorNumber(GCS.checkpointNum);
-					scrController.camy.ViewObjectInstant(instance.chosenplanet.transform);
-					scrController.speed = scrController.currFloor.speed;
-					if (scrVfxPlus.instance != null)
-					{
-						int index = GCS.checkpointNum;
-						ffxCheckpoint component = ADOBase.lm.listFloors[GCS.checkpointNum].GetComponent<ffxCheckpoint>();
-						if (component != null && component.scrubFourBack)
-						{
-							index = scrController.FindScrubStart(GCS.checkpointNum);
-						}
-						scrVfxPlus.instance.ScrubToTime((float)ADOBase.lm.listFloors[index].entryTime);
-						scrController.printe("complete all");
-						DOTween.CompleteAll(withCallbacks: true);
-					}
-					if (scrController.stickToFloor)
-					{
-						scrController.chosenplanet.transform.position = ADOBase.lm.listFloors[GCS.checkpointNum].transform.position;
-					}
-				}
-				_003CpressToStart_003E5__2 = scrUIController.instance.txtPressToStart.GetComponent<scrPressToStart>();
-				_003CpressToStart_003E5__2.ShowText();
-				if (GCS.standaloneLevelMode)
-				{
-					_003C_003E2__current = null;
-					_003C_003E1__state = 3;
-					return true;
-				}
-				goto IL_04f9;
-			case 3:
-				_003C_003E1__state = -1;
-				ADOBase.customLevel.isLoading = false;
-				goto IL_04f9;
-			case 4:
-				{
-					_003C_003E1__state = -1;
-					break;
-				}
-				IL_04f9:
-				_003CprevIsEditingLevel_003E5__3 = ADOBase.isEditingLevel;
-				break;
-			}
-			if (!scrController.ValidInputWasTriggered() || scrController.isCutscene)
-			{
-				if (ADOBase.isEditingLevel != _003CprevIsEditingLevel_003E5__3)
-				{
-					_003CpressToStart_003E5__2.HideText();
-					return false;
-				}
-				if (!ADOBase.isEditingLevel || scrController.exitingToMainMenu)
-				{
-					if (!scrController.paused && ADOBase.uiController.difficultyUIMode != 0 && !scrController.isCutscene)
-					{
-						if (RDInput.leftPress)
-						{
-							ADOBase.uiController.DifficultyArrowPressed(rightPressed: false);
-						}
-						else if (RDInput.rightPress)
-						{
-							ADOBase.uiController.DifficultyArrowPressed(rightPressed: true);
-						}
-					}
-					scrController.holdKeys.Clear();
-					_003C_003E2__current = null;
-					_003C_003E1__state = 4;
-					return true;
-				}
-			}
-			_003CpressToStart_003E5__2.HideText();
-			scrUIController.instance.txtCountdown.GetComponent<scrCountdown>().ShowGetReady();
-			ADOBase.conductor.Rewind();
-			ADOBase.conductor.Start();
-			scrController.Start_Rewind();
-			if (scrController.gameworld && scrController.levelNameShouldHide && scrController.currFloor != null)
-			{
-				DOVirtual.DelayedCall((float)(ADOBase.conductor.crotchetAtStart / (double)scrController.currFloor.speed / (double)ADOBase.conductor.song.pitch * (double)ADOBase.conductor.adjustedCountdownTicks), scrController.LevelNameTextAway);
-			}
-			if (GCS.standaloneLevelMode)
-			{
-				ADOBase.customLevel.FinishCustomLevelLoading(seqID, scrController.bluePlanet, scrController.redPlanet);
-			}
-			RDUtils.SetGarbageCollectionEnabled(enabled: false);
-			return false;
-		}
-
-		bool IEnumerator.MoveNext()
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in MoveNext
-			return this.MoveNext();
-		}
-
-		[DebuggerHidden]
-		void IEnumerator.Reset()
-		{
-			throw new NotSupportedException();
-		}
-	}
-
-	[StructLayout(LayoutKind.Auto)]
-	[CompilerGenerated]
-	private struct _003C_003Ec__DisplayClass197_0
-	{
-		public bool isPurePerfect;
-	}
-
-	[StructLayout(LayoutKind.Auto)]
-	[CompilerGenerated]
-	private struct _003C_003Ec__DisplayClass216_0
-	{
-		public bool mouseOverAButton;
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass275_0
-	{
-		public scrController _003C_003E4__this;
-
-		public long? targetTick;
-
-		internal void _003CSimulated_PlayerControl_Update_003Eb__0()
-		{
-			_003C_003E4__this.CheckPostHoldFail(targetTick);
-		}
-
-		internal void _003CSimulated_PlayerControl_Update_003Eb__1()
-		{
-			_003C_003E4__this.OttoHoldHit(targetTick);
-		}
-
-		internal void _003CSimulated_PlayerControl_Update_003Eb__2()
-		{
-			_003C_003E4__this.HitHoldFloorsIfStartedAtHold(targetTick);
-		}
-
-		internal void _003CSimulated_PlayerControl_Update_003Eb__3()
-		{
-			_003C_003E4__this.CheckPreHoldFail(targetTick);
-		}
-
-		internal void _003CSimulated_PlayerControl_Update_003Eb__4()
-		{
-			_003C_003E4__this.UpdateHoldKeys(targetTick);
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003C_003Ec__DisplayClass289_0
-	{
-		public bool complete;
-
-		internal void _003CResetCustomLevel_003Eb__0()
-		{
-			complete = true;
-		}
-	}
-
-	[CompilerGenerated]
-	private sealed class _003CResetCustomLevel_003Ed__289 : IEnumerator<object>, IEnumerator, IDisposable
-	{
-		private int _003C_003E1__state;
-
-		private object _003C_003E2__current;
-
-		private _003C_003Ec__DisplayClass289_0 _003C_003E8__1;
-
-		public scrController _003C_003E4__this;
-
-		object IEnumerator<object>.Current
-		{
-			[DebuggerHidden]
-			get
-			{
-				return _003C_003E2__current;
-			}
-		}
-
-		object IEnumerator.Current
-		{
-			[DebuggerHidden]
-			get
-			{
-				return _003C_003E2__current;
-			}
-		}
-
-		[DebuggerHidden]
-		public _003CResetCustomLevel_003Ed__289(int _003C_003E1__state)
-		{
-			this._003C_003E1__state = _003C_003E1__state;
-		}
-
-		[DebuggerHidden]
-		void IDisposable.Dispose()
-		{
-		}
-
-		private bool MoveNext()
-		{
-			int num = _003C_003E1__state;
-			scrController scrController = _003C_003E4__this;
-			switch (num)
-			{
-			default:
-				return false;
-			case 0:
-				_003C_003E1__state = -1;
-				if (GCS.standaloneLevelMode)
-				{
-					_003C_003E8__1 = new _003C_003Ec__DisplayClass289_0();
-					_003C_003E8__1.complete = false;
-					scrUIController.instance.WipeToBlack(WipeDirection.StartsFromRight, delegate
-					{
-						_003C_003E8__1.complete = true;
-					});
-					goto IL_007c;
-				}
-				RDUtils.SetGarbageCollectionEnabled(enabled: true);
-				goto IL_0098;
-			case 1:
-				_003C_003E1__state = -1;
-				goto IL_007c;
-			case 2:
-				{
-					_003C_003E1__state = -1;
-					scrUIController.instance.WipeFromBlack();
-					break;
-				}
-				IL_007c:
-				if (!_003C_003E8__1.complete)
-				{
-					_003C_003E2__current = null;
-					_003C_003E1__state = 1;
-					return true;
-				}
-				_003C_003E8__1 = null;
-				goto IL_0098;
-				IL_0098:
-				foreach (scrFloor listFloor in ADOBase.lm.listFloors)
-				{
-					if ((bool)listFloor.bottomGlow)
-					{
-						listFloor.bottomGlow.enabled = false;
-					}
-					listFloor.topGlow.enabled = false;
-				}
-				if (!GCS.practiceMode && GCS.standaloneLevelMode)
-				{
-					GCS.currentSpeedTrial = GCS.nextSpeedRun;
-				}
-				scrController.printe($"GCS.currentSpeedTrial {GCS.currentSpeedTrial} GCS.nextSpeedRun {GCS.nextSpeedRun}");
-				ADOBase.customLevel.ResetScene();
-				ADOBase.customLevel.Play(GCS.checkpointNum);
-				scrController.transitioningLevel = false;
-				if (GCS.standaloneLevelMode)
-				{
-					_003C_003E2__current = null;
-					_003C_003E1__state = 2;
-					return true;
-				}
-				break;
-			}
-			return false;
-		}
-
-		bool IEnumerator.MoveNext()
-		{
-			//ILSpy generated this explicit interface implementation from .override directive in MoveNext
-			return this.MoveNext();
-		}
-
-		[DebuggerHidden]
-		void IEnumerator.Reset()
-		{
-			throw new NotSupportedException();
-		}
-	}
-
 	public const int EndOfLevel = -1;
 
 	public const int LastLevelPlayed = -2;
@@ -1073,11 +586,7 @@ public class scrController : StateBehaviour
 		dpadInputChecker = base.gameObject.GetOrAddComponent<scrDpadInputChecker>();
 		redPlanet = GameObject.Find("PlanetRed").GetComponent<scrPlanet>();
 		bluePlanet = redPlanet.other;
-		planetList = new List<scrPlanet>
-		{
-			redPlanet,
-			bluePlanet
-		};
+		planetList = new List<scrPlanet> { redPlanet, bluePlanet };
 		GameObject planetContainer = redPlanet.transform.parent.gameObject;
 		for (int i = 0; i < planetList.Count; i++)
 		{
@@ -1086,25 +595,18 @@ public class scrController : StateBehaviour
 			planetList[i].prev = GetMultiPlanet(i, -1);
 		}
 		canExitLevel = true;
-		_003C_003Ec__DisplayClass176_0 CS_0024_003C_003E8__locals0;
-		availablePlanets = new List<scrPlanet>
-		{
-			planetGreen = CS_0024_003C_003E8__locals0._003CAwake_003Eg__InitPlanet_007C0("PlanetGreen", new Color(0.3f, 0.7f, 0f, 1f)),
-			planetYellow = CS_0024_003C_003E8__locals0._003CAwake_003Eg__InitPlanet_007C0("PlanetYellow", new Color(1f, 0.8f, 0f, 1f)),
-			planetPurple = CS_0024_003C_003E8__locals0._003CAwake_003Eg__InitPlanet_007C0("PlanetPurple", new Color(0.7f, 0.1f, 1f, 1f)),
-			planetPink = CS_0024_003C_003E8__locals0._003CAwake_003Eg__InitPlanet_007C0("PlanetPink", new Color(1f, 0.1f, 0.7f, 1f)),
-			planetOrange = CS_0024_003C_003E8__locals0._003CAwake_003Eg__InitPlanet_007C0("PlanetOrange", new Color(1f, 0.4f, 0.1f, 1f)),
-			planetCyan = CS_0024_003C_003E8__locals0._003CAwake_003Eg__InitPlanet_007C0("PlanetCyan", new Color(0.1f, 0.8f, 0.9f, 1f))
-		};
+		availablePlanets = new List<scrPlanet> { };
+		planetGreen = InitPlanet("PlanetGreen", new Color(0.3f, 0.7f, 0f, 1f));
+		planetYellow = InitPlanet("PlanetYellow", new Color(1f, 0.8f, 0f, 1f));
+		planetPurple = InitPlanet("PlanetPurple", new Color(0.7f, 0.1f, 1f, 1f));
+		planetPink = InitPlanet("PlanetPink", new Color(1f, 0.1f, 0.7f, 1f));
+		planetOrange = InitPlanet("PlanetOrange", new Color(1f, 0.4f, 0.1f, 1f));
+		planetCyan = InitPlanet("PlanetCyan", new Color(0.1f, 0.8f, 0.9f, 1f));
 		foreach (scrPlanet availablePlanet in availablePlanets)
 		{
 			availablePlanet.Destroy();
 		}
-		allPlanets = new List<scrPlanet>
-		{
-			redPlanet,
-			bluePlanet
-		};
+		allPlanets = new List<scrPlanet> { redPlanet, bluePlanet };
 		allPlanets.AddRange(availablePlanets);
 		dummyPlanets = new List<scrPlanet>();
 		multiPlanetLines = new List<LineRenderer>();
@@ -1127,7 +629,7 @@ public class scrController : StateBehaviour
 		}
 		else
 		{
-			bool practiceMode = GCS.practiceMode;
+			_ = GCS.practiceMode;
 		}
 		if (GCS.previousScene == null)
 		{
@@ -1179,9 +681,9 @@ public class scrController : StateBehaviour
 					{
 						Rect rect = sprite.rect;
 						float num = 1f / rect.height * 10f;
-						float x = (float)Screen.width * 1f / (float)Screen.height / (rect.width * 1f / rect.height) * 1.0005f * num;
+						float num2 = (float)Screen.width * 1f / (float)Screen.height / (rect.width * 1f / rect.height) * 1.0005f * num;
 						printe($"texture [{rect.width} x {rect.height}] height: {num}, Screen {Screen.width} x {Screen.height}");
-						lofiBackground.transform.localScale = new Vector3(x, num, 1f);
+						lofiBackground.transform.localScale = new Vector3(num2, num, 1f);
 						lofiBackground.SetActive(value: true);
 					}
 					else
@@ -1209,12 +711,12 @@ public class scrController : StateBehaviour
 			txtCaption.SetLocalizedFont();
 			caption = ADOBase.GetLocalizedLevelName(levelName);
 			string text = levelName.Substring(0, levelName.IndexOf('-'));
-			bool num2 = ADOBase.worldData.ContainsKey(text);
-			if (!num2)
+			bool num3 = ADOBase.worldData.ContainsKey(text);
+			if (!num3)
 			{
 				printe(currentWorldString + " is not present in WorldData...");
 			}
-			currentWorldString = (num2 ? text : "Template");
+			currentWorldString = (num3 ? text : "Template");
 		}
 		if (ADOBase.isMobile)
 		{
@@ -1256,7 +758,7 @@ public class scrController : StateBehaviour
 		{
 			scrUIController.instance.PrepareWipeFromBlack();
 			hitTextContainer = new GameObject("HitTexts");
-			Transform transform = hitTextContainer.transform;
+			Transform parent = hitTextContainer.transform;
 			HitMargin[] obj = (HitMargin[])Enum.GetValues(typeof(HitMargin));
 			cachedHitTexts = new Dictionary<HitMargin, scrHitTextMesh[]>();
 			HitMargin[] array = obj;
@@ -1267,7 +769,7 @@ public class scrController : StateBehaviour
 					scrHitTextMesh[] array2 = new scrHitTextMesh[100];
 					for (int k = 0; k < 100; k++)
 					{
-						scrHitTextMesh componentInChildren = UnityEngine.Object.Instantiate(ADOBase.gc.hitTextPrefab, transform).GetComponentInChildren<scrHitTextMesh>();
+						scrHitTextMesh componentInChildren = UnityEngine.Object.Instantiate(ADOBase.gc.hitTextPrefab, parent).GetComponentInChildren<scrHitTextMesh>();
 						componentInChildren.Init(hitMargin);
 						array2[k] = componentInChildren;
 					}
@@ -1294,6 +796,16 @@ public class scrController : StateBehaviour
 		{
 			freeroamInvulnerability = true;
 		}
+		scrPlanet InitPlanet(string name, Color c)
+		{
+			scrPlanet obj2 = UnityEngine.Object.Instantiate(bluePlanet, planetContainer.transform);
+			obj2.name = name;
+			obj2.EnableCustomColor();
+			obj2.SetPlanetColor(c);
+			obj2.SetTailColor(c);
+			obj2.isExtra = true;
+			return obj2;
+		}
 	}
 
 	public void LoadCustomWorld(string levelPath, bool skipToMain = false)
@@ -1318,9 +830,9 @@ public class scrController : StateBehaviour
 	{
 		visualQuality = Persistence.GetVisualQuality();
 		visualEffects = Persistence.GetVisualEffects();
-		strictHoldsSaved = (Persistence.GetHoldBehavior() == HoldBehavior.Normal);
+		strictHoldsSaved = Persistence.GetHoldBehavior() == HoldBehavior.Normal;
 		strictHolds = strictHoldsSaved;
-		requireHolding = (Persistence.GetHoldBehavior() < HoldBehavior.NoHoldNeeded);
+		requireHolding = Persistence.GetHoldBehavior() < HoldBehavior.NoHoldNeeded;
 		freeroamInvulnerability = Persistence.GetFreeroamInvulnerability();
 	}
 
@@ -1390,21 +902,19 @@ public class scrController : StateBehaviour
 			txtTryCalibrating.text = "";
 			txtPercent = scrUIController.instance.txtPercent;
 			txtCaption = scrUIController.instance.txtLevelName;
-			float a = GCS.speedTrialMode ? GCS.currentSpeedTrial : (ADOBase.isEditingLevel ? ADOBase.editor.playbackSpeed : 1f);
+			float a = (GCS.speedTrialMode ? GCS.currentSpeedTrial : (ADOBase.isEditingLevel ? ADOBase.editor.playbackSpeed : 1f));
 			if (Mathf.Approximately(a, 1f))
 			{
 				txtCaption.text = caption;
 			}
 			else
 			{
-				string str = RDString.Get("levelSelect.multiplier", new Dictionary<string, object>
+				string text = RDString.Get("levelSelect.multiplier", new Dictionary<string, object> {
 				{
-					{
-						"multiplier",
-						a.ToString("0.0#")
-					}
-				});
-				txtCaption.text = caption + " (" + str + ")";
+					"multiplier",
+					a.ToString("0.0#")
+				} });
+				txtCaption.text = caption + " (" + text + ")";
 			}
 			txtCaption.SetLocalizedFont();
 		}
@@ -1496,7 +1006,7 @@ public class scrController : StateBehaviour
 
 	private void Start()
 	{
-		bool debug = RDC.debug;
+		_ = RDC.debug;
 		if (GCS.d_recording)
 		{
 			RDC.auto = true;
@@ -1554,19 +1064,17 @@ public class scrController : StateBehaviour
 		txtCaption.text = caption;
 		if (GCS.speedTrialMode)
 		{
-			string str = RDString.Get("levelSelect.multiplier", new Dictionary<string, object>
+			string text = RDString.Get("levelSelect.multiplier", new Dictionary<string, object> {
 			{
-				{
-					"multiplier",
-					GCS.currentSpeedTrial.ToString("0.0#")
-				}
-			});
-			txtCaption.text = caption + " (" + str + ")";
+				"multiplier",
+				GCS.currentSpeedTrial.ToString("0.0#")
+			} });
+			txtCaption.text = caption + " (" + text + ")";
 		}
 		else if (GCS.practiceMode)
 		{
-			string str2 = RDString.Get("status.practiceMode");
-			txtCaption.text = caption + "\n(" + str2 + ")";
+			string text2 = RDString.Get("status.practiceMode");
+			txtCaption.text = caption + "\n(" + text2 + ")";
 		}
 		txtCaption.SetLocalizedFont();
 		if (!GCS.standaloneLevelMode)
@@ -1580,10 +1088,10 @@ public class scrController : StateBehaviour
 			Component[] components = listFloor.GetComponents(typeof(ffxSetFilterPlus));
 			for (int i = 0; i < components.Length; i++)
 			{
-				ffxSetFilterPlus ffxSetFilterPlus = ((ffxPlusBase)components[i]) as ffxSetFilterPlus;
-				if (ffxSetFilterPlus.enableFilter)
+				ffxSetFilterPlus ffxSetFilterPlus2 = ((ffxPlusBase)components[i]) as ffxSetFilterPlus;
+				if (ffxSetFilterPlus2.enableFilter)
 				{
-					filters.Add(ffxSetFilterPlus.filter);
+					filters.Add(ffxSetFilterPlus2.filter);
 				}
 			}
 		}
@@ -1620,17 +1128,15 @@ public class scrController : StateBehaviour
 				camy.torot += item3.rotatecamera;
 				camy.fromrot = camy.torot;
 				ffxBase[] componentsInChildren = item3.GetComponentsInChildren<ffxBase>();
-				foreach (ffxBase ffxBase in componentsInChildren)
+				foreach (ffxBase ffxBase2 in componentsInChildren)
 				{
-					if (!(ffxBase is ffxCheckpoint))
+					if (!(ffxBase2 is ffxCheckpoint))
 					{
-						ffxBase.doEffect();
+						ffxBase2.doEffect();
+						continue;
 					}
-					else
-					{
-						item3.floorIcon = FloorIcon.Checkpoint;
-						item3.UpdateIconSprite();
-					}
+					item3.floorIcon = FloorIcon.Checkpoint;
+					item3.UpdateIconSprite();
 				}
 				DOTween.CompleteAll(withCallbacks: true);
 			}
@@ -1873,15 +1379,15 @@ public class scrController : StateBehaviour
 		}
 		else if (planetsUsed > 2)
 		{
-			Color.RGBToHSV(color, out float H, out float S, out float V);
-			Color.RGBToHSV(color2, out float H2, out float S2, out float V2);
+			Color.RGBToHSV(color, out var H, out var S, out var V);
+			Color.RGBToHSV(color2, out var H2, out var S2, out var V2);
 			Mathf.Max(Mathf.Abs(H2 - H), 1f - Mathf.Abs(H2 - H));
-			float num = (1f - Mathf.Abs(H2 - H) > Mathf.Abs(H2 - H)) ? Mathf.Max(H, H2) : Mathf.Min(H, H2);
-			float num2 = (1f - Mathf.Abs(H2 - H) > Mathf.Abs(H2 - H)) ? Mathf.Min(H, H2) : Mathf.Max(H, H2);
-			float num3 = (num == H) ? S : S2;
-			float num4 = (num == H) ? V : V2;
-			float num5 = (num == H) ? S2 : S;
-			float num6 = (num == H) ? V2 : V;
+			float num = ((1f - Mathf.Abs(H2 - H) > Mathf.Abs(H2 - H)) ? Mathf.Max(H, H2) : Mathf.Min(H, H2));
+			float num2 = ((1f - Mathf.Abs(H2 - H) > Mathf.Abs(H2 - H)) ? Mathf.Min(H, H2) : Mathf.Max(H, H2));
+			float num3 = ((num == H) ? S : S2);
+			float num4 = ((num == H) ? V : V2);
+			float num5 = ((num == H) ? S2 : S);
+			float num6 = ((num == H) ? V2 : V);
 			if (num2 < num)
 			{
 				num2 += 1f;
@@ -1908,7 +1414,7 @@ public class scrController : StateBehaviour
 		}
 		else if (!GCS.d_oldConductor)
 		{
-			States states = (gameworld && !forceNoCountdown) ? States.Countdown : States.PlayerControl;
+			States states = ((gameworld && !forceNoCountdown) ? States.Countdown : States.PlayerControl);
 			ChangeState(states);
 		}
 		ADOBase.uiController.MinimizeDifficultyContainer();
@@ -1933,7 +1439,7 @@ public class scrController : StateBehaviour
 		popuptime = Mathf.Min(popuptime, b);
 		if (chosenplanet != null && currFloor != null)
 		{
-			DOTween.To(() => chosenplanet.cosmeticRadius, delegate(float x)
+			DOTween.To(() => chosenplanet.cosmeticRadius, delegate (float x)
 			{
 				chosenplanet.cosmeticRadius = x;
 			}, startRadius * currFloor.radiusScale, popuptime);
@@ -1974,16 +1480,16 @@ public class scrController : StateBehaviour
 			}
 		}
 		currentState = (States)(object)base.stateMachine.GetState();
-		if ((debugModeCheatCode.CheckCheatCode() && Time.unscaledTime - debugTileTime < 8f) || (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Home)) || UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.F2))
+		if ((debugModeCheatCode.CheckCheatCode() && Time.unscaledTime - debugTileTime < 8f) || (Input.GetKey(UnityEngine.KeyCode.LeftControl) && Input.GetKeyDown(UnityEngine.KeyCode.Home)) || Input.GetKeyDown(UnityEngine.KeyCode.F2))
 		{
 			RDC.debug = !RDC.debug;
-			printe("debug mode is: " + RDC.debug.ToString());
+			printe("debug mode is: " + RDC.debug);
 		}
 		if (typingModeCheatCode.CheckCheatCode())
 		{
 			GCS.typingMode = !GCS.typingMode;
 			scrFlash.Flash(Color.white);
-			printe("typing mode is: " + GCS.typingMode.ToString());
+			printe("typing mode is: " + GCS.typingMode);
 		}
 		if (RDInput.cancelPress && !paused)
 		{
@@ -1993,10 +1499,10 @@ public class scrController : StateBehaviour
 			}
 			else if (ADOBase.cls == null || !ADOBase.cls.optionsPanels.justHidPanels)
 			{
-				scnCLS instance = scnCLS.instance;
-				if (instance != null && instance.lastFrameSearchModeAvailable == Time.frameCount)
+				scnCLS scnCLS2 = scnCLS.instance;
+				if (scnCLS2 != null && scnCLS2.lastFrameSearchModeAvailable == Time.frameCount)
 				{
-					instance.ToggleSearchMode(search: false);
+					scnCLS2.ToggleSearchMode(search: false);
 				}
 				else
 				{
@@ -2004,7 +1510,7 @@ public class scrController : StateBehaviour
 				}
 			}
 		}
-		if (GCS.d_drumcontroller && gameworld && UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Tab))
+		if (GCS.d_drumcontroller && gameworld && Input.GetKeyDown(UnityEngine.KeyCode.Tab))
 		{
 			disableCongratsMessage = true;
 			OnLandOnPortal(-1, null);
@@ -2042,21 +1548,21 @@ public class scrController : StateBehaviour
 			level.Hit(currentFloorID);
 		}
 		bool holdingShift = RDInput.holdingShift;
-		if ((RDC.debug || (ADOBase.isUnityEditor && !ADOBase.isLevelEditor)) & holdingShift)
+		if ((RDC.debug || (ADOBase.isUnityEditor && !ADOBase.isLevelEditor)) && holdingShift)
 		{
-			if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.A))
+			if (Input.GetKeyDown(UnityEngine.KeyCode.A))
 			{
 				RDC.auto = !RDC.auto;
 			}
-			else if ((UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftControl) || UnityEngine.Input.GetKey(UnityEngine.KeyCode.RightControl)) && UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.H))
+			else if ((Input.GetKey(UnityEngine.KeyCode.LeftControl) || Input.GetKey(UnityEngine.KeyCode.RightControl)) && Input.GetKeyDown(UnityEngine.KeyCode.H))
 			{
 				ClearAllAchievements();
 			}
-			else if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.H))
+			else if (Input.GetKeyDown(UnityEngine.KeyCode.H))
 			{
 				Persistence.GiveAchievements();
 			}
-			else if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.M))
+			else if (Input.GetKeyDown(UnityEngine.KeyCode.M))
 			{
 				GCS.d_hitsounds = !GCS.d_hitsounds;
 				if (!GCS.d_hitsounds)
@@ -2065,7 +1571,7 @@ public class scrController : StateBehaviour
 				}
 				scrDebugHUDMessage.LogBool(GCS.d_hitsounds, "Hit Sounds");
 			}
-			else if (gameworld && UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.N))
+			else if (gameworld && Input.GetKeyDown(UnityEngine.KeyCode.N))
 			{
 				OnLandOnPortal(-1, null);
 				PortalTravelAction(portalDestination);
@@ -2080,48 +1586,48 @@ public class scrController : StateBehaviour
 					Persistence.SetMedalsForDLCLevel(currentWorldString, array);
 				}
 			}
-			else if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.R) && !GCS.lofiVersion)
+			else if (Input.GetKeyDown(UnityEngine.KeyCode.R) && !GCS.lofiVersion)
 			{
-				if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftControl))
+				if (Input.GetKey(UnityEngine.KeyCode.LeftControl))
 				{
 					GCS.checkpointNum = 0;
 				}
 				Restart();
 			}
-			else if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.U) && !GCS.lofiVersion)
+			else if (Input.GetKeyDown(UnityEngine.KeyCode.U) && !GCS.lofiVersion)
 			{
 				GCS.checkpointNum = GCS.customInternalUseCheckpoint;
 				Restart();
 			}
-			else if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.Comma))
+			else if (Input.GetKey(UnityEngine.KeyCode.Comma))
 			{
 				ScrubAdjacent(forward: false);
 			}
-			else if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.Period))
+			else if (Input.GetKey(UnityEngine.KeyCode.Period))
 			{
 				ScrubAdjacent(forward: true);
 			}
-			else if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Slash))
+			else if (Input.GetKeyDown(UnityEngine.KeyCode.Slash))
 			{
 				Scrub(customCheckpoint);
 			}
-			else if (gameworld && UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.P))
+			else if (gameworld && Input.GetKeyDown(UnityEngine.KeyCode.P))
 			{
 				printe("killing all tweens");
 				DOTween.KillAll();
 				ADOBase.LoadScene(ADOBase.GetPreviousLevelName());
 			}
-			else if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Z))
+			else if (Input.GetKeyDown(UnityEngine.KeyCode.Z))
 			{
 				GCS.d_stationary = !GCS.d_stationary;
 				scrDebugHUDMessage.LogBool(GCS.d_stationary, "Stationary");
 			}
-			else if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Slash))
+			else if (Input.GetKeyDown(UnityEngine.KeyCode.Slash))
 			{
 				RDC.noHud = !RDC.noHud;
 				scrDebugHUDMessage.LogBool(RDC.noHud, "No HUD");
 			}
-			else if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Backslash) && background != null)
+			else if (Input.GetKeyDown(UnityEngine.KeyCode.Backslash) && background != null)
 			{
 				background.SetActive(!background.activeSelf);
 			}
@@ -2167,7 +1673,7 @@ public class scrController : StateBehaviour
 			}
 			if (!midspinInfiniteMargin)
 			{
-				if ((RDC.auto | flag) && !RDC.useOldAuto)
+				if ((RDC.auto || flag) && !RDC.useOldAuto)
 				{
 					errorMeter.AddHit(0f);
 				}
@@ -2179,9 +1685,9 @@ public class scrController : StateBehaviour
 		}
 		scrMisc.Vibrate(50L);
 		chosenplanet.next.ChangeFace(pulse: true);
-		scrPlanet x = chosenplanet;
+		scrPlanet obj = chosenplanet;
 		chosenplanet = chosenplanet.SwitchChosen();
-		bool result = x != chosenplanet;
+		bool result = obj != chosenplanet;
 		if (ADOBase.playerIsOnIntroScene)
 		{
 			return result;
@@ -2216,7 +1722,8 @@ public class scrController : StateBehaviour
 		}
 		if (currFloor.midSpin)
 		{
-			int count = planetList.Count;
+			_ = planetList.Count;
+			_ = 2;
 			midspinInfiniteMargin = true;
 			keyTimes.Add(Time.timeAsDouble);
 		}
@@ -2270,6 +1777,7 @@ public class scrController : StateBehaviour
 			txtCongrats.text = RDString.Get("status.congratulations");
 			scrSfx.instance.PlaySfx(SfxSound.Applause);
 		}
+		bool isPurePerfect;
 		if (gameworld || (!gameworld && !isPuzzleRoom && currFloor.freeroamGenerated))
 		{
 			bool flag2 = mistakesManager.IsAllPurePerfect();
@@ -2280,7 +1788,7 @@ public class scrController : StateBehaviour
 			}
 			else if (ADOBase.isLevelEditor)
 			{
-				string key = flag2 ? "status.allPurePerfect" : "status.congratulations";
+				string key = (flag2 ? "status.allPurePerfect" : "status.congratulations");
 				txtCongrats.text = RDString.Get(key);
 				if (GCS.standaloneLevelMode)
 				{
@@ -2291,7 +1799,7 @@ public class scrController : StateBehaviour
 			else if (isbosslevel)
 			{
 				mistakesManager.CalculatePercentAcc();
-				SystemLanguage language = RDString.language;
+				_ = RDString.language;
 				string text = null;
 				string text2 = null;
 				if (currentWorldString == "7" && flag2)
@@ -2302,7 +1810,7 @@ public class scrController : StateBehaviour
 				{
 					text2 = RDString.Get("status.world11Congratulations");
 				}
-				string text3 = flag2 ? text : text2;
+				string text3 = (flag2 ? text : text2);
 				if (text3 == null || text3.Contains("[Don't translate]"))
 				{
 					text3 = RDString.Get(flag2 ? "status.allPurePerfect" : "status.congratulations");
@@ -2311,7 +1819,7 @@ public class scrController : StateBehaviour
 				flag = flag2;
 				if (!GCS.practiceMode && !GCS.d_booth)
 				{
-					endLevelType = mistakesManager.Save(scrController.currentWorld, wonLevel: true, GCS.currentSpeedTrial);
+					endLevelType = mistakesManager.Save(currentWorld, wonLevel: true, GCS.currentSpeedTrial);
 				}
 				else
 				{
@@ -2330,56 +1838,53 @@ public class scrController : StateBehaviour
 			{
 				flag3 = true;
 				printe("levelName: " + levelName);
-				string text4 = levelName;
-				int index = text4.Length - 1;
-				int num = int.Parse(text4[index].ToString());
-				int currentWorld = scrController.currentWorld;
-				if (Persistence.GetLevelTutorialProgress(currentWorld) < num)
+				int num = int.Parse(levelName[^1].ToString());
+				int worldZeroIndexed = currentWorld;
+				if (Persistence.GetLevelTutorialProgress(worldZeroIndexed) < num)
 				{
-					Persistence.SetLevelTutorialProgress(currentWorld, num);
+					Persistence.SetLevelTutorialProgress(worldZeroIndexed, num);
 				}
 			}
-			if (disableCongratsMessage | flag3)
+			if (disableCongratsMessage || flag3)
 			{
 				txtCongrats.text = "";
 			}
 			ADOBase.controller.txtCongrats.gameObject.SetActive(value: true);
 			if (!isPuzzleRoom && showDetailedResults && !flag3)
 			{
-				_003C_003Ec__DisplayClass197_0 _003C_003Ec__DisplayClass197_ = default(_003C_003Ec__DisplayClass197_0);
-				_003C_003Ec__DisplayClass197_.isPurePerfect = mistakesManager.IsAllPurePerfect();
-				int resultCount = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.Perfect);
-				int resultCount2 = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.EarlyPerfect);
-				int resultCount3 = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.LatePerfect);
-				int resultCount4 = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.VeryEarly);
-				int resultCount5 = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.VeryLate);
-				int resultCount6 = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.TooEarly);
-				int resultCount7 = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.FailMiss);
-				int resultCount8 = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.FailOverload);
-				int num2 = _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin.Auto);
-				float num3 = Persistence.GetShowXAccuracy() ? mistakesManager.percentXAcc : mistakesManager.percentAcc;
+				isPurePerfect = mistakesManager.IsAllPurePerfect();
+				int resultCount3 = GetHits(HitMargin.Perfect);
+				int resultCount4 = GetHits(HitMargin.EarlyPerfect);
+				int resultCount5 = GetHits(HitMargin.LatePerfect);
+				int resultCount6 = GetHits(HitMargin.VeryEarly);
+				int resultCount7 = GetHits(HitMargin.VeryLate);
+				int resultCount8 = GetHits(HitMargin.TooEarly);
+				int resultCount9 = GetHits(HitMargin.FailMiss);
+				int resultCount10 = GetHits(HitMargin.FailOverload);
+				int num2 = GetHits(HitMargin.Auto);
+				float num3 = (Persistence.GetShowXAccuracy() ? mistakesManager.percentXAcc : mistakesManager.percentAcc);
 				ColourSchemeHitMargin hitMarginColoursUI = RDConstants.data.hitMarginColoursUI;
 				StringBuilder stringBuilder = new StringBuilder();
-				stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("ePerfect")).Append(_003COnLandOnPortal_003Eg__Result_007C197_3(resultCount2, hitMarginColoursUI.colourLittleEarly.ToHex())).Append("     ");
+				stringBuilder.Append(Localized("ePerfect")).Append(Result(resultCount4, hitMarginColoursUI.colourLittleEarly.ToHex())).Append("     ");
 				if (num2 > 0)
 				{
-					stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("perfect")).Append(_003COnLandOnPortal_003Eg__ResultWithAuto_007C197_4(resultCount, num2, hitMarginColoursUI.colourPerfect.ToHex())).Append("     ");
+					stringBuilder.Append(Localized("perfect")).Append(ResultWithAuto(resultCount3, num2, hitMarginColoursUI.colourPerfect.ToHex())).Append("     ");
 				}
 				else
 				{
-					stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("perfect")).Append(_003COnLandOnPortal_003Eg__Result_007C197_3(resultCount, hitMarginColoursUI.colourPerfect.ToHex())).Append("     ");
+					stringBuilder.Append(Localized("perfect")).Append(Result(resultCount3, hitMarginColoursUI.colourPerfect.ToHex())).Append("     ");
 				}
-				stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("lPerfect")).Append(_003COnLandOnPortal_003Eg__Result_007C197_3(resultCount3, hitMarginColoursUI.colourLittleLate.ToHex())).Append("\n");
-				stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("tooEarly")).Append(_003COnLandOnPortal_003Eg__Result_007C197_3(resultCount6, hitMarginColoursUI.colourTooEarly.ToHex())).Append("     ");
-				stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("early")).Append(_003COnLandOnPortal_003Eg__Result_007C197_3(resultCount4, hitMarginColoursUI.colourVeryEarly.ToHex())).Append("     ");
-				stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("late")).Append(_003COnLandOnPortal_003Eg__Result_007C197_3(resultCount5, hitMarginColoursUI.colourVeryLate.ToHex())).Append("\n");
+				stringBuilder.Append(Localized("lPerfect")).Append(Result(resultCount5, hitMarginColoursUI.colourLittleLate.ToHex())).Append("\n");
+				stringBuilder.Append(Localized("tooEarly")).Append(Result(resultCount8, hitMarginColoursUI.colourTooEarly.ToHex())).Append("     ");
+				stringBuilder.Append(Localized("early")).Append(Result(resultCount6, hitMarginColoursUI.colourVeryEarly.ToHex())).Append("     ");
+				stringBuilder.Append(Localized("late")).Append(Result(resultCount7, hitMarginColoursUI.colourVeryLate.ToHex())).Append("\n");
 				if (ADOBase.controller.noFail || ADOBase.controller.safetyTilesArePresent)
 				{
-					stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("missFails")).Append(_003COnLandOnPortal_003Eg__Result_007C197_3(resultCount7, hitMarginColoursUI.colourFail.ToHex())).Append("     ");
-					stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("overloadFails")).Append(_003COnLandOnPortal_003Eg__Result_007C197_3(resultCount8, hitMarginColoursUI.colourFail.ToHex())).Append("\n");
+					stringBuilder.Append(Localized("missFails")).Append(Result(resultCount9, hitMarginColoursUI.colourFail.ToHex())).Append("     ");
+					stringBuilder.Append(Localized("overloadFails")).Append(Result(resultCount10, hitMarginColoursUI.colourFail.ToHex())).Append("\n");
 				}
-				stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2(Persistence.GetShowXAccuracy() ? "xAccuracy" : "accuracy")).Append(_003COnLandOnPortal_003Eg__GoldAccuracy_007C197_5($"{num3 * 100f:0.00}%", ref _003C_003Ec__DisplayClass197_)).Append("     ");
-				stringBuilder.Append(_003COnLandOnPortal_003Eg__Localized_007C197_2("checkpoints")).Append(checkpointsUsed.ToString()).Append("\n");
+				stringBuilder.Append(Localized(Persistence.GetShowXAccuracy() ? "xAccuracy" : "accuracy")).Append(GoldAccuracy($"{num3 * 100f:0.00}%")).Append("     ");
+				stringBuilder.Append(Localized("checkpoints")).Append(checkpointsUsed.ToString()).Append("\n");
 				ADOBase.controller.txtResults.text = stringBuilder.ToString();
 				ADOBase.controller.txtResults.gameObject.SetActive(value: true);
 			}
@@ -2398,6 +1903,30 @@ public class scrController : StateBehaviour
 			winTime = Time.unscaledTime;
 			ChangeState(States.Won);
 		}
+		int GetHits(HitMargin hitMargin)
+		{
+			return mistakesManager.GetHits(hitMargin);
+		}
+		string GoldAccuracy(string accText)
+		{
+			if (!isPurePerfect)
+			{
+				return accText;
+			}
+			return "<color=#FFDA00>" + accText + "</color>";
+		}
+		static string Localized(string s)
+		{
+			return RDString.Get("status.results." + s) + ": ";
+		}
+		static string Result(int resultCount, string color)
+		{
+			return $"<color={color}>{resultCount}</color>";
+		}
+		static string ResultWithAuto(int resultCount, int resultCount2, string color)
+		{
+			return $"<color={color}>{resultCount} ({resultCount2})</color>";
+		}
 	}
 
 	public void PortalTravelAction(int destination)
@@ -2411,179 +1940,179 @@ public class scrController : StateBehaviour
 		WipeDirection wipeDirection = WipeDirection.StartsFromRight;
 		switch (portalDestination)
 		{
-		case -1:
-			if (currentWorldString == "T4" && isbosslevel && Persistence.GetTaroStoryProgress() < 4)
-			{
-				Persistence.SetTaroStoryProgress(4);
-				Persistence.Save();
-			}
-			if (currentWorldString == "T5" && isbosslevel && Persistence.GetTaroStoryProgress() < 6)
-			{
-				Persistence.SetTaroStoryProgress(6);
-				Persistence.Save();
-			}
-			if (GCS.standaloneLevelMode)
-			{
-				if (GCS.speedTrialMode || GCS.practiceMode)
+			case -1:
+				if (currentWorldString == "T4" && isbosslevel && Persistence.GetTaroStoryProgress() < 4)
 				{
+					Persistence.SetTaroStoryProgress(4);
+					Persistence.Save();
+				}
+				if (currentWorldString == "T5" && isbosslevel && Persistence.GetTaroStoryProgress() < 6)
+				{
+					Persistence.SetTaroStoryProgress(6);
+					Persistence.Save();
+				}
+				if (GCS.standaloneLevelMode)
+				{
+					if (GCS.speedTrialMode || GCS.practiceMode)
+					{
+						if (GCS.speedTrialMode)
+						{
+							GCS.nextSpeedRun = GCS.currentSpeedTrial + 0.1f;
+						}
+						printe($"incremented speed trial to {GCS.nextSpeedRun}");
+						StartCoroutine(ResetCustomLevel());
+					}
+					else if (GCS.customLevelIndex >= GCS.customLevelPaths.Length - 1)
+					{
+						QuitToMainMenu();
+						flag = true;
+					}
+					else
+					{
+						GCS.customLevelIndex++;
+						StartLoadingScene(WipeDirection.StartsFromRight);
+					}
+				}
+				else if (GCS.speedTrialMode || GCS.practiceMode)
+				{
+					if (endLevelType == EndLevelType.FirstWinSpeedTrial)
+					{
+						QuitToMainMenu();
+						flag = true;
+						break;
+					}
 					if (GCS.speedTrialMode)
 					{
 						GCS.nextSpeedRun = GCS.currentSpeedTrial + 0.1f;
 					}
-					printe($"incremented speed trial to {GCS.nextSpeedRun}");
-					StartCoroutine(ResetCustomLevel());
+					GCS.sceneToLoad = levelName;
 				}
-				else if (GCS.customLevelIndex >= GCS.customLevelPaths.Length - 1)
+				else if (isbosslevel)
 				{
+					if (currentWorldString == "6" && endLevelType == EndLevelType.FirstWin)
+					{
+						GCS.worldEntrance = null;
+					}
 					QuitToMainMenu();
 					flag = true;
 				}
 				else
 				{
-					GCS.customLevelIndex++;
-					StartLoadingScene(WipeDirection.StartsFromRight);
+					GCS.sceneToLoad = ADOBase.GetNextLevelName();
 				}
-			}
-			else if (GCS.speedTrialMode || GCS.practiceMode)
-			{
-				if (endLevelType == EndLevelType.FirstWinSpeedTrial)
+				break;
+			case -2:
+				GCS.sceneToLoad = Persistence.GetSavedCurrentLevel();
+				if (!ADOBase.ownsTaroDLC && GCS.sceneToLoad.IsTaro())
 				{
-					QuitToMainMenu();
-					flag = true;
-					break;
+					GCS.sceneToLoad = "1-1";
 				}
-				if (GCS.speedTrialMode)
+				break;
+			case -3:
+				GCS.sceneToLoad = "scnCalibration";
+				break;
+			case -4:
+				if (!GCS.standaloneLevelMode)
 				{
-					GCS.nextSpeedRun = GCS.currentSpeedTrial + 0.1f;
+					GCS.speedTrialMode = false;
+					GCS.practiceMode = false;
 				}
-				GCS.sceneToLoad = levelName;
-			}
-			else if (isbosslevel)
-			{
-				if (currentWorldString == "6" && endLevelType == EndLevelType.FirstWin)
-				{
-					GCS.worldEntrance = null;
-				}
+				GCS.sceneToLoad = "scnEditor";
+				GCS.worldEntrance = null;
+				SteamIntegration.EditorEntered();
+				break;
+			case -60:
+				GCS.sceneToLoad = GetTaroMenuToGoTo();
+				break;
+			case -573:
+				GCS.sceneToLoad = "TP-Test";
+				break;
+			case -574:
+				GCS.sceneToLoad = "TP-1";
+				break;
+			case -575:
+				GCS.sceneToLoad = "TP-2";
+				break;
+			case -576:
+				GCS.sceneToLoad = "TP-X";
+				break;
+			case -577:
+				Persistence.SetTaroStoryProgress(5);
+				Persistence.Save();
+				GCS.sceneToLoad = "scnTaroMenu3";
+				break;
+			case -59:
 				QuitToMainMenu();
-				flag = true;
-			}
-			else
-			{
-				GCS.sceneToLoad = ADOBase.GetNextLevelName();
-			}
-			break;
-		case -2:
-			GCS.sceneToLoad = Persistence.GetSavedCurrentLevel();
-			if (!ADOBase.ownsTaroDLC && GCS.sceneToLoad.IsTaro())
-			{
-				GCS.sceneToLoad = "1-1";
-			}
-			break;
-		case -3:
-			GCS.sceneToLoad = "scnCalibration";
-			break;
-		case -4:
-			if (!GCS.standaloneLevelMode)
-			{
+				break;
+			case -5:
 				GCS.speedTrialMode = false;
 				GCS.practiceMode = false;
-			}
-			GCS.sceneToLoad = "scnEditor";
-			GCS.worldEntrance = null;
-			SteamIntegration.EditorEntered();
-			break;
-		case -60:
-			GCS.sceneToLoad = GetTaroMenuToGoTo();
-			break;
-		case -573:
-			GCS.sceneToLoad = "TP-Test";
-			break;
-		case -574:
-			GCS.sceneToLoad = "TP-1";
-			break;
-		case -575:
-			GCS.sceneToLoad = "TP-2";
-			break;
-		case -576:
-			GCS.sceneToLoad = "TP-X";
-			break;
-		case -577:
-			Persistence.SetTaroStoryProgress(5);
-			Persistence.Save();
-			GCS.sceneToLoad = "scnTaroMenu3";
-			break;
-		case -59:
-			QuitToMainMenu();
-			break;
-		case -5:
-			GCS.speedTrialMode = false;
-			GCS.practiceMode = false;
-			GCS.currentSpeedTrial = 1f;
-			GCS.nextSpeedRun = 1f;
-			printe("we reset speed trial value...");
-			GCS.sceneToLoad = "scnCLS";
-			GCS.worldEntrance = null;
-			SteamIntegration.IncrementCLSEnteredStat();
-			break;
-		case -77777:
-			SteamFriends.ActivateGameOverlayToWebPage("https://store.steampowered.com/app/774181/Rhythm_Doctor/");
-			GCS.sceneToLoad = GCNS.sceneLevelSelect;
-			break;
-		case -10:
-			wipeDirection = WipeDirection.StartsFromLeft;
-			GCS.sceneToLoad = ADOBase.GetPreviousLevelName();
-			break;
-		case -11:
-			GCS.sceneToLoad = ADOBase.GetNextLevelName();
-			break;
-		case -12:
-			wipeDirection = WipeDirection.StartsFromLeft;
-			GCS.nextSpeedRun = GCS.currentSpeedTrial - 0.1f;
-			GCS.sceneToLoad = levelName;
-			break;
-		case -13:
-			GCS.nextSpeedRun = GCS.currentSpeedTrial + 0.1f;
-			GCS.sceneToLoad = levelName;
-			break;
-		case -14:
-			GCS.speedTrialMode = false;
-			GCS.practiceMode = false;
-			GCS.nextSpeedRun = 1f;
-			GCS.standaloneLevelMode = false;
-			if (portalArguments == "?")
-			{
-				GCS.sceneToLoad = "oldtrumpet-X";
-			}
-			else
-			{
-				GCS.sceneToLoad = portalArguments;
-			}
-			break;
-		case -15:
-			GCS.speedTrialMode = true;
-			GCS.practiceMode = false;
-			GCS.standaloneLevelMode = false;
-			if (portalArguments == "XO-X" || portalArguments == "T3-X" || portalArguments == "T3EX-X" || portalArguments == "T5-X")
-			{
+				GCS.currentSpeedTrial = 1f;
 				GCS.nextSpeedRun = 1f;
-			}
-			else
-			{
-				GCS.nextSpeedRun = 1.1f;
-			}
-			GCS.sceneToLoad = portalArguments;
-			break;
-		case -16:
-		{
-			GCS.speedTrialMode = false;
-			GCS.practiceMode = false;
-			GCS.nextSpeedRun = 1f;
-			string key = portalArguments;
-			int worldAttempts = Persistence.GetWorldAttempts(ADOBase.worldData[key].index);
-			int levelCount = ADOBase.worldData[key].levelCount;
-			GCS.sceneToLoad = ((!GCS.d_booth && (worldAttempts > 0 || levelCount == 1)) ? (portalArguments + "-X") : (portalArguments + "-1"));
-			break;
-		}
+				printe("we reset speed trial value...");
+				GCS.sceneToLoad = "scnCLS";
+				GCS.worldEntrance = null;
+				SteamIntegration.IncrementCLSEnteredStat();
+				break;
+			case -77777:
+				SteamFriends.ActivateGameOverlayToWebPage("https://store.steampowered.com/app/774181/Rhythm_Doctor/");
+				GCS.sceneToLoad = GCNS.sceneLevelSelect;
+				break;
+			case -10:
+				wipeDirection = WipeDirection.StartsFromLeft;
+				GCS.sceneToLoad = ADOBase.GetPreviousLevelName();
+				break;
+			case -11:
+				GCS.sceneToLoad = ADOBase.GetNextLevelName();
+				break;
+			case -12:
+				wipeDirection = WipeDirection.StartsFromLeft;
+				GCS.nextSpeedRun = GCS.currentSpeedTrial - 0.1f;
+				GCS.sceneToLoad = levelName;
+				break;
+			case -13:
+				GCS.nextSpeedRun = GCS.currentSpeedTrial + 0.1f;
+				GCS.sceneToLoad = levelName;
+				break;
+			case -14:
+				GCS.speedTrialMode = false;
+				GCS.practiceMode = false;
+				GCS.nextSpeedRun = 1f;
+				GCS.standaloneLevelMode = false;
+				if (portalArguments == "?")
+				{
+					GCS.sceneToLoad = "oldtrumpet-X";
+				}
+				else
+				{
+					GCS.sceneToLoad = portalArguments;
+				}
+				break;
+			case -15:
+				GCS.speedTrialMode = true;
+				GCS.practiceMode = false;
+				GCS.standaloneLevelMode = false;
+				if (portalArguments == "XO-X" || portalArguments == "T3-X" || portalArguments == "T3EX-X" || portalArguments == "T5-X")
+				{
+					GCS.nextSpeedRun = 1f;
+				}
+				else
+				{
+					GCS.nextSpeedRun = 1.1f;
+				}
+				GCS.sceneToLoad = portalArguments;
+				break;
+			case -16:
+				{
+					GCS.speedTrialMode = false;
+					GCS.practiceMode = false;
+					GCS.nextSpeedRun = 1f;
+					string key = portalArguments;
+					int worldAttempts = Persistence.GetWorldAttempts(ADOBase.worldData[key].index);
+					int levelCount = ADOBase.worldData[key].levelCount;
+					GCS.sceneToLoad = ((!GCS.d_booth && (worldAttempts > 0 || levelCount == 1)) ? (portalArguments + "-X") : (portalArguments + "-1"));
+					break;
+				}
 		}
 		if (!flag)
 		{
@@ -2611,7 +2140,7 @@ public class scrController : StateBehaviour
 	public string GetTaroMenuToGoTo()
 	{
 		int taroStoryProgress = Persistence.GetTaroStoryProgress();
-		string text = (taroStoryProgress < 3) ? "scnTaroMenu1" : ((taroStoryProgress < 5) ? "scnTaroMenu2" : ((taroStoryProgress < 6) ? "scnTaroMenu3" : "scnTaroMenu0"));
+		string text = ((taroStoryProgress < 3) ? "scnTaroMenu1" : ((taroStoryProgress < 5) ? "scnTaroMenu2" : ((taroStoryProgress < 6) ? "scnTaroMenu3" : "scnTaroMenu0")));
 		if (currentWorldString == "T4" && taroStoryProgress == 4)
 		{
 			text = "TP-1";
@@ -2758,13 +2287,13 @@ public class scrController : StateBehaviour
 		int num = 2;
 		for (int j = 1; j <= floorNum; j++)
 		{
-			scrFloor scrFloor = scrLevelMaker.instance.listFloors[j];
-			if (scrFloor.numPlanets != num)
+			scrFloor scrFloor2 = scrLevelMaker.instance.listFloors[j];
+			if (scrFloor2.numPlanets != num)
 			{
-				num = scrFloor.numPlanets;
+				num = scrFloor2.numPlanets;
 				SetNumPlanets(num, whileScrubbing: true, j);
 			}
-			if (scrFloor.midSpin)
+			if (scrFloor2.midSpin)
 			{
 				scrubchosen = scrubchosen.prev;
 			}
@@ -2915,29 +2444,53 @@ public class scrController : StateBehaviour
 			}
 		}
 		bool flag2;
+		bool mouseOverAButton;
 		if (ADOBase.isMobile)
 		{
-			flag2 = ((Input.anyKeyDown && !Input.GetKeyDown(UnityEngine.KeyCode.Mouse0) && !Input.GetKeyDown(UnityEngine.KeyCode.Mouse1)) | flag);
+			flag2 = (Input.anyKeyDown && !Input.GetKeyDown(UnityEngine.KeyCode.Mouse0) && !Input.GetKeyDown(UnityEngine.KeyCode.Mouse1)) || flag;
 		}
 		else
 		{
-			_003C_003Ec__DisplayClass216_0 _003C_003Ec__DisplayClass216_ = default(_003C_003Ec__DisplayClass216_0);
-			_003C_003Ec__DisplayClass216_.mouseOverAButton = false;
-			if (_003CValidInputWasTriggered_003Eg__GetMouseDown_007C216_0())
+			mouseOverAButton = false;
+			if (GetMouseDown())
 			{
-				_003C_003Ec__DisplayClass216_.mouseOverAButton = EventSystem.current.IsPointerOverGameObject();
+				mouseOverAButton = EventSystem.current.IsPointerOverGameObject();
 			}
 			if (isCutscene)
 			{
-				_003C_003Ec__DisplayClass216_.mouseOverAButton = false;
+				mouseOverAButton = false;
 			}
-			flag2 = _003CValidInputWasTriggered_003Eg__GetInputHappened_007C216_1(ref _003C_003Ec__DisplayClass216_);
+			flag2 = GetInputHappened();
 		}
 		if (!flag2)
 		{
 			return false;
 		}
 		return CountValidKeysPressed() > 0;
+		bool GetInputHappened()
+		{
+			if ((Input.anyKeyDown || dpadInputChecker.anyDirDown || RDInput.GetMain(ButtonState.IsDown) > 0) && !mouseOverAButton)
+			{
+				return !paused;
+			}
+			return false;
+		}
+		static bool GetMouseDown()
+		{
+			if (AsyncInputManager.isActive)
+			{
+				if (!AsyncInput.GetKeyDown(MouseButton.Button1, frameDependent: false))
+				{
+					return AsyncInput.GetKeyDown(MouseButton.Button2, frameDependent: false);
+				}
+				return true;
+			}
+			if (!Input.GetKeyDown(UnityEngine.KeyCode.Mouse0))
+			{
+				return Input.GetKeyDown(UnityEngine.KeyCode.Mouse1);
+			}
+			return true;
+		}
 	}
 
 	public bool ValidInputWasReleased()
@@ -2945,7 +2498,7 @@ public class scrController : StateBehaviour
 		bool flag = false;
 		if (ADOBase.isMobile)
 		{
-			if (holdKeys.Count != 0 && UnityEngine.Input.touchCount == 0 && !Input.anyKey)
+			if (holdKeys.Count != 0 && Input.touchCount == 0 && !Input.anyKey)
 			{
 				holdKeys.Clear();
 				return true;
@@ -2953,24 +2506,24 @@ public class scrController : StateBehaviour
 		}
 		else
 		{
-			bool holding = this.holding;
+			bool num = holding;
 			int count = holdKeys.Count;
-			if (holding && count == 0)
+			if (num && count == 0)
 			{
 				RDBaseDll.printem("stopped holding");
 				return true;
 			}
 			List<object> mainHeldKeys = RDInput.GetMainHeldKeys();
-			for (int num = holdKeys.Count - 1; num >= 0; num--)
+			for (int num2 = holdKeys.Count - 1; num2 >= 0; num2--)
 			{
-				object obj = holdKeys[num];
+				object obj = holdKeys[num2];
 				if (obj == null)
 				{
-					holdKeys.RemoveAt(num);
+					holdKeys.RemoveAt(num2);
 				}
 				else if (mainHeldKeys.IndexOf(obj) == -1)
 				{
-					holdKeys.RemoveAt(num);
+					holdKeys.RemoveAt(num2);
 					flag = true;
 				}
 			}
@@ -3023,15 +2576,13 @@ public class scrController : StateBehaviour
 		{
 			foreach (object mainPressKey in RDInput.GetMainPressKeys())
 			{
-				if (mainPressKey is UnityEngine.KeyCode)
+				if (mainPressKey is UnityEngine.KeyCode keyCode)
 				{
-					UnityEngine.KeyCode keyCode = (UnityEngine.KeyCode)mainPressKey;
 					keyFrequency[keyCode] = (keyFrequency.ContainsKey(keyCode) ? (keyFrequency[keyCode] + 1) : 0);
 					keyTotal++;
 				}
-				if (mainPressKey is SharpHook.Native.KeyCode)
+				if (mainPressKey is SharpHook.Native.KeyCode keyCode2)
 				{
-					SharpHook.Native.KeyCode keyCode2 = (SharpHook.Native.KeyCode)mainPressKey;
 					keyFrequency[keyCode2] = (keyFrequency.ContainsKey(keyCode2) ? (keyFrequency[keyCode2] + 1) : 0);
 					keyTotal++;
 				}
@@ -3045,9 +2596,8 @@ public class scrController : StateBehaviour
 		if (ADOBase.isMobile)
 		{
 			Touch[] touches = Input.touches;
-			for (int i = 0; i < touches.Length; i++)
+			foreach (Touch touch in touches)
 			{
-				Touch touch = touches[i];
 				if (!IsScreenPointInsideUIElements(touch.position))
 				{
 					foundHeld(new MutualKeyCode(null));
@@ -3081,23 +2631,14 @@ public class scrController : StateBehaviour
 	public void ShowHitText(HitMargin hitMargin, Vector3 position, float angle)
 	{
 		scrHitTextMesh[] array = cachedHitTexts[hitMargin];
-		int num = 0;
-		scrHitTextMesh scrHitTextMesh;
-		while (true)
+		foreach (scrHitTextMesh scrHitTextMesh2 in array)
 		{
-			if (num < array.Length)
+			if (scrHitTextMesh2.dead)
 			{
-				scrHitTextMesh = array[num];
-				if (scrHitTextMesh.dead)
-				{
-					break;
-				}
-				num++;
-				continue;
+				scrHitTextMesh2.Show(position, angle);
+				break;
 			}
-			return;
 		}
-		scrHitTextMesh.Show(position, angle);
 	}
 
 	private void OnApplicationQuit()
@@ -3171,16 +2712,16 @@ public class scrController : StateBehaviour
 			for (int i = 0; i < planetList.Count - numPlanets; i++)
 			{
 				int planetIndex = GetMultiPlanet(whileScrubbing ? scrubchosen.planetIndex : chosenplanet.planetIndex, -(i + 1)).planetIndex;
-				scrPlanet scrPlanet = planetList[planetIndex];
+				scrPlanet scrPlanet2 = planetList[planetIndex];
 				if (!whileScrubbing)
 				{
-					scrPlanet.Die(0.3f);
+					scrPlanet2.Die(0.3f);
 				}
 				else
 				{
-					scrPlanet.Destroy();
+					scrPlanet2.Destroy();
 				}
-				scrPlanet.toDelete = true;
+				scrPlanet2.toDelete = true;
 			}
 			int num = 0;
 			for (int num2 = planetList.Count - 1; num2 >= 0; num2--)
@@ -3197,7 +2738,7 @@ public class scrController : StateBehaviour
 		if (numPlanets > count)
 		{
 			int num3 = 0;
-			int num4 = whileScrubbing ? scrubchosen.planetIndex : chosenplanet.planetIndex;
+			int num4 = (whileScrubbing ? scrubchosen.planetIndex : chosenplanet.planetIndex);
 			int num5 = num4 + num3;
 			for (int j = count; j < numPlanets; j++)
 			{
@@ -3249,7 +2790,7 @@ public class scrController : StateBehaviour
 		}
 		if ((Persistence.GetPlayerColor(red: true) == scrPlanet.transPinkColor && Persistence.GetPlayerColor(red: false) == scrPlanet.transBlueColor) || (Persistence.GetPlayerColor(red: false) == scrPlanet.transPinkColor && Persistence.GetPlayerColor(red: true) == scrPlanet.transBlueColor) || (Persistence.GetPlayerColor(red: true) == scrPlanet.nbYellowColor && Persistence.GetPlayerColor(red: false) == scrPlanet.nbPurpleColor) || (Persistence.GetPlayerColor(red: false) == scrPlanet.nbYellowColor && Persistence.GetPlayerColor(red: true) == scrPlanet.nbPurpleColor))
 		{
-			Color item = new Color(0.9568627f, 164f / 255f, 0.7098039f);
+			Color item = new Color(0.9568627f, 0.6431373f, 0.7098039f);
 			Color item2 = new Color(0.3607843f, 67f / 85f, 0.9294118f);
 			Color white = Color.white;
 			Color item3 = Color.white;
@@ -3262,75 +2803,16 @@ public class scrController : StateBehaviour
 				item3 = Color.black;
 				white2 = Color.white;
 			}
-			List<Color> list = new List<Color>
-			{
-				item,
-				item2,
-				white
-			};
-			List<Color> list2 = new List<Color>
-			{
-				item3,
-				white2,
-				white3
-			};
+			List<Color> list = new List<Color> { item, item2, white };
+			List<Color> list2 = new List<Color> { item3, white2, white3 };
 			List<List<int>> list3 = new List<List<int>>();
-			list3.Add(new List<int>
-			{
-				0,
-				1
-			});
-			list3.Add(new List<int>
-			{
-				0,
-				1,
-				2
-			});
-			list3.Add(new List<int>
-			{
-				0,
-				1,
-				0,
-				1
-			});
-			list3.Add(new List<int>
-			{
-				0,
-				1,
-				1,
-				0,
-				2
-			});
-			list3.Add(new List<int>
-			{
-				0,
-				1,
-				1,
-				0,
-				2,
-				2
-			});
-			list3.Add(new List<int>
-			{
-				0,
-				1,
-				0,
-				2,
-				0,
-				1,
-				0
-			});
-			list3.Add(new List<int>
-			{
-				0,
-				1,
-				0,
-				2,
-				2,
-				0,
-				1,
-				0
-			});
+			list3.Add(new List<int> { 0, 1 });
+			list3.Add(new List<int> { 0, 1, 2 });
+			list3.Add(new List<int> { 0, 1, 0, 1 });
+			list3.Add(new List<int> { 0, 1, 1, 0, 2 });
+			list3.Add(new List<int> { 0, 1, 1, 0, 2, 2 });
+			list3.Add(new List<int> { 0, 1, 0, 2, 0, 1, 0 });
+			list3.Add(new List<int> { 0, 1, 0, 2, 2, 0, 1, 0 });
 			for (int l = 0; l < planetList.Count; l++)
 			{
 				planetList[l].SetPlanetColor(list[list3[planetList.Count - 2][l]]);
@@ -3405,68 +2887,67 @@ public class scrController : StateBehaviour
 			return;
 		}
 		freeroamUpTime += Time.deltaTime;
-		scrFloor scrFloor = listFreeroamStartTiles[curFreeRoamSection];
-		if (freeroamUpTime > 0.1f && ADOBase.conductor.songposition_minusi > scrFloor.nextfloor.entryTime - ADOBase.conductor.crotchet / (double)scrFloor.speed * (double)scrFloor.freeroamEndEarlyBeats)
+		scrFloor scrFloor2 = listFreeroamStartTiles[curFreeRoamSection];
+		if (!(freeroamUpTime > 0.1f) || !(ADOBase.conductor.songposition_minusi > scrFloor2.nextfloor.entryTime - ADOBase.conductor.crotchet / (double)scrFloor2.speed * (double)scrFloor2.freeroamEndEarlyBeats))
 		{
-			if (currentState == States.PlayerControl || scnEditor.instance != null)
-			{
-				foreach (scrFloor item in ADOBase.lm.listFreeroam[curFreeRoamSection])
-				{
-					if (item != chosenplanet.currfloor)
-					{
-						item.ToggleCollider(collEn: false);
-						item.isLandable = false;
-						item.TweenOpacity(0f, (float)ADOBase.conductor.crotchet);
-					}
-					else
-					{
-						item.ToggleCollider(collEn: false);
-						item.isLandable = false;
-						int freeroamEndEarlyBeats = scrFloor.freeroamEndEarlyBeats;
-						float num = (float)ADOBase.conductor.crotchet * ((float)freeroamEndEarlyBeats - 0.8f) / scrFloor.speed;
-						if (ADOBase.conductor.crotchet / (double)scrFloor.speed * (double)scrFloor.freeroamEndEarlyBeats - (double)num < 0.05000000074505806)
-						{
-							num = 0f;
-						}
-						if (num > 0f)
-						{
-							LockInput(num);
-						}
-						for (int i = 0; i < planetList.Count; i++)
-						{
-							planetList[i].iFrames = (float)ADOBase.conductor.crotchet * ((float)freeroamEndEarlyBeats - 0.8f) / scrFloor.speed;
-						}
-						MoveCameraToTile(scrFloor.nextfloor, item, (float)(ADOBase.conductor.crotchet / (double)scrFloor.nextfloor.speed) * (float)freeroamEndEarlyBeats * 0.5f / ADOBase.conductor.song.pitch, scrFloor.freeroamEndEase, 1f);
-						Vector3 b = startRadius * scrFloor.nextfloor.radiusScale * new Vector3(Mathf.Sin((float)scrFloor.exitangle), Mathf.Cos((float)scrFloor.exitangle), 0f);
-						Vector3 endValue = scrFloor.nextfloor.transform.position - b;
-						float duration = (float)(ADOBase.conductor.crotchet / (double)scrFloor.speed) * (float)freeroamEndEarlyBeats * 0.5f / ADOBase.conductor.song.pitch;
-						item.transform.DOMove(endValue, duration).SetEase(scrFloor.freeroamEndEase);
-						if (!stickToFloor)
-						{
-							chosenplanet.transform.DOMove(endValue, duration).SetEase(scrFloor.freeroamEndEase);
-						}
-						DOTween.Sequence().AppendInterval((float)(ADOBase.conductor.crotchet / (double)scrFloor.speed) * (float)freeroamEndEarlyBeats / ADOBase.conductor.song.pitch).Append(item.TweenOpacity(0f, (float)ADOBase.conductor.crotchet));
-						double num2 = scrMisc.mod(chosenplanet.angle, 6.2831854820251465);
-						ADOBase.conductor.lastHit = scrFloor.nextfloor.entryTime - ADOBase.conductor.crotchet / (double)scrFloor.speed * (double)freeroamEndEarlyBeats;
-						item.isCCW = item.nextfloor.isCCW;
-						isCW = !item.isCCW;
-						int num3 = (!item.isCCW) ? 1 : (-1);
-						bool isCCW = item.isCCW;
-						double num4 = scrFloor.nextfloor.entryangle - (double)(MathF.PI * (float)num3);
-						double num5 = num4 - (double)(MathF.PI * (float)freeroamEndEarlyBeats * (float)num3);
-						chosenplanet.SetTargetExitAngle(num4);
-						chosenplanet.SetSnappedLastAngle(num5);
-						chosenplanet.Update_RefreshAngles();
-						double num6 = scrMisc.mod(chosenplanet.angle, 6.2831854820251465);
-						float angleCorrectionType = item.angleCorrectionType;
-						bool isCCW2 = item.isCCW;
-						chosenplanet.TweenSnappedLastAngle(num5 - (num6 - num2), num5);
-						gameworld = true;
-					}
-				}
-			}
-			curFreeRoamSection++;
+			return;
 		}
+		if (currentState == States.PlayerControl || scnEditor.instance != null)
+		{
+			foreach (scrFloor item in ADOBase.lm.listFreeroam[curFreeRoamSection])
+			{
+				if (item != chosenplanet.currfloor)
+				{
+					item.ToggleCollider(collEn: false);
+					item.isLandable = false;
+					item.TweenOpacity(0f, (float)ADOBase.conductor.crotchet);
+					continue;
+				}
+				item.ToggleCollider(collEn: false);
+				item.isLandable = false;
+				int freeroamEndEarlyBeats = scrFloor2.freeroamEndEarlyBeats;
+				float num = (float)ADOBase.conductor.crotchet * ((float)freeroamEndEarlyBeats - 0.8f) / scrFloor2.speed;
+				if (ADOBase.conductor.crotchet / (double)scrFloor2.speed * (double)scrFloor2.freeroamEndEarlyBeats - (double)num < 0.05000000074505806)
+				{
+					num = 0f;
+				}
+				if (num > 0f)
+				{
+					LockInput(num);
+				}
+				for (int i = 0; i < planetList.Count; i++)
+				{
+					planetList[i].iFrames = (float)ADOBase.conductor.crotchet * ((float)freeroamEndEarlyBeats - 0.8f) / scrFloor2.speed;
+				}
+				MoveCameraToTile(scrFloor2.nextfloor, item, (float)(ADOBase.conductor.crotchet / (double)scrFloor2.nextfloor.speed) * (float)freeroamEndEarlyBeats * 0.5f / ADOBase.conductor.song.pitch, scrFloor2.freeroamEndEase, 1f);
+				Vector3 vector = startRadius * scrFloor2.nextfloor.radiusScale * new Vector3(Mathf.Sin((float)scrFloor2.exitangle), Mathf.Cos((float)scrFloor2.exitangle), 0f);
+				Vector3 endValue = scrFloor2.nextfloor.transform.position - vector;
+				float duration = (float)(ADOBase.conductor.crotchet / (double)scrFloor2.speed) * (float)freeroamEndEarlyBeats * 0.5f / ADOBase.conductor.song.pitch;
+				item.transform.DOMove(endValue, duration).SetEase(scrFloor2.freeroamEndEase);
+				if (!stickToFloor)
+				{
+					chosenplanet.transform.DOMove(endValue, duration).SetEase(scrFloor2.freeroamEndEase);
+				}
+				DOTween.Sequence().AppendInterval((float)(ADOBase.conductor.crotchet / (double)scrFloor2.speed) * (float)freeroamEndEarlyBeats / ADOBase.conductor.song.pitch).Append(item.TweenOpacity(0f, (float)ADOBase.conductor.crotchet));
+				double num2 = scrMisc.mod(chosenplanet.angle, 6.2831854820251465);
+				ADOBase.conductor.lastHit = scrFloor2.nextfloor.entryTime - ADOBase.conductor.crotchet / (double)scrFloor2.speed * (double)freeroamEndEarlyBeats;
+				item.isCCW = item.nextfloor.isCCW;
+				isCW = !item.isCCW;
+				int num3 = ((!item.isCCW) ? 1 : (-1));
+				_ = item.isCCW;
+				double num4 = scrFloor2.nextfloor.entryangle - (double)(MathF.PI * (float)num3);
+				double num5 = num4 - (double)(MathF.PI * (float)freeroamEndEarlyBeats * (float)num3);
+				chosenplanet.SetTargetExitAngle(num4);
+				chosenplanet.SetSnappedLastAngle(num5);
+				chosenplanet.Update_RefreshAngles();
+				double num6 = scrMisc.mod(chosenplanet.angle, 6.2831854820251465);
+				_ = item.angleCorrectionType;
+				_ = item.isCCW;
+				chosenplanet.TweenSnappedLastAngle(num5 - (num6 - num2), num5);
+				gameworld = true;
+			}
+		}
+		curFreeRoamSection++;
 	}
 
 	public void UpdateInput()
@@ -3515,21 +2996,18 @@ public class scrController : StateBehaviour
 		}
 		LinkedList<ushort> linkedList = new LinkedList<ushort>();
 		LinkedList<ushort> linkedList2 = new LinkedList<ushort>();
-		foreach (Tuple<UnityEngine.KeyCode, ushort> unityNativeKeyCode in KeyCodeConverter.UnityNativeKeyCodeList)
+		foreach (var (key, num3) in KeyCodeConverter.UnityNativeKeyCodeList)
 		{
-			unityNativeKeyCode.Deconstruct(out UnityEngine.KeyCode item, out ushort item2);
-			UnityEngine.KeyCode key = item;
-			ushort num2 = item2;
-			if (UnityEngine.Input.GetKeyUp(key))
+			if (Input.GetKeyUp(key))
 			{
-				if (AsyncInputManager.keyMask.Contains(num2))
+				if (AsyncInputManager.keyMask.Contains(num3))
 				{
-					linkedList2.AddLast(num2);
+					linkedList2.AddLast(num3);
 				}
 			}
-			else if (UnityEngine.Input.GetKeyDown(key) && !AsyncInputManager.keyMask.Contains(num2))
+			else if (Input.GetKeyDown(key) && !AsyncInputManager.keyMask.Contains(num3))
 			{
-				linkedList.AddLast(num2);
+				linkedList.AddLast(num3);
 			}
 		}
 		if (linkedList.Count > 0 || linkedList2.Count > 0)
@@ -3546,23 +3024,23 @@ public class scrController : StateBehaviour
 				AsyncInputManager.keyDownMask.Clear();
 				AsyncInputManager.keyUpMask.Clear();
 			}
-			validKeyWasReleased = (linkedList2.Count > 0);
-			foreach (ushort item3 in linkedList)
+			validKeyWasReleased = linkedList2.Count > 0;
+			foreach (ushort item in linkedList)
 			{
-				list.Add((UnityEngine.KeyCode)item3);
-				AsyncInputManager.keyMask.Add(item3);
-				AsyncInputManager.keyDownMask.Add(item3);
-				AsyncInputManager.frameDependentKeyMask.Add(item3);
-				AsyncInputManager.frameDependentKeyDownMask.Add(item3);
-				RDBaseDll.printesw($"[Frame {Time.frameCount}] Async Input>> Handle dropped release key {item3}");
+				list.Add((UnityEngine.KeyCode)item);
+				AsyncInputManager.keyMask.Add(item);
+				AsyncInputManager.keyDownMask.Add(item);
+				AsyncInputManager.frameDependentKeyMask.Add(item);
+				AsyncInputManager.frameDependentKeyDownMask.Add(item);
+				RDBaseDll.printesw($"[Frame {Time.frameCount}] Async Input>> Handle dropped release key {item}");
 			}
-			foreach (ushort item4 in linkedList2)
+			foreach (ushort item2 in linkedList2)
 			{
-				AsyncInputManager.keyMask.Remove(item4);
-				AsyncInputManager.keyUpMask.Add(item4);
-				AsyncInputManager.frameDependentKeyMask.Remove(item4);
-				AsyncInputManager.frameDependentKeyUpMask.Add(item4);
-				RDBaseDll.printesw($"[Frame {Time.frameCount}] Async Input>> Handle dropped press key {item4}");
+				AsyncInputManager.keyMask.Remove(item2);
+				AsyncInputManager.keyUpMask.Add(item2);
+				AsyncInputManager.frameDependentKeyMask.Remove(item2);
+				AsyncInputManager.frameDependentKeyUpMask.Add(item2);
+				RDBaseDll.printesw($"[Frame {Time.frameCount}] Async Input>> Handle dropped press key {item2}");
 			}
 		}
 		ProcessKeyInputs(list, num);
@@ -3575,7 +3053,7 @@ public class scrController : StateBehaviour
 
 	private void ProcessKeyInputs(IReadOnlyList<UnityEngine.KeyCode> keyCodes, long eventTick)
 	{
-		long value = (eventTick != 0L) ? eventTick : AsyncInputManager.currFrameTick;
+		long value = ((eventTick != 0L) ? eventTick : AsyncInputManager.currFrameTick);
 		if (base.state == States.PlayerControl && GetDestinationState(base.stateMachine) == States.PlayerControl)
 		{
 			Simulated_PlayerControl_Update(value);
@@ -3584,7 +3062,7 @@ public class scrController : StateBehaviour
 
 	public void ScreenShake(float duration, float strength)
 	{
-		DOTween.Shake(() => camy.shake, delegate(Vector3 x)
+		DOTween.Shake(() => camy.shake, delegate (Vector3 x)
 		{
 			camy.shake = x;
 		}, duration, strength, 100);
@@ -3592,61 +3070,61 @@ public class scrController : StateBehaviour
 
 	public void MoveCameraToTile(scrFloor floor, scrFloor from, float fSecs, Ease ease, float zoom = -1f)
 	{
-		ffxCameraPlus ffxCameraPlus = chosenplanet.currfloor.gameObject.AddComponent<ffxCameraPlus>();
-		ffxCameraPlus.duration = fSecs;
-		ffxCameraPlus.targetPos = new Vector2(floor.transform.position.x - from.transform.position.x, floor.transform.position.y - from.transform.position.y);
-		ffxCameraPlus.targetRot = camy.transform.eulerAngles.z;
+		ffxCameraPlus ffxCameraPlus2 = chosenplanet.currfloor.gameObject.AddComponent<ffxCameraPlus>();
+		ffxCameraPlus2.duration = fSecs;
+		ffxCameraPlus2.targetPos = new Vector2(floor.transform.position.x - from.transform.position.x, floor.transform.position.y - from.transform.position.y);
+		ffxCameraPlus2.targetRot = camy.transform.eulerAngles.z;
 		if (zoom <= 0f)
 		{
-			ffxCameraPlus.targetZoom = camy.zoomSize;
+			ffxCameraPlus2.targetZoom = camy.zoomSize;
 		}
 		else
 		{
-			ffxCameraPlus.targetZoom = zoom;
+			ffxCameraPlus2.targetZoom = zoom;
 		}
-		ffxCameraPlus.ease = ease;
-		ffxCameraPlus.movementType = CamMovementType.Tile;
-		ffxCameraPlus.StartEffect();
+		ffxCameraPlus2.ease = ease;
+		ffxCameraPlus2.movementType = CamMovementType.Tile;
+		ffxCameraPlus2.StartEffect();
 	}
 
 	public void MoveCameraToObject(GameObject o, float fSecs, Ease ease, float zoom = -1f)
 	{
-		ffxCameraPlus ffxCameraPlus = new ffxCameraPlus();
-		ffxCameraPlus.ForceUpdateCamParent();
-		ffxCameraPlus.duration = fSecs;
-		ffxCameraPlus.targetPos = new Vector2(o.transform.position.x, o.transform.position.y);
-		ffxCameraPlus.targetRot = camy.transform.eulerAngles.z;
+		ffxCameraPlus ffxCameraPlus2 = new ffxCameraPlus();
+		ffxCameraPlus2.ForceUpdateCamParent();
+		ffxCameraPlus2.duration = fSecs;
+		ffxCameraPlus2.targetPos = new Vector2(o.transform.position.x, o.transform.position.y);
+		ffxCameraPlus2.targetRot = camy.transform.eulerAngles.z;
 		if (zoom <= 0f)
 		{
-			ffxCameraPlus.targetZoom = camy.zoomSize;
+			ffxCameraPlus2.targetZoom = camy.zoomSize;
 		}
 		else
 		{
-			ffxCameraPlus.targetZoom = zoom;
+			ffxCameraPlus2.targetZoom = zoom;
 		}
-		ffxCameraPlus.ease = ease;
-		ffxCameraPlus.movementType = CamMovementType.Tile;
-		ffxCameraPlus.StartEffect();
+		ffxCameraPlus2.ease = ease;
+		ffxCameraPlus2.movementType = CamMovementType.Tile;
+		ffxCameraPlus2.StartEffect();
 	}
 
 	public void MoveCameraToPlayer(float fSecs, Ease ease, float zoom = -1f)
 	{
-		ffxCameraPlus ffxCameraPlus = new ffxCameraPlus();
-		ffxCameraPlus.ForceUpdateCamParent();
-		ffxCameraPlus.duration = fSecs;
-		ffxCameraPlus.targetPos = Vector2.zero;
-		ffxCameraPlus.targetRot = camy.transform.eulerAngles.z;
+		ffxCameraPlus ffxCameraPlus2 = new ffxCameraPlus();
+		ffxCameraPlus2.ForceUpdateCamParent();
+		ffxCameraPlus2.duration = fSecs;
+		ffxCameraPlus2.targetPos = Vector2.zero;
+		ffxCameraPlus2.targetRot = camy.transform.eulerAngles.z;
 		if (zoom <= 0f)
 		{
-			ffxCameraPlus.targetZoom = camy.zoomSize;
+			ffxCameraPlus2.targetZoom = camy.zoomSize;
 		}
 		else
 		{
-			ffxCameraPlus.targetZoom = zoom;
+			ffxCameraPlus2.targetZoom = zoom;
 		}
-		ffxCameraPlus.ease = ease;
-		ffxCameraPlus.movementType = CamMovementType.Player;
-		ffxCameraPlus.StartEffect();
+		ffxCameraPlus2.ease = ease;
+		ffxCameraPlus2.movementType = CamMovementType.Player;
+		ffxCameraPlus2.StartEffect();
 	}
 
 	public void LevelNameTextAway()
@@ -3692,7 +3170,8 @@ public class scrController : StateBehaviour
 
 	private void Checkpoint_Update()
 	{
-		if (!(ADOBase.editor?.inStrictlyEditingMode ?? false))
+		scnEditor obj = ADOBase.editor;
+		if ((object)obj == null || !obj.inStrictlyEditingMode)
 		{
 			double num = (ADOBase.conductor.songposition_minusi - startTime) / (ADOBase.lm.listFloors[GCS.checkpointNum].entryTime - startTime);
 			ADOBase.conductor.song.volume = Mathf.Lerp(0f, startVolume, (float)num);
@@ -3739,7 +3218,7 @@ public class scrController : StateBehaviour
 		}
 	}
 
-	public void Simulated_PlayerControl_Update(long? targetTick = default(long?))
+	public void Simulated_PlayerControl_Update(long? targetTick = null)
 	{
 		if (paused || currFloor == null || isCutscene)
 		{
@@ -3755,7 +3234,7 @@ public class scrController : StateBehaviour
 			{
 				nextfloor = nextfloor.nextfloor;
 			}
-			__nextTileIsHoldCached = (nextfloor.holdLength > -1);
+			__nextTileIsHoldCached = nextfloor.holdLength > -1;
 		}
 		AsyncInputUtils.WhileFloorNotChangeOrOnceIfAsyncInputDisabled(this, delegate
 		{
@@ -3811,7 +3290,7 @@ public class scrController : StateBehaviour
 		}
 	}
 
-	private void OttoHoldHit(long? targetTick = default(long?))
+	private void OttoHoldHit(long? targetTick = null)
 	{
 		if (targetTick.HasValue)
 		{
@@ -3819,11 +3298,11 @@ public class scrController : StateBehaviour
 			AsyncInputUtils.AdjustAngle(this, valueOrDefault);
 		}
 		bool nextTileIsAuto = _nextTileIsAuto;
-		if ((!((RDC.auto || benchmarkMode) | nextTileIsAuto) && (currFloor.holdLength <= -1 || !currFloor.auto)) || !isGameWorld)
+		if ((!(RDC.auto || benchmarkMode || nextTileIsAuto) && (currFloor.holdLength <= -1 || !currFloor.auto)) || !isGameWorld)
 		{
 			return;
 		}
-		int num = RDC.useOldAuto ? 1 : 5;
+		int num = (RDC.useOldAuto ? 1 : 5);
 		while (num > 0 && chosenplanet.AutoShouldHitNow())
 		{
 			bool auto = RDC.auto;
@@ -3839,7 +3318,7 @@ public class scrController : StateBehaviour
 		}
 	}
 
-	private void HitAutoFloors(long? targetTick = default(long?))
+	private void HitAutoFloors(long? targetTick = null)
 	{
 		if (targetTick.HasValue)
 		{
@@ -3862,7 +3341,7 @@ public class scrController : StateBehaviour
 		}
 	}
 
-	private void UpdateHoldBehavior(long? targetTick = default(long?))
+	private void UpdateHoldBehavior(long? targetTick = null)
 	{
 		if (targetTick.HasValue)
 		{
@@ -3892,7 +3371,7 @@ public class scrController : StateBehaviour
 					currFloor.holdRenderer.Unfill();
 					currFloor.holdCompletion = 0f;
 					camy.Refocus(currFloor.prevfloor.transform);
-					DOTween.To(() => camy.holdOffset, delegate(Vector3 x)
+					DOTween.To(() => camy.holdOffset, delegate (Vector3 x)
 					{
 						camy.holdOffset = x;
 					}, Vector3.zero, 0.3f).SetEase(Ease.OutCubic);
@@ -3907,7 +3386,7 @@ public class scrController : StateBehaviour
 				currFloor.holdRenderer.Unfill(withHoldTiming: false);
 				currFloor.holdCompletion = 0f;
 				camy.Refocus(currFloor.prevfloor.transform);
-				DOTween.To(() => camy.holdOffset, delegate(Vector3 x)
+				DOTween.To(() => camy.holdOffset, delegate (Vector3 x)
 				{
 					camy.holdOffset = x;
 				}, Vector3.zero, 0.3f).SetEase(Ease.OutCubic);
@@ -3941,7 +3420,7 @@ public class scrController : StateBehaviour
 		}
 	}
 
-	private void HitHoldFloorsIfStartedAtHold(long? targetTick = default(long?))
+	private void HitHoldFloorsIfStartedAtHold(long? targetTick = null)
 	{
 		if (targetTick.HasValue)
 		{
@@ -3958,7 +3437,7 @@ public class scrController : StateBehaviour
 		}
 	}
 
-	private void CheckPreHoldFail(long? targetTick = default(long?))
+	private void CheckPreHoldFail(long? targetTick = null)
 	{
 		if (targetTick.HasValue)
 		{
@@ -3973,7 +3452,7 @@ public class scrController : StateBehaviour
 		}
 	}
 
-	private void UpdateHoldKeys(long? targetTick = default(long?))
+	private void UpdateHoldKeys(long? targetTick = null)
 	{
 		if (targetTick.HasValue)
 		{
@@ -3982,7 +3461,7 @@ public class scrController : StateBehaviour
 		}
 		bool nextTileIsHold = _nextTileIsHold;
 		double holdMargin = _holdMargin;
-		if (keyTimes.Count <= 0 || GCS.d_stationary || GCS.d_freeroam || (!((currFloor.holdLength > -1 && !strictHolds) | nextTileIsHold) && currFloor.holdLength != -1 && !((double)currFloor.holdCompletion < holdMargin)) || (RDC.auto && isGameWorld) || (isGameWorld && currFloor.seqID >= ADOBase.lm.listFloors.Count - 1) || benchmarkMode)
+		if (keyTimes.Count <= 0 || GCS.d_stationary || GCS.d_freeroam || (!((currFloor.holdLength > -1 && !strictHolds) || nextTileIsHold) && currFloor.holdLength != -1 && !((double)currFloor.holdCompletion < holdMargin)) || (RDC.auto && isGameWorld) || (isGameWorld && currFloor.seqID >= ADOBase.lm.listFloors.Count - 1) || benchmarkMode)
 		{
 			return;
 		}
@@ -3995,32 +3474,33 @@ public class scrController : StateBehaviour
 		if (num && currFloor.holdLength > -1)
 		{
 			holdKeys.Clear();
-			IterateValidKeysHeld(delegate(MutualKeyCode k)
+			IterateValidKeysHeld(delegate (MutualKeyCode k)
 			{
-				object obj2 = k.isAsync ? ((object)k.asyncKeyCode) : k.keyCodeObject;
+				object obj2 = (k.isAsync ? ((object)k.asyncKeyCode) : k.keyCodeObject);
 				holdKeys.Add(obj2);
 				printe($"(1) adding as holdKey {obj2}");
-			}, delegate(MutualKeyCode k)
+			}, delegate (MutualKeyCode k)
 			{
 				holdKeys.Remove(k.isAsync ? ((object)k.asyncKeyCode) : k.keyCodeObject);
 			}, onlyPressedKeys: true);
 		}
-		if (midspinInfiniteMargin)
+		if (!midspinInfiniteMargin)
 		{
-			keyTimes.RemoveAt(0);
-			if (Hit() && currFloor.holdLength > -1)
+			return;
+		}
+		keyTimes.RemoveAt(0);
+		if (Hit() && currFloor.holdLength > -1)
+		{
+			holdKeys.Clear();
+			IterateValidKeysHeld(delegate (MutualKeyCode k)
 			{
-				holdKeys.Clear();
-				IterateValidKeysHeld(delegate(MutualKeyCode k)
-				{
-					object obj = k.isAsync ? ((object)k.asyncKeyCode) : k.keyCodeObject;
-					holdKeys.Add(obj);
-					printe($"(2) adding as holdKey {obj}");
-				}, delegate(MutualKeyCode k)
-				{
-					holdKeys.Remove(k.isAsync ? ((object)k.asyncKeyCode) : k.keyCodeObject);
-				}, onlyPressedKeys: true);
-			}
+				object obj = (k.isAsync ? ((object)k.asyncKeyCode) : k.keyCodeObject);
+				holdKeys.Add(obj);
+				printe($"(2) adding as holdKey {obj}");
+			}, delegate (MutualKeyCode k)
+			{
+				holdKeys.Remove(k.isAsync ? ((object)k.asyncKeyCode) : k.keyCodeObject);
+			}, onlyPressedKeys: true);
 		}
 	}
 
@@ -4051,7 +3531,7 @@ public class scrController : StateBehaviour
 		bool flag = currFloor.nextfloor != null && currFloor.nextfloor.auto;
 		if (!hitbox)
 		{
-			if (((RDC.auto | flag) && !RDC.useOldAuto) || (RDC.debug && !overload) || (!gameworld && !currFloor.freeroam))
+			if (((RDC.auto || flag) && !RDC.useOldAuto) || (RDC.debug && !overload) || (!gameworld && !currFloor.freeroam))
 			{
 				return;
 			}
@@ -4119,7 +3599,7 @@ public class scrController : StateBehaviour
 		{
 			printe("die");
 			chosenplanet.PreDie();
-			DOTween.To(() => chosenplanet.cosmeticRadius, delegate(float x)
+			DOTween.To(() => chosenplanet.cosmeticRadius, delegate (float x)
 			{
 				chosenplanet.cosmeticRadius = x;
 			}, 0f, 0.5f).OnComplete(Fail2Action);
@@ -4198,7 +3678,7 @@ public class scrController : StateBehaviour
 		{
 			txtPercent.GetComponent<scrPercentageComplete>().UpdatePercent();
 			txtPercent.gameObject.SetActive(value: true);
-			string msg = (!GCS.d_chinese) ? ((!GCS.d_booth) ? "" : (GCS.d_drumcontroller ? "Drum To Restart" : "Any Key To Restart")) : ((!GCS.d_booth) ? "" : (GCS.d_drumcontroller ? "拍下按钮, 重新挑战" : "拍下按钮, 重新挑战"));
+			string msg = ((!GCS.d_chinese) ? ((!GCS.d_booth) ? "" : (GCS.d_drumcontroller ? "Drum To Restart" : "Any Key To Restart")) : ((!GCS.d_booth) ? "" : (GCS.d_drumcontroller ? "拍下按钮, 重新挑战" : "拍下按钮, 重新挑战")));
 			txtPercent.GetComponent<scrPercentageComplete>().ShowMessage(msg);
 		}
 		if (GCS.d_booth)
@@ -4334,67 +3814,5 @@ public class scrController : StateBehaviour
 		{
 			txtTryCalibrating.alignment = TextAnchor.MiddleCenter;
 		}
-	}
-
-	[CompilerGenerated]
-	private static string _003COnLandOnPortal_003Eg__Localized_007C197_2(string s)
-	{
-		return RDString.Get("status.results." + s) + ": ";
-	}
-
-	[CompilerGenerated]
-	private static string _003COnLandOnPortal_003Eg__Result_007C197_3(int resultCount, string color)
-	{
-		return $"<color={color}>{resultCount}</color>";
-	}
-
-	[CompilerGenerated]
-	private static string _003COnLandOnPortal_003Eg__ResultWithAuto_007C197_4(int resultCount, int resultCount2, string color)
-	{
-		return $"<color={color}>{resultCount} ({resultCount2})</color>";
-	}
-
-	[CompilerGenerated]
-	private static string _003COnLandOnPortal_003Eg__GoldAccuracy_007C197_5(string accText, ref _003C_003Ec__DisplayClass197_0 P_1)
-	{
-		if (!P_1.isPurePerfect)
-		{
-			return accText;
-		}
-		return "<color=#FFDA00>" + accText + "</color>";
-	}
-
-	[CompilerGenerated]
-	private int _003COnLandOnPortal_003Eg__GetHits_007C197_6(HitMargin hitMargin)
-	{
-		return mistakesManager.GetHits(hitMargin);
-	}
-
-	[CompilerGenerated]
-	private static bool _003CValidInputWasTriggered_003Eg__GetMouseDown_007C216_0()
-	{
-		if (AsyncInputManager.isActive)
-		{
-			if (!AsyncInput.GetKeyDown(MouseButton.Button1, frameDependent: false))
-			{
-				return AsyncInput.GetKeyDown(MouseButton.Button2, frameDependent: false);
-			}
-			return true;
-		}
-		if (!Input.GetKeyDown(UnityEngine.KeyCode.Mouse0))
-		{
-			return UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Mouse1);
-		}
-		return true;
-	}
-
-	[CompilerGenerated]
-	private bool _003CValidInputWasTriggered_003Eg__GetInputHappened_007C216_1(ref _003C_003Ec__DisplayClass216_0 P_0)
-	{
-		if ((Input.anyKeyDown || dpadInputChecker.anyDirDown || RDInput.GetMain(ButtonState.IsDown) > 0) && !P_0.mouseOverAButton)
-		{
-			return !paused;
-		}
-		return false;
 	}
 }

@@ -503,7 +503,7 @@ public static class RDEditorUtils
 	{
 		if (paths == null)
 		{
-			throw new ArgumentNullException("paths");
+			throw new System.ArgumentNullException("paths");
 		}
 		return paths.Aggregate(Path.Combine);
 	}

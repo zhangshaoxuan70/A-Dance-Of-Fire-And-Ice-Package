@@ -22,7 +22,7 @@ public class PolarScreen : MonoBehaviour
 	private void Awake()
 	{
 		SCShader = Shader.Find("ADOFAI/PolarScreen");
-		Material material = material;
+		_ = material;
 	}
 
 	private void OnRenderImage(RenderTexture sourceTexture, RenderTexture destTexture)
