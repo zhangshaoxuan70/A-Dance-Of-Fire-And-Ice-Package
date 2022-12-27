@@ -4,7 +4,7 @@ We try to make editor running on mobile so we start this project.
 
 Also 7th Beat think they can't make editor on mobile...
 
-The "We" means two students. (And their English is very poor)
+"We" means two students. (And their English are very poor)
 
 Our programming skills are not very good (Unity is even more), I hope everyone can help us to correct the code.
 
