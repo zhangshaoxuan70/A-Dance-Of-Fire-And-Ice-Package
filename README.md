@@ -16,7 +16,7 @@ This is my first time upload project on Github.
 
 We try to rebuild the scnEditor, but
 
-Assets\Scripts\MonsterLove\StateMachine\StateBehaviour.cs 
+[Assets\Scripts\MonsterLove\StateMachine\StateBehaviour.cs](https://github.com/zhangshaoxuan70/A-Dance-Of-Fire-And-Ice-Package/blob/master/Assets/Scripts/MonsterLove/StateMachine/StateBehaviour.cs)
 
 can't work well.
 
