@@ -10,6 +10,18 @@ Our programming skills are not very good (Unity is even more), I hope everyone c
 
 This is my first time upload project on Github.
 
+
+
+2022/12/27:
+
+We try to rebuild the scnEditor, but
+
+[Assets\Scripts\MonsterLove\StateMachine\StateBehaviour.cs]()
+
+can't work well.
+
+
+
 The another maker: [TherCN](https://github.com/TherCN/)
 
 You can find us on Bilibili or Discord:
